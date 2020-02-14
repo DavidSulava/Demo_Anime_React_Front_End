@@ -96,7 +96,7 @@ export class Registration extends Component {
 
                         <br/>
                         { (this.props.msg && this.props.msg.erCaptcha) && <div className="alert alert-danger">{ this.props.msg.erCaptcha } </div> }
-                        <div className="g-recaptcha" data-sitekey={ process.env.REACT_APP_RECAPCHA_KEY } style ={{ margin:'auto auto', width: '250px', textAlign: 'center'}} ></div>
+                        <div className="g-recaptcha" data-sitekey={ process.env.REACT_APP_RECAPCHA_KEY  } style ={{ margin:'auto auto', width: '250px', textAlign: 'center'}} ></div>
                         <br/>
 
                         <button type="submit"  name="submitReg" className="submitRreg" >SUBMIT</button>
