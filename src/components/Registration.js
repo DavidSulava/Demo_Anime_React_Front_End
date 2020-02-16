@@ -34,7 +34,7 @@ export class Registration extends Component {
     submForm(ev)
       {
         ev.preventDefault()
-        var path =  ev.target.action
+        var path =  '/users/register'
 
         var formData = new FormData( ev.target );
 
