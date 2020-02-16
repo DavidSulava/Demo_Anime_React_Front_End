@@ -69,7 +69,7 @@ export class Registration extends Component {
           {
             return (
 
-                <form onSubmit={ this.submForm }  method = "POST" className="regForm" action='/users/register'>
+                <form onSubmit={ this.submForm }  method = "POST" className="regForm" action='users/register'>
                     <div className="Registration">
                         { ( this.props.msg && this.props.msg.errorCred ) && <div className="alert alert-danger">{ this.props.msg.errorCred } </div> }
                         <input type="hidden" name='sender'   value='' /> <br/>
