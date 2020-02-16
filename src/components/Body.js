@@ -33,7 +33,16 @@ export class Body extends Component {
 
 
     check_length(el)    { return el.episodes > 1 };
-    get_translation(el) { return /(?<=\()(Sub|Dub)(?=\)$)/i.exec(el) ? /(?<=\()(Sub|Dub)(?=\)$)/i.exec(el)[0].toUpperCase() : 'Sub'  };
+    get_translation(el)
+        {
+            var reverse_str     = el.split('').reverse().join('');
+            var reversed_params = 'Sub|Dub'.split('').reverse().join('');
+            var reg             = new RegExp(`(?!\\))${reversed_params}(?=\\()`, 'i');
+            var status          = reg.exec(reverse_str);
+
+            return status ? status[0].split('').reverse().join('').toUpperCase() : 'SUB'
+            // return /(?<=\()(Sub|Dub)(?=\)$)/i.exec(el) ? /(?<=\()(Sub|Dub)(?=\)$)/i.exec(el)[0].toUpperCase() : 'SUB'; // --Old
+        };
     get_img(el)         { return el.imgU2 ? el.imgU2  : el.img ? el.img : 'img/NoImageFound.png' };
 
     getState()

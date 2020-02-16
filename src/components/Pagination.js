@@ -16,12 +16,18 @@ export class Pagination extends Component {
     componentDidMount()
         {
 
-            // Refresh page url to start page ( to be improved... )
-            let refreshUrl  = /.*page=([\d]+)/i.exec( this.props.location.search );
+            let refreshUrl  = /page=([\d]+)/i.exec( this.props.location.search ); // ---Old
 
             if(  Array.isArray( refreshUrl ) && refreshUrl[1] > 1 )
                 {
-                    this.props.location.search = this.props.location.search.replace( /(?<=page=)[\d]+/, 1 );
+                    // ----[ for the Edge compatibility ( not supports positive lookBehind) ]----
+                    var reversed_str = this.props.location.search.split('').reverse().join('');
+                    var reversed_par = 'page='.split('').reverse().join('');
+                    var reg          = new RegExp(`[\\d]+(?=${reversed_par})`, 'i');
+
+                    this.props.location.search = reversed_str.replace( reg, 1 ).split('').reverse().join('');
+
+                    // this.props.location.search = this.props.location.search.replace( /(?<=page=)[\d]+/, 1 );// ---Old
                     window.location.href       = this.props.location.search
                 }
 
@@ -29,7 +35,7 @@ export class Pagination extends Component {
     curPage( location, index )
         {
 
-            let curLocation = /.*page=([\d]+)/i.exec(location.search);
+            let curLocation = /page=([\d]+)/i.exec(location.search);
 
             if( Array.isArray( curLocation ) && parseInt(curLocation[1]) === index)
                 return true

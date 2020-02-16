@@ -5,7 +5,15 @@ export const getSearch = ( getParams='' )=>
                 //async stuff
                 (async ()=>
                     {
-                        let searchLen = /(?<=title=).*/i.exec(getParams);
+                       // --- [ reverse regex for edge browser ~~edge supports only  Lookahead ?~~ ] ---
+                        var pr_str  = getParams.split("").reverse().join("");
+                        var param   = 'title'.split("").reverse().join("");
+                        var pattern = new RegExp(`.*(?=\=${param}\?)`, "i");
+
+                        let searchLen = pattern.exec(pr_str);
+
+                        // let searchLen = /(?<=title=).*/i.exec(getParams); // ---Old
+
 
                         if(searchLen[0] && searchLen[0].length>2 )
                             {

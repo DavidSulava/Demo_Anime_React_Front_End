@@ -18,7 +18,7 @@ function importAll(r)
   }
 const images = importAll(require.context('../../../public/img/', false, /\.(png|jpg|jpeg|gif)?$/));
 
-
+function revSTR(str){return str.split('').reverse().join('')}
 
 export class Profile extends Component {
 
@@ -106,8 +106,14 @@ export class Profile extends Component {
       {
         ev.stopPropagation();
 
-        var imgSrc  = ev.target.src;
-        var imgName = imgSrc.replace( /.*(?<=img\/)/, '');
+        // var imgSrc  = ev.target.src; //--Old
+        // var imgName = imgSrc.replace( /.*(?<=img\/)/, ''); //--Old
+
+        // ----[ for the Edge compatibility ( not supports positive lookBehind) ]----
+        var imgSrc  = revSTR( ev.target.src );
+        var imgName = imgSrc.replace( new RegExp(`(?=\/${ revSTR( 'img' ) }).*`, 'i'), '');
+            imgName = revSTR( imgName )
+
 
         var formData = new FormData( );
             formData.append('img', imgName );
