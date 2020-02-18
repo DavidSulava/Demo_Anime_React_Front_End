@@ -68,7 +68,7 @@ export class Pagination extends Component {
                         {
 
                             ( curPage > 1 )  &&
-                            <li className="page-item" style={{cursor:'pointer'}}  >
+                            <li className="page-item" >
                                 <NavLink exact to= { `?${str_Params}&page=${1}` } onClick ={()=>this.goToPage( `${str_Params}&page=${1}` )} className='page-link' > 1 </NavLink>
                             </li>
 
@@ -77,8 +77,8 @@ export class Pagination extends Component {
                         {
 
                             ( curPage > 1 )  &&
-                            <li className="page-item" style={{cursor:'pointer'}}  >
-                                <Link to= { `?${prevPage}` } onClick ={()=>this.goToPage( prevPage )} className='page-link' > prev </Link>
+                            <li className="page-item" >
+                                <Link to= { `?${prevPage}` } onClick ={()=>this.goToPage( prevPage )} className='page-link' > {"<<"} </Link>
                             </li>
 
                         }
@@ -111,7 +111,7 @@ export class Pagination extends Component {
 
                             ( totalPages > 1 && curPage < totalPages )  &&
                             <li className="page-item" style={{cursor:'pointer'}}  >
-                                <Link  to= { `?${nextPage}` } onClick ={()=>this.goToPage( nextPage )} className='page-link' > next </Link>
+                                <Link  to= { `?${nextPage}` } onClick ={()=>this.goToPage( nextPage )} className='page-link' >{">>"} </Link>
                             </li>
 
                         }
@@ -146,7 +146,7 @@ const mapStateToProps = ( state )=>
     }
 const mapDispatchToProps = ( dispatch )=>
     {
-        return {  addMovie : (params) => { dispatch( getMovie(params) ) }  }
+        return {  addMovie : ( params ) => { dispatch( getMovie( params ) ) }  }
     }
 
-export default connect( mapStateToProps, mapDispatchToProps )( withRouter(Pagination) )
+export default connect( mapStateToProps, mapDispatchToProps )( withRouter( Pagination ) )

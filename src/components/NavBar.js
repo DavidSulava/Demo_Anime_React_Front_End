@@ -48,7 +48,7 @@ export class NavBar extends Component {
 
                 return (<img src  = { process.env.PUBLIC_URL + '/img/' + this.props.user.img }
                         alt   = "avatar " className="avatarlogged "
-                        title = { `${ this.props.user.name }&#13;${ this.props.user.email }` } /> );
+                        title = { `${ this.props.user.name }\n${ this.props.user.email }` } /> );
 
             else if ( this.props.user && !this.props.user.img)
 
@@ -126,8 +126,8 @@ export class NavBar extends Component {
 
     render() {
         return (
-
-            <nav id="nav" className= 'container-fluid row' >
+        
+            <nav id="nav" className= 'container-fluid' style={{padding:'0'}} >
 
                 <input type="checkbox" className="toggle" id="mMenu" style = {{ display:"none" }} />
                 <label htmlFor="mMenu"  className="box col-xs-1 col-sm-1 col-md-1">

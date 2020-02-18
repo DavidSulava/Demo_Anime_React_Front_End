@@ -67,13 +67,16 @@ body
         color           : black;
         font-size       : $fSizeMain;
         margin          : 0;
+
     }
 
 nav
 {
     background-color: $navBcolor ;
     font-size       : 20px;
+
     @include stopSelection;
+
 
 
     .loginContainer
@@ -173,6 +176,7 @@ div#m_data_index
     {
         padding: 0;
         margin : 15px 0 0 0;
+        width: 100vw;
 
         .fButton_wrapper
             {
@@ -184,7 +188,7 @@ div#m_data_index
                         display: inline-block;
                         width  : 80px;
                         height : 40px;
-                        margin : 0 10px 5px 0;
+                        margin : 0 20px 8px 0;
                         padding: 0;
                         cursor : pointer;
                         color  : black;
@@ -296,8 +300,9 @@ div#m_data_index
                 }
         }
         ul.m_i_v{
-            padding: 0;
+            padding   : 0;
             min-height: 100vh;
+
 
             li{
                 display: inline-block;
@@ -385,11 +390,25 @@ div#m_data_index
 
         }
         ul.pagination{
+            max-width: 409px;
+            width    : 100vw;
             justify-content: center;
             display: flex;
-            margin : 2px;
+            margin : 2px auto;
             @include stopSelection;
+
+            li{
+                cursor: pointer;
+            }
         }
+        @media screen and (max-width:380px)
+            {
+                .fButton_wrapper > .fButton{  margin : 0 8px 8px 0; }
+                ul.pagination li a
+                    {
+                        padding: 6px 9px;
+                    }
+            }
     }
 
 
@@ -954,7 +973,7 @@ div#m_data_index
     footer
         {
 
-            position        : inherit;
+            // position        : inherit;
             background-color: $navBcolor ;
             color           : $fColorBright;
             margin-top      : 20px;

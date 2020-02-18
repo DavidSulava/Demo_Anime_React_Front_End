@@ -20,6 +20,7 @@ export class SearchBar extends Component {
 
             e.preventDefault();
 
+
             if( this.props.search && (this.props.search.data && this.props.search.data.length > 0 ))
                 this.props.history.push({ pathname: '/filtered',  state: { c_param: `title=${this.searchTitle}`} });
 
