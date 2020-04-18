@@ -19,9 +19,9 @@
   "scripts": {
     "start": "node server/server.js",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test" : "react-scripts test",
     "eject": "react-scripts eject",
-    "local": "react-scripts start"
+    "local": "set PORT=3001 && react-scripts start"
   },
   "engines": {
     "node": "12.x"

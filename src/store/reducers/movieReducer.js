@@ -1,6 +1,6 @@
 
 
-function rootReducer( state = { movie: [], filter:[] , article:[]}, action )
+function appMainReducer( state = { movie: [], filter:[] , article:[]}, action )
     {
         switch (action.type)
             {
@@ -36,4 +36,4 @@ function rootReducer( state = { movie: [], filter:[] , article:[]}, action )
     }
 
 
-export default rootReducer;
+export default appMainReducer;

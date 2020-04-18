@@ -6,7 +6,8 @@ import { getMovie }         from '../store/actions/getMovieAction'
 
 
 
-export class Pagination extends Component {
+export class Pagination extends Component
+{
     activeStyle={
                     fontWeight: "bold",
                     color     : "white",

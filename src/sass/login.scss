@@ -37,7 +37,7 @@ $imageSelection_W_Height : 75vh;
             border-radius   : 7px;
             position        : fixed;
             z-index         : 5;
-            margin          : $navHeight 0 0 0;
+            margin          : calc( ( #{$navHeight} - 34px)/2 )  0 0 0;
             right           : 5px;
             width           : 200px;
             background-color:rgb(255, 255, 255);

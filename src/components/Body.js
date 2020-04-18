@@ -43,7 +43,7 @@ export class Body extends Component {
             return status ? status[0].split('').reverse().join('').toUpperCase() : 'SUB'
             // return /(?<=\()(Sub|Dub)(?=\)$)/i.exec(el) ? /(?<=\()(Sub|Dub)(?=\)$)/i.exec(el)[0].toUpperCase() : 'SUB'; // --Old
         };
-    get_img(el)         { return el.imgU2 ? el.imgU2  : el.img ? el.img : 'img/NoImageFound.png' };
+    get_img(el) { return el.imgU2 ? el.imgU2  : el.img ? el.img : 'img/NoImageFound.png' };
 
     getState()
         {

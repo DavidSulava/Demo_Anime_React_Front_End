@@ -19,7 +19,7 @@ import Body     from './components/Body';
 import Article  from './components/Article';
 import FooterComp   from './components/Footer';
 import Registration from './components/Registration';
-import Profile  from './components/user/profileOptions';
+import Profile      from './components/user/profileOptions';
 import emailConfirm from './components/user/emailConfirm';
 
 

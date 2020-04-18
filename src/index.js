@@ -13,11 +13,10 @@ import { combineReducers, createStore, applyMiddleware, compose } from 'redux'
 
 // ---[ Reducers ]---
 import movieReducer  from './store/reducers/movieReducer';
-import userReducer  from './store/reducers/userReducer';
+import userReducer   from './store/reducers/userReducer';
 
 const rootReducer = combineReducers( { movieReducer, userReducer } )
-
-const store = createStore( rootReducer,  compose( applyMiddleware(thunk) ) );
+const store       = createStore( rootReducer,  compose( applyMiddleware(thunk) ) );
 
 ReactDOM.render(<Provider store={store}>
                     <App />

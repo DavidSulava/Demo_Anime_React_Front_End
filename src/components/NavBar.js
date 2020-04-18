@@ -10,7 +10,8 @@ import { checkUserSession } from '../store/actions/checkUserSession'
 import SearchBar   from './searchBar';
 
 
-export class NavBar extends Component {
+export class NavBar extends Component
+{
 
     constructor(props)
         {
@@ -27,6 +28,7 @@ export class NavBar extends Component {
       }
     submForm(ev)
         {
+            console.log(this.props);
             ev.preventDefault();
 
             let formEl = ev.currentTarget.parentNode
@@ -44,7 +46,7 @@ export class NavBar extends Component {
 
                 return ( <div className="alert alert-danger" style={{ width:'auto', margin:'0 7px'}}>{ this.props.msg.errorCred } </div> );
 
-            else if ( this.props.user && this.props.user.img )
+            else if (  this.props.user && this.props.user.img )
 
                 return (<img src  = { process.env.PUBLIC_URL + '/img/' + this.props.user.img }
                         alt   = "avatar " className="avatarlogged "
@@ -126,7 +128,7 @@ export class NavBar extends Component {
 
     render() {
         return (
-        
+
             <nav id="nav" className= 'container-fluid' style={{padding:'0'}} >
 
                 <input type="checkbox" className="toggle" id="mMenu" style = {{ display:"none" }} />
