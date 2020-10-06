@@ -1,11 +1,11 @@
 {
   "files": {
     "main.css": "https://davidsulava.github.io/Demo_Anime_React_Front_End/static/css/main.a7da3599.chunk.css",
-    "main.js": "https://davidsulava.github.io/Demo_Anime_React_Front_End/static/js/main.e5793c44.chunk.js",
+    "main.js": "https://davidsulava.github.io/Demo_Anime_React_Front_End/static/js/main.df7b1ad5.chunk.js",
     "runtime-main.js": "https://davidsulava.github.io/Demo_Anime_React_Front_End/static/js/runtime-main.f7ef0641.js",
     "static/js/2.98e24d19.chunk.js": "https://davidsulava.github.io/Demo_Anime_React_Front_End/static/js/2.98e24d19.chunk.js",
     "index.html": "https://davidsulava.github.io/Demo_Anime_React_Front_End/index.html",
-    "precache-manifest.b2809b0da5e7a2c42b128f625cf71d42.js": "https://davidsulava.github.io/Demo_Anime_React_Front_End/precache-manifest.b2809b0da5e7a2c42b128f625cf71d42.js",
+    "precache-manifest.2b88a54a5a611e6e4a9bdcd08dec2ba5.js": "https://davidsulava.github.io/Demo_Anime_React_Front_End/precache-manifest.2b88a54a5a611e6e4a9bdcd08dec2ba5.js",
     "service-worker.js": "https://davidsulava.github.io/Demo_Anime_React_Front_End/service-worker.js",
     "static/media/100506.jpg": "https://davidsulava.github.io/Demo_Anime_React_Front_End/static/media/100506.732b3996.jpg",
     "static/media/108839.gif": "https://davidsulava.github.io/Demo_Anime_React_Front_End/static/media/108839.5ba567c6.gif",
@@ -38,6 +38,6 @@
     "static/js/runtime-main.f7ef0641.js",
     "static/js/2.98e24d19.chunk.js",
     "static/css/main.a7da3599.chunk.css",
-    "static/js/main.e5793c44.chunk.js"
+    "static/js/main.df7b1ad5.chunk.js"
   ]
 }
