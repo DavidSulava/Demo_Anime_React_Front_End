@@ -1,7 +1,8 @@
 {
-  "name": "anime",
-  "version": "0.1.0",
-  "private": true,
+  "name"     : "anime",
+  "version"  : "0.1.0",
+  "private"  : true   ,
+  "homepage" : "https://DavidSulava.github.io/Demo_Anime_React_Front_End",
   "dependencies": {
     "bootstrap": "^4.4.1",
     "dotenv": "^8.2.0",
