@@ -10,121 +10,109 @@ import { checkUserSession } from '../store/actions/checkUserSession'
 import SearchBar   from './searchBar';
 
 
-export class NavBar extends Component
-{
+export class NavBar extends Component{
 
-    constructor(props)
-        {
-            super(props);
-            this.state = { ...props };
+    constructor(props){
+        super(props);
+        this.state = { ...props };
 
-            this.submForm  = this.submForm.bind(this);
-            this.logOut    = this.logOut.bind(this);
-        }
+        this.submForm  = this.submForm.bind(this);
+        this.logOut    = this.logOut.bind(this);
+    }
 
-    componentDidMount()
-      {
+    componentDidMount() {
         this.props.checkUserSess();
-      }
-    submForm(ev)
-        {
-            console.log(this.props);
-            ev.preventDefault();
+    }
+    submForm(ev) {
+        ev.preventDefault();
 
-            let formEl = ev.currentTarget.parentNode
-            var path   =  "/users/login";
+        let formEl = ev.currentTarget.parentNode
+        var path   = "/users/login";
 
-            var formData = new FormData( formEl );
+        var formData = new FormData(formEl);
 
-            this.props.login( path, formData );
-        }
-    imgSection()
-        {
-            let no_img_el = (<i className="fa fa-user" style={{ fontSize: '8vmin' }}></i>);
-
-            if( this.props.msg && this.props.msg.errorCred && !this.props.user )
-
-                return ( <div className="alert alert-danger" style={{ width:'auto', margin:'0 7px'}}>{ this.props.msg.errorCred } </div> );
-
-            else if (  this.props.user && this.props.user.img )
-
-                return (<img src  = { process.env.PUBLIC_URL + '/img/' + this.props.user.img }
-                        alt   = "avatar " className="avatarlogged "
-                        title = { `${ this.props.user.name }\n${ this.props.user.email }` } /> );
-
-            else if ( this.props.user && !this.props.user.img)
-
-                return (<i className="fa fa-user avatarlogged"   style={{ fontSize: '4vmin', color: 'rgb(39, 217, 187)', cursor:'pointer' }}  alt="avatar " title={ `${ this.props.user.name }&#13;${ this.props.user.email }` }></i>);
-
-            else
-                return no_img_el
-        }
-
-    logOut(ev)
-        {
-            ev.preventDefault();
-
-            this.props.checkUserSess('/users/logOut');
-
-        }
-
-    formSection()
-        {
-            if ( !this.props.user || !this.props.user.email)
-                {
-                    return (
-                        <div>
-                            <div className="loginButtons  ">
-                                <button className="enter ">LOGIN</button>
-                            </div>
-
-                            <form  className="loginForm" method="POST" >
-                                <a className="closeMe">&times;</a>
-                                <div className="imgContainer">
-                                    { this.imgSection() }
-                                </div>
-
-                                <label htmlFor="uname">Email</label>
-                                <input id="uname" type="text" placeholder="Email" name="email" />
+        this.props.login(path, formData);
+    }
+    imgSection(){
 
 
-                                <br/>
+        if( this.props.msg && this.props.msg.errorCred && !this.props.user )
 
-                                <label htmlFor="pass">Password</label>
-                                <input id="pass" type="password" placeholder="Enter Password" name="password" ></input>
+            return ( <div className="alert alert-danger" style={{ width:'auto', margin:'0 7px'}}>{ this.props.msg.errorCred } </div> );
 
-                                <br/>
+        else if (  this.props.user && this.props.user.img )
 
-                                <button className="singin" type="submit" name="singin" onClick={ this.submForm }>Login</button>
+            return (<img src  = { process.env.PUBLIC_URL + '/img/' + this.props.user.img }
+                    alt   = "avatar " className="avatarlogged "
+                    title = { `${ this.props.user.name }\n${ this.props.user.email }` } /> );
 
-                                <button className="singup"  name="singup" >
-                                    <a href="/registration">Sing-Up</a>
-                                </button>
-                                <br/>
-                                {/* <Link to="password/reset">Forgot password?</Link> */}
+        else if ( this.props.user && !this.props.user.img)
 
-                            </form>
-                        </div>
-                    )
-                }
-            else if ( this.props.user && this.props.user.email  )
-                {
-                    return (
-                        <div>
+            return (<i className="fa fa-user avatarlogged"   style={{ fontSize: '4vmin', color: 'rgb(39, 217, 187)', cursor:'pointer' }}  alt="avatar " title={ `${ this.props.user.name }&#13;${ this.props.user.email }` }></i>);
+
+    }
+
+    logOut(ev) {
+        ev.preventDefault();
+
+        this.props.checkUserSess('/users/logOut');
+
+    }
+
+    formSection(){
+        if ( !this.props.user || !this.props.user.email) {
+            return (
+                <div>
+                    <div className="loginButtons  ">
+                        <button className="enter ">LOGIN</button>
+                    </div>
+
+                    <form  className="loginForm" method="POST" >
+                        <a className="closeMe">&times;</a>
+                        <div className="imgContainer">
                             { this.imgSection() }
-                            <form className="logged " action='/users/logout' method="POST" style = {{ display: 'none'}}  >
-
-                                <div className="fold" style = {{ display: 'block'}}>
-                                    <h4>{ this.props.user.name }</h4><p>{this.props.user.email}</p>
-                                    <Link to="/user/profile" >Profile</Link>
-                                    <button className="logout" onClick={ this.logOut } type="submit" name="logout">Log-Out</button>
-                                </div>
-                            </form>
                         </div>
 
-                    )
-                }
+                        <label htmlFor="uname">Email</label>
+                        <input id="uname" type="text" placeholder="Email" name="email" />
+
+
+                        <br/>
+
+                        <label htmlFor="pass">Password</label>
+                        <input id="pass" type="password" placeholder="Enter Password" name="password" ></input>
+
+                        <br/>
+
+                        <button className="singin" type="submit" name="singin" onClick={ this.submForm }>Login</button>
+
+                        <button className="singup"  name="singup" >
+                            <a href="/registration">Sing-Up</a>
+                        </button>
+                        <br/>
+                        {/* <Link to="password/reset">Forgot password?</Link> */}
+
+                    </form>
+                </div>
+            )
         }
+        else if ( this.props.user && this.props.user.email  ){
+            return (
+                <div>
+                    { this.imgSection() }
+                    <form className="logged " action='/users/logout' method="POST" style = {{ display: 'none'}}  >
+
+                        <div className="fold" style = {{ display: 'block'}}>
+                            <h4>{ this.props.user.name }</h4><p>{this.props.user.email}</p>
+                            <Link to="/user/profile" >Profile</Link>
+                            <button className="logout" onClick={ this.logOut } type="submit" name="logout">Log-Out</button>
+                        </div>
+                    </form>
+                </div>
+
+            )
+        }
+    }
 
     render() {
         return (
@@ -163,14 +151,12 @@ export class NavBar extends Component
     }
 }
 
-const mapStateToProps = ( state )=>
-    {
-        return {  ...state.userReducer  }
-    }
-const mapDispatchToProps = ( dispatch )=>
-    {
-        return { login : ( path, params) => {  dispatch( getUser( path, params ) ) }, checkUserSess: ( path ) => {  dispatch( checkUserSession( path ) ) }  }
-    }
+const mapStateToProps = ( state )=>{
+    return {  ...state.userReducer  }
+}
+const mapDispatchToProps = ( dispatch )=>{
+    return { login : ( path, params) => {  dispatch( getUser( path, params ) ) }, checkUserSess: ( path ) => {  dispatch( checkUserSession( path ) ) }  }
+}
 
 // export default withRouter( NavBar );
 export default connect( mapStateToProps, mapDispatchToProps )( withRouter( NavBar ) )

@@ -17,12 +17,10 @@
     "three": "^0.109.0"
   },
   "scripts": {
-    "start": "node server/server.js",
-    "serve": "react-scripts start"  ,
+    "serve": "set PORT=3001 && react-scripts start",
     "build": "react-scripts build",
     "test" : "react-scripts test",
-    "eject": "react-scripts eject",
-    "local": "set PORT=3001 && react-scripts start"
+    "eject": "react-scripts eject"
   },
   "engines": {
     "node": "12.x"
