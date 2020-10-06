@@ -19,7 +19,9 @@ function logo ()
 
 
 
-    var logoCanvas        = document.querySelector( 'nav > canvas.logo' );
+    var logoCanvas        = document.querySelector( 'canvas.logo' );
+    if(!logoCanvas)return
+
     var k                 = logoCanvas.parentElement.offsetWidth/logoCanvas.parentElement.offsetHeight;
         logoCanvas.height = logoCanvas.parentElement.offsetHeight;
         // logoCanvas.width  = logoCanvas.parentElement.offsetWidth*k;

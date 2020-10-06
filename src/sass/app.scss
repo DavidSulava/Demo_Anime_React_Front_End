@@ -37,7 +37,7 @@ $m_index_width  : 136px;
 @mixin stopSelection
     {
         -webkit-touch-callout: none; /* iOS Safari */
-            user-select      : none;
+        user-select          : none;
     }
 
 
@@ -59,24 +59,25 @@ $m_index_width  : 136px;
 
 
 
-body
-    {
-        background-color:$colorBackground;
-        text-align      : center;
+body {
+    background-color : $colorBackground;
+    text-align       : center;
 
-        color           : black;
-        font-size       : $fSizeMain;
-        margin          : 0;
+    color     : black;
+    font-size : $fSizeMain;
+    margin    : 0;
 
-    }
-
+}
+.container-fluid{
+    margin-right: 0;
+    margin-left: 0;
+}
 nav
 {
     background-color: $navBcolor ;
     font-size       : 20px;
 
     @include stopSelection;
-
 
 
     .loginContainer
@@ -89,15 +90,23 @@ nav
                 vertical-align: middle;
             }
         }
-    canvas.logo
-        {
+
+    .canvasWrapper{
+        background-color : inherit ;
+        padding          : 0;
+        text-align: left;
+
+        canvas.logo{
             height     : $logoHeight;
             margin     : ($navHeight - $logoHeight)/2  0 auto 0;
             padding    : 0;
             max-width  : 200px;
-
-            // line-height: 6vmin;
         }
+    }
+    .nPanel{
+        text-align: left;
+    }
+    
 
     label.box
         {
@@ -794,8 +803,7 @@ div#m_data_index
             padding    : 0;
             position   : absolute;
             z-index    : 3;
-            /* right      : 125px; */
-            margin-top : $navHeight - 5px;
+            margin-top : 5px;
 
             ul{
                 background-color : rgb(247, 247, 247);
@@ -911,23 +919,15 @@ div#m_data_index
                     }
 
 
-            // #fa-search:checked +.search-content +.loginContainer +.mobileBar
-            //     {
-            //         display: block;
-            //         margin : 20px auto 0 auto;
-            //         /* display       : flex; */
-            //         /* width         : 90%; */
-
-            //     }
-
             .wrapper_MbSearch
             {
-                position: absolute;
-                top     : $navHeight;
-                margin  : 0 auto 0 auto;
-                padding : 10px;
-                z-index : 3;
-                background-color: $navBcolor;
+                position         : absolute;
+                top              : $navHeight;
+                left             : 50%;
+                transform        : translate(-50%, 0);
+                padding          : 10px;
+                z-index          : 3;
+                background-color : $navBcolor;
 
                 .mobileBar
                     {
@@ -947,7 +947,7 @@ div#m_data_index
 
             .search-suggest
                 {
-                    margin-top  : $navHeight* 2 - 3px;
+                    margin-top  : $navHeight - 3px;
                     left        : 0;
                     right       : 0;
                     margin-left : auto;
@@ -973,7 +973,6 @@ div#m_data_index
     footer
         {
 
-            // position        : inherit;
             background-color: $navBcolor ;
             color           : $fColorBright;
             margin-top      : 20px;
@@ -997,37 +996,51 @@ div#m_data_index
         top: 0;
         bottom: 0;
         z-index: 4;
-        width: 100%;
+        width: 100vw;
         background-color: rgba(133, 131, 131, 0.726);
 
-        form
-            {
-                position        : relative;
-                padding         : 10PX;
-                background-color: #f3f3f3;
-                border-radius   : 5px;
-                top             : 30vh;
-                color           : black;
+        form{
+            position         : relative;
+            padding          : 10PX;
+            background-color : #f3f3f3;
+            border-radius    : 5px;
+            top              : 30vh;
+            color            : black;
+            margin           : auto;
 
-                transform       : translateY(-30%);
+            transform       : translateY(-30%);
 
-                .dummy
-                    {
-                        display: block;
-                        text-align: center;
-                    }
-                .closeMe
-                    {
-                        font-weight: bold;
-                        display: block;
-                        float: right;
-                        cursor: pointer;
-                        margin-right: 6px;
-                        color: #f73a3a;
-                        text-decoration: none;
-                    }
+            .dummy
+                {
+                    display    : block;
+                    text-align : center;
+                }
+            .closeMe
+                {
+                    font-weight     : bold;
+                    display         : block;
+                    float           : right;
+                    cursor          : pointer;
+                    margin-right    : 6px;
+                    color           : #f73a3a;
+                    text-decoration : none;
+                }
+        }
+ 
+    }
+
+@media screen and (orientation:landscape) and (min-device-width: 319px) and (max-device-width: 640px) {
+
+    .emessageWrap form {
+        height   : 97vh;
+        overflow : auto;
+
+        input,
+        textarea {
+            font-size: 10px;
         }
     }
+}
 
 
 //--Dynamic CSS Classes

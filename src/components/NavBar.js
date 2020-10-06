@@ -117,33 +117,32 @@ export class NavBar extends Component{
     render() {
         return (
 
-            <nav id="nav" className= 'container-fluid' style={{padding:'0'}} >
+            <nav id="nav" className= 'container-fluid row' style={{padding:'0'}} >
 
                 <input type="checkbox" className="toggle" id="mMenu" style = {{ display:"none" }} />
-                <label htmlFor="mMenu"  className="box col-xs-1 col-sm-1 col-md-1">
+                <label htmlFor="mMenu"  className="box col-1 col-sm-1 col-md-1">
                     <i className="fa fa-align-justify "></i>
                 </label>
 
                 {/* CANVAS */}
-                <canvas className="logo col-xs-4 col-sm-2 col-md-2 col-lg-2 " ></canvas>
+                <div className='canvasWrapper col-7 col-sm-8 col-md-8 col-lg-2 '>
+                    <canvas className="logo" ></canvas>
+                </div>
 
-
-                <ul className="nPanel col-xs-12 col-sm-12 col-md-7 col-lg-7">
+                <ul className="nPanel col-12 col-sm-12 col-md-12 col-lg-6 col-xl-7 ">
                     <li><NavLink  to="/home"    >HOME</NavLink></li>
                     <li><NavLink  to="/latest"  >LATEST</NavLink></li>
                     <li><NavLink  to="/movies"  >MOVIES</NavLink></li>
                     <li><NavLink  to="/tv"      >TV</NavLink></li>
-
                 </ul>
 
                 <div id='search_wrapper'>
                     <SearchBar/>
                 </div>
-                {/* Ligin */}
-                <div className="loginContainer col-xs-2 col-sm-2 col-md-1 col-lg-1">
 
+                {/* Login */}
+                <div className="loginContainer col-2 col-sm-2 col-md-1 col-lg-1 col-xl-1">
                     { this.formSection() }
-
                 </div>
 
             </nav>

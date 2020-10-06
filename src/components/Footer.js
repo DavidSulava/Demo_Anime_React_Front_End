@@ -57,56 +57,61 @@ export class FooterComp extends Component {
 
         }
 
-    contactForm ()
-        {
-            return  (
-                <form onSubmit={ (ev)=> this.sendMessage(ev) } method="POST" action='/users/contact/email'  className="form-group row col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3">
-                    { (this.state.msg && this.state.msg.contact) &&
-                        <label className="alert alert-success" role="alert" >{ this.state.msg.contact }</label>
+    contactForm (){
+        return  (
+            <form onSubmit={ (ev)=> this.sendMessage(ev) } method="POST" action='/users/contact/email'  className=" col-11  col-md-6 ">
 
-                    }
-                    <a  className="closeMe foterCl">×</a><br/>
+                {
+                    (this.state.msg && this.state.msg.contact) &&
+                        <label className="alert alert-success" role="alert" >{ this.state.msg.contact }</label>
+                }
+
+                <a  className="closeMe foterCl ">×</a><br/>
+
+                <div class="form-group">
                     <label>Email:</label><br/>
                     <input ref="email" type="email" name='email' className="sender form-control" placeholder="Enter your email"/>
+
                     <span className="mailErr text-danger"><small ref="email_error"></small></span><br/>
+                </div>
 
 
+                <div className="form-group">
+                    <label htmlFor="comment">Message:</label>
+                    <textarea ref="comment" name='msg' className="form-control" rows="5" id="comment" type="text" placeholder="Enter your message"></textarea>
+                    <span className="textErr text-danger"><small ref="comment_error"></small></span>
+                </div>
 
-                    <div className="form-group">
-                        <label htmlFor="comment">Message:</label>
-                        <textarea ref="comment" name='msg' className="form-control" rows="5" id="comment" type="text" placeholder="Enter your message"></textarea>
-                        <span className="textErr text-danger"><small ref="comment_error"></small></span>
+                <label className="dummy"></label>
+
+                <div className="input-group">
+                    <div className="g-recaptcha" > {/*  to do capcha_siteKay */}
                     </div>
+                </div>
 
-                    <label className="dummy"></label>
+                {/* MSG from Server */}
+                <span  className="mailErr   text-danger">
+                    <small ref="send_email_error"></small>
+                </span><br/>
 
-                    <div className="input-group">
-                        <div className="g-recaptcha" > {/*  to do capcha_siteKay */}
-                        </div>
-                    </div>
+                <span  className="mailOk  text-success">
+                    <small ref="send_email_OK">   </small><br/>
+                </span><br/>
 
-                    <span  className="mailErr   text-danger">
-                        <small ref="send_email_error"></small>
-                    </span><br/>
+                {/* Send Button */}
+                <input   type='submit'  value="SEND" className="btn btn-success form-control"/><br/>
 
-                    <span  className="mailOk  text-success">
-                        <small ref="send_email_OK">   </small><br/>
-                    </span><br/>
 
-                    <div className="form-group">
-                        <input   type='submit'  value="SEND" className="btn btn-success col-sm-1 form-control"/><br/>
-                    </div>
-
-                </form>
-            )
-        }
+            </form>
+        )
+    }
 
     render() {
         return (
             <footer>
                 <div  className="footer_wrapper">
 
-                    <div className="emessageWrap container"  style = {{ display:"none" }}>
+                    <div className="emessageWrap container-fluid"  style = {{ display:"none" }}>
 
 
                        {this.contactForm()}

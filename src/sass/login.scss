@@ -1,673 +1,592 @@
-
-$navHeight      : 56px;
-$fSizeMain      : 13px;
-$fColorBright   : rgb(255,255,255);
-$std_btn_color  : rgb(122, 198, 127);
-$imageSelection_W_Height : 75vh;
-
-
-
+$navHeight: 56px;
+$fSizeMain: 13px;
+$fColorBright: rgb(255, 255, 255);
+$std_btn_color: rgb(122, 198, 127);
+$imageSelection_W_Height: 75vh;
 
 /*-----------------------------------*/
 /*--------------[ Login ]-------------- */
-    .loginContainer
-        {
-            /* float: left; */
-            padding: 0;
-            text-align: center;
+.loginContainer {
+	/* float: left; */
+	padding: 0;
+	text-align: center;
 
-            a{text-decoration:none;}
-        }
-    .loginButtons
-        {
-            padding : 0;
+	a {
+		text-decoration: none;
+	}
+}
+.loginButtons {
+	padding: 0;
 
-            button
-                {
-                    border-radius    : 2px;
-                    border           : none;
-                    height           : 34px;
-                    color            : $fColorBright;
-                    background-color : $std_btn_color;
-                }
-        }
+	button {
+		border-radius    : 2px;
+		border           : none;
+		height           : 34px;
+		color            : $fColorBright;
+		background-color : $std_btn_color;
+	}
+}
 
-    .loginForm
-        {
-            border-radius   : 7px;
-            position        : fixed;
-            z-index         : 5;
-            margin          : calc( ( #{$navHeight} - 34px)/2 )  0 0 0;
-            right           : 5px;
-            width           : 200px;
-            background-color:rgb(255, 255, 255);
-            display         : none;
-            box-shadow      : 0px 2px 10px rgb(2, 1, 1);
-            color           : #000000;
-            font-size       : $fSizeMain + 1px;
+.loginForm {
+	border-radius    : 7px;
+	position         : fixed;
+	z-index          : 5;
+	margin           : calc((#{$navHeight} - 34px) / 2) 0 0 0;
+	padding          : 5px;
+	right            : 5px;
+	width            : 200px;
+	background-color : rgb(255, 255, 255);
+	display          : none;
+	box-shadow       : 0px 2px 10px rgb(2, 1, 1);
+	color            : #000000;
+	font-size        : $fSizeMain + 1px;
 
-            >a{
-                clear          : left;
-                display        : block;
-                text-align     : center;
-                padding        : 0;
-                margin         : 0 0 5px 0;
-                font-size      : $fSizeMain ;
-            }
-            a.closeMe
-                {
-                    font-weight : bold;
-                    display     : block;
-                    float       : right;
-                    cursor      : pointer;
-                    margin-right: 6px;
-                    color       : rgb(247, 58, 58);
-                    text-decoration: none;
-                }
+	> a {
+		clear      : left;
+		display    : block;
+		text-align : center;
+		padding    : 0;
+		margin     : 0 0 5px 0;
+		font-size  : $fSizeMain;
+	}
+	a.closeMe {
+		font-weight     : bold;
+		display         : block;
+		float           : right;
+		cursor          : pointer;
+		margin-right    : 6px;
+		color           : rgb(247, 58, 58);
+		text-decoration : none;
+	}
+}
 
+.imgContainer {
+	text-align : center;
+	margin     : 24px auto 12px auto;
+}
+.imgContainer i {
+	margin : 0 auto 0 auto;
+	width  : 99%;
+}
 
+.avatar {
+	width: 70%;
+	border-radius: 50%;
+}
 
-        }
+.loginForm input,
+.loginForm label {
+	width    : 170px;
+	position : relative;
+	display  : block;
+	margin   : 0 auto;
+	padding  : 2px;
+	outline  : none;
+}
+.loginForm .singin,
+.loginForm .singup {
+	font-size : $fSizeMain;
+	position  : relative;
+	width     : 35%;
+	margin    : 6px 8px;
 
+	border-radius    : 2px;
+	border           : none;
+	height           : 25px;
+	color            : $fColorBright;
+	background-color : $std_btn_color;
+	box-shadow       : 0px 0px 3.5px rgb(2, 1, 1);
+}
+.loginForm .singin:hover,
+.loginForm .singup:hover {
+	background-color: rgb(127, 212, 133);
+}
+.loginForm .singin:active,
+.loginForm .singup:active {
+	background-color: rgb(122, 198, 127);
+}
+.loginForm .singin {
+	float: left;
+}
+.loginForm .singup {
+	float: right;
+}
+.loginForm .singup a {
+	color: $fColorBright;
+}
 
-    .imgContainer
-        {
-            text-align: center;
-            margin    : 24px auto 12px auto;
-        }
-    .imgContainer i
-        {
-            margin    : 0 auto 0 auto;
-            width     : 99% ;
-        }
+/*_______________________*/
+/*--------[ LOGGED ]---------*/
 
-    .avatar
-        {
-            width        : 70%;
-            border-radius: 50%;
-        }
-
-    .loginForm input,.loginForm label
-        {
-            width   : 170px;
-            position: relative;
-            display : block;
-            margin  : 0 auto;
-        }
-    .loginForm .singin,  .loginForm .singup
-        {
-            font-size: $fSizeMain;
-            position : relative;
-            width    : 35%;
-            margin   : 6px 8px;
-
-            border-radius    : 2px;
-            border           : none;
-            height           : 25px;
-            color            : $fColorBright;
-            background-color : $std_btn_color;
-            box-shadow       : 0px 0px 3.5px rgb(2, 1, 1);
-        }
-    .loginForm .singin:hover, .loginForm .singup:hover
-        {
-            background-color : rgb(127, 212, 133);
-        }
-    .loginForm .singin:active, .loginForm .singup:active
-        {
-            background-color : rgb(122, 198, 127);
-        }
-    .loginForm .singin
-        {
-            float    : left;
-        }
-    .loginForm .singup
-        {
-            float    : right;
-        }
-    .loginForm .singup a{color  : $fColorBright;}
-
-    /*_______________________*/
-    /*--------[ LOGGED ]---------*/
-
-    .logged
-        {
-            /*float     : left;*/
-            /*position  : absolute;*/
-            /*z-index   : 3;*/
-            /*top       : 5px;
+.logged {
+	/*float     : left;*/
+	/*position  : absolute;*/
+	/*z-index   : 3;*/
+	/*top       : 5px;
             right     : 10px; */
-            text-align: right;
-            margin-left: 10px;
-        }
+	text-align: right;
+	margin-left: 10px;
+}
 
-    .avatarlogged
-        {
-            width : 34px;
-            height: 34px;
-            margin: ($navHeight - 34px)/2 auto 5px auto;
-            border-radius: 50%;
-        }
+.avatarlogged {
+	width         : 34px;
+	height        : 34px;
+	margin        : ($navHeight - 34px)/2 auto 5px auto;
+	border-radius : 50%;
+}
 
-    .fold
-        {
-            position     : fixed;
-            z-index      : 3;
-            max-width    : 180px;
-            width        : 40vw;
-            right        : 10px;
-            background-color: white;
-            margin-top   : 10px;
-            padding      : 5px;
-            border-radius: 3%;
-            display      : none;
-            box-shadow   : 0px 4px 50px 0px rgba(0,0,0,0.75);
+.fold {
+	position         : fixed;
+	z-index          : 3;
+	max-width        : 180px;
+	width            : 40vw;
+	right            : 10px;
+	background-color : white;
+	margin-top       : 10px;
+	padding          : 5px;
+	border-radius    : 3%;
+	display          : none;
+	box-shadow       : 0px 4px 50px 0px rgba(0, 0, 0, 0.75);
 
+	a {
+		position     : relative;
+		text-align   : left;
+		margin-right : 15px;
+	}
+	a,
+	.logout {
+		font-size: 0.7em;
+	}
+}
 
-            a{
-                position     : relative;
-                text-align   : left;
-                margin-right : 15px;
+.logged h4 {
+	position : relative;
+	color    : #000000;
+}
+.logged p {
+	position  : relative;
+	font-size : 0.64em;
+	color     : #000000;
+}
 
-            }
-            a, .logout{
-                font-size: 0.7em;
-            }
-        }
-
-    .logged h4
-        {
-            position: relative;
-            color: #000000;
-        }
-    .logged p
-        {
-            position : relative;
-            font-size: 0.64em;
-            color    : #000000;
-        }
-
-    .logout
-        {
-            position         : relative;
-            color            : rgb(251, 253, 251);
-            background-color : rgb(122, 198, 127);
-            border           : none;
-            border-radius    : 5px;
-        }
-    .logout:hover
-        {
-            background-color : rgb(244, 112, 112);
-        }
-    .logout:active
-        {
-            background-color : rgb(242, 76, 76);
-        }
+.logout {
+	position         : relative;
+	color            : rgb(251, 253, 251);
+	background-color : rgb(122, 198, 127);
+	border           : none;
+	border-radius    : 5px;
+}
+.logout:hover {
+	background-color: rgb(244, 112, 112);
+}
+.logout:active {
+	background-color: rgb(242, 76, 76);
+}
 
 /*________________________________________*/
 /*----------[ Avatar change ]---------------*/
 /*----Canvas and Tools----*/
-    .both_canvas_wrapper,.file_select_wrapper
-    {margin:20px 10% 0 10%;}
-    .both_canvas_wrapper
-    {display: block;}
-    .both_canvas_wrapper:after
-    {
-        content: '';
-        display: table;
-        clear  : both;
-    }
+.both_canvas_wrapper,
+.file_select_wrapper {
+	margin: 20px 10% 0 10%;
+}
+.both_canvas_wrapper {
+	display: block;
+}
+.both_canvas_wrapper:after {
+	content: "";
+	display: table;
+	clear: both;
+}
 
-    .avatarIMG_canvas_wrapper
-        {
-            width           : 90vw;
-            height          : $imageSelection_W_Height ;
-            margin          : auto auto ;
-            border-radius   : 3px;
-            background-color: rgb(68, 68, 68);
+.avatarIMG_canvas_wrapper {
+	width            : 90vw;
+	height           : $imageSelection_W_Height;
+	margin           : auto auto;
+	border-radius    : 3px;
+	background-color : rgb(68, 68, 68);
 
-            padding         :  0;
-        }
-    .img_sel_holder
-        {
-            height    : $imageSelection_W_Height - 8 ;
-            margin    : auto auto ;
-            overflow  : auto;
-            overflow-x: hidden;
-        }
-    .avatarIMG_canvas
-    {
-        margin : 0 auto 3vmin auto;
-        display: block;
-    }
+	padding: 0;
+}
+.img_sel_holder {
+	height     : $imageSelection_W_Height - 8;
+	margin     : auto auto;
+	overflow   : auto;
+	overflow-x : hidden;
+}
+.avatarIMG_canvas {
+	margin: 0 auto 3vmin auto;
+	display: block;
+}
 
-    .cropped_Canvas_wrapper
-    {
-        width           : 30%;
-        border-radius   :3px;
-        background-color: rgb(255, 255, 255);
-        float           : left;
-        margin          : 0 10px;
-        align-self      :flex-end;
-    }
-    .cropped_Canvas
-    {
+.cropped_Canvas_wrapper {
+	width            : 30%;
+	border-radius    : 3px;
+	background-color : rgb(255, 255, 255);
+	float            : left;
+	margin           : 0 10px;
+	align-self       : flex-end;
+}
+.cropped_Canvas {
+	margin: 0 auto -18px auto;
+	padding: 6px 6px 0 6px;
+	display: block;
+}
 
-        margin  : 0 auto -18px auto;
-        padding : 6px 6px 0 6px ;
-        display : block;
-    }
+.tools {
+	width            : auto;
+	border-radius    : 5px;
+	background-color : rgb(248, 241, 215);
+	text-align       : center;
+	font-size        : 4.5vmin;
+}
+.tools a {
+	cursor          : pointer;
+	text-decoration : none;
+	color           : rgb(108, 224, 0);
+}
+.tools a:hover {
+	color: rgb(173, 254, 92);
+}
 
-    .tools
-    {
-        width           : auto;
-        border-radius   : 5px;
-        background-color: rgb(248, 241, 215);
-        text-align      : center;
-        font-size       : 4.5vmin;
-    }
-    .tools a
-    {
-        cursor: pointer;
-        text-decoration: none;
-        color: rgb(108, 224, 0);
-    }
-    .tools a:hover
-        {color: rgb(173, 254, 92);}
+.tools a:active {
+	color: rgb(91, 188, 0);
+}
 
-    .tools a:active
-        {color: rgb(91, 188, 0);}
+.file_select_wrapper {
+	clear: left;
+	text-align: left;
+}
+.close_cropper_wrapper {
+	text-align       : right;
+	background-color : rgb(248, 246, 246);
+	border-radius    : 3px 3px 0 0;
+	margin-bottom    : 8px;
+}
+.close_cropper {
+	cursor      : pointer;
+	color       : black;
+	font-size   : 3.5vmin;
+	line-height : 3.5vmin;
+}
+@media screen and (max-width: 810px) {
+	.both_canvas_wrapper {
+		margin         : 20px 22%;
+		display        : flex;
+		flex-direction : column;
+	}
 
-    .file_select_wrapper
-        {
-            clear: left;
-            text-align: left;
-        }
-    .close_cropper_wrapper
-        {
-            text-align: right;
-            background-color: rgb(248, 246, 246);
-            border-radius: 3px 3px 0 0;
-            margin-bottom: 8px;
-        }
-    .close_cropper
-        {
-            cursor: pointer;
-            color : black;
-            font-size   : 3.5vmin;
-            line-height : 3.5vmin;
+	.avatarIMG_canvas_wrapper {
+		align-self: center;
+	}
+	.avatarIMG_canvas {
+		margin: 0 auto;
+	}
+	.cropped_Canvas_wrapper {
+		margin: 5px 28%;
+		width: 100%;
+		min-width: 70%;
+		align-self: center;
+	}
+	.cropped_Canvas {
+		margin: 0 auto -18px auto;
+	}
 
-        }
-    @media screen and (max-width: 810px)
-        {
-            .both_canvas_wrapper
-                {
-                    margin : 20px 22%;
-                    display: flex;
-                    flex-direction: column;
-                }
+	.tools {
+		font-size: 6.5vmin;
+	}
 
-                .avatarIMG_canvas_wrapper
-                    {
-                        align-self: center;
-                    }
-                    .avatarIMG_canvas
-                        {
-                            margin : 0 auto;
-                        }
-                .cropped_Canvas_wrapper
-                    {
-                        margin    : 5px 28%;
-                        width     : 100%;
-                        min-width : 70%;
-                        align-self: center;
-                    }
-                    .cropped_Canvas
-                        {
-                            margin : 0 auto -18px auto;
+	.file_select_wrapper {
+		margin: 0 15%;
+	}
+	.form_IMG_local,
+	.form_IMG_URL {
+		max-width     : 40vmin;
+		min-width     : 100%;
+		font-size     : 3.5vmin;
+		overflow      : hidden;
+		text-overflow : ellipsis;
+	}
+}
+@media screen and (max-width: 320px) {
+	.close_cropper {
+		margin-right: 0.2vmin;
+	}
+}
+/*---Image forms-----*/
 
-                        }
+.localImage,
+.urlImage {
+	margin-right     : -2px;
+	background-color : rgba(255, 255, 255, 0.37254901960784315);
+	padding          : 5px;
+	border-radius    : 5px 5px 0 0;
+	cursor           : pointer;
+}
+#localImage,
+#urlImage {
+	display: none;
+}
 
-            .tools
-                {
-                    font-size: 6.5vmin;
-                }
+#urlImage:checked + .urlImage {
+	background-color: rgb(255, 255, 255);
+}
+#localImage:checked + .localImage {
+	background-color: rgb(255, 255, 255);
+}
 
-            .file_select_wrapper
-                {
-                    margin:0 15%;
+.form_IMG_local,
+.form_IMG_URL {
+	margin-top       : -5px;
+	background-color : rgb(255, 255, 238);
+	padding          : 10px;
+	max-width        : 40vmin;
+	border-radius    : 0 5px 5px 5px;
+	display          : none;
+}
+.form_IMG_local input,
+.form_IMG_URL input,
+.form_IMG_URL button {
+	margin-top: 5px;
+}
 
-                }
-            .form_IMG_local, .form_IMG_URL
-                {
-                    max-width       : 40vmin;
-                    min-width       : 100%;
-                    font-size       : 3.5vmin;
-                    overflow        : hidden;
-                    text-overflow   : ellipsis;
-                }
+.form_IMG_URL input[name="url"] {
+	width   : 100%;
+	display : block;
+	margin  : 0 auto 0 auto;
+}
 
-        }
-    @media screen and (max-width: 320px)
-        {
-            .close_cropper
-                {
-                    margin-right: 0.2vmin;
-                }
-        }
-    /*---Image forms-----*/
-
-    .localImage, .urlImage
-        {
-            margin-right    : -2px;
-            background-color: rgba(255, 255, 255, .37254901960784315);
-            padding         : 5px;
-            border-radius   : 5px 5px 0 0;
-            cursor          : pointer;
-        }
-    #localImage, #urlImage{display: none;}
-
-    #urlImage:checked + .urlImage
-        {
-            background-color: rgb(255, 255, 255) ;
-        }
-    #localImage:checked + .localImage
-        {
-            background-color: rgb(255, 255, 255) ;
-        }
-
-    .form_IMG_local, .form_IMG_URL
-        {
-        margin-top      : -5px;
-        background-color: rgb(255, 255, 238);
-        padding         : 10px;
-        max-width       : 40vmin;
-        border-radius   : 0 5px 5px 5px;
-        display         : none;
-        }
-    .form_IMG_local input, .form_IMG_URL input,.form_IMG_URL button
-        {
-            margin-top: 5px;
-        }
-
-    .form_IMG_URL input[name='url']
-        {
-            width  : 100%;
-            display: block;
-            margin : 0 auto 0 auto;
-        }
-
-    #urlImage:checked ~ .form_IMG_URL
-        {
-            display: block ;
-        }
-    #localImage:checked ~ .form_IMG_local
-        {
-            display: block ;
-        }
+#urlImage:checked ~ .form_IMG_URL {
+	display: block;
+}
+#localImage:checked ~ .form_IMG_local {
+	display: block;
+}
 
 /*----image crop Window----*/
-    .avatarWrapper
-        {
-            display : block;
-            overflow: auto;
-            top     : 0;
-            padding-top: (100vh - $imageSelection_W_Height ) / 2 ;
-            width   : 100%;
-            height  : 100%;
-            position: fixed;
-            z-index : 3;
-            background-color: rgba(159, 188, 244, 0.9);
-        }
-    .cropIMG
-        {
-            margin-left: 10%;
-        }
-    .avatarWrapperWrapper
-        {
-            margin          : 15px auto;
-            background-color: #f7f3ef;
-            max-width       : 80vmin;
-            min-width       : 205px;
-            border-radius   : 5px 5px 5px 5px;
-        }
-    .avatarWrapperWrapper label
-        {
-            display    : block;
-            max-width  : 80vmin;
-            min-width  : 205px;
-            margin     : 0 auto 0 auto;
+.avatarWrapper {
+	display          : block;
+	overflow         : auto;
+	top              : 0;
+	padding-top      : (100vh - $imageSelection_W_Height) / 2;
+	width            : 100%;
+	height           : 100%;
+	position         : fixed;
+	z-index          : 3;
+	background-color : rgba(159, 188, 244, 0.9);
+}
+.cropIMG {
+	margin-left: 10%;
+}
+.avatarWrapperWrapper {
+	margin           : 15px auto;
+	background-color : #f7f3ef;
+	max-width        : 80vmin;
+	min-width        : 205px;
+	border-radius    : 5px 5px 5px 5px;
+}
+.avatarWrapperWrapper label {
+	display   : block;
+	max-width : 80vmin;
+	min-width : 205px;
+	margin    : 0 auto 0 auto;
 
-
-            background-color: rgb(255, 255, 255);
-            padding         : 5px;
-            border-radius   : 5px 5px 0 0;
-        }
-
+	background-color: rgb(255, 255, 255);
+	padding: 5px;
+	border-radius: 5px 5px 0 0;
+}
 
 /*_________________________________________*/
 /*--------------[ Registration ]------------- */
-    .regForm
-    {
-        height : 100vh;
-        margin : 20px auto;
-        display: table;
-    }
-    .Registration
-    {
-        position     : relative;
-        text-align   : center;
-        padding      : 15px 15px;
-        border-radius: 5px;
+.regForm {
+	height  : 100vh;
+	margin  : 20px auto;
+	display : table;
+}
+.Registration {
+	position      : relative;
+	text-align    : center;
+	padding       : 15px 15px;
+	border-radius : 5px;
 
-        width        : 90vw;
-        max-width    : 750px;
+	width     : 90vw;
+	max-width : 750px;
 
-        box-shadow   : 0px 1px 8px rgb(2, 1, 1);
-        background-color: rgb(246, 247, 248);
+	box-shadow       : 0px 1px 8px rgb(2, 1, 1);
+	background-color : rgb(246, 247, 248);
 
-        margin: 0 auto;
-        top   : 3vh;
-    }
+	margin : 0 auto;
+	top    : 3vh;
+}
 
-    .Registration input
-    {
-        position: relative;
-        padding : 2px;
+.Registration input {
+	position : relative;
+	padding  : 2px;
 
-        max-width : 600px;
-        width     : 70vw;
-        max-height: 80px;
-        /* height: 4vmin; */
-        font-size: 2.5vmin;
+	max-width  : 600px;
+	width      : 70vw;
+	max-height : 80px;
+	/* height  : 4vmin; */
+	font-size  : 2.5vmin;
 
-        margin: 2px auto;
-    }
+	margin: 2px auto;
+}
 
-    @media screen and (max-width: 768px)
-        {
-            .Registration input
-                {
-                    margin   : 1px auto;
-                    font-size: 4.5vmin;
-                    padding  : 2px;
-                }
-        }
+@media screen and (max-width: 768px) {
+	.Registration input {
+		margin    : 1px auto;
+		font-size : 4.5vmin;
+		padding   : 2px;
+	}
+}
 
-    .submitRreg
-        {
-            border-radius    : 5px;
-            border           : none;
-            height           : 34px;
-            color            : rgb(234, 240, 234);
-            background-color : $std_btn_color;
-        }
-    .submitRreg:hover
-        {
-            background-color : rgb(96, 173, 101);
-            /* box-shadow: 2px 5px 10px rgb(2, 1, 1); */
-        }
-    .submitRreg:active
-    {
-        background-color : rgb(122, 198, 127);
-        box-shadow:  inset 0px 0px 2px 1px rgba(50, 78, 45, 0.89);
-    }
-
-
+.submitRreg {
+	border-radius    : 5px;
+	border           : none;
+	height           : 34px;
+	color            : rgb(234, 240, 234);
+	background-color : $std_btn_color;
+}
+.submitRreg:hover {
+	background-color: rgb(96, 173, 101);
+	/* box-shadow: 2px 5px 10px rgb(2, 1, 1); */
+}
+.submitRreg :active {
+	background-color : rgb(122, 198, 127);
+	box-shadow       : inset 0px 0px 2px 1px rgba(50, 78, 45, 0.89);
+}
 
 /*________________________________________*/
 /*----------[ Profile change ]---------------*/
 
 /* ------- Analitycs ------- */
-    .dAnalitycs a
-    {
-        display: table;
-        margin : 0 auto;
-    }
-    .analisBody
-    {
-        display: table;
-        height : 100vh;
-        width  : auto;
-        margin : 20px auto 0 auto;
-    }
-    /*-------- Profile -----------*/
-    .profile_change, .Pas_Change, .lAnalitycs
-        {
-            display    : block;
-            max-width  : 80vmin;
-            min-width  : 205px;
-            margin     : 15px auto 0 auto;
+.dAnalitycs a {
+	display : table;
+	margin  : 0 auto;
+}
+.analisBody {
+	display : table;
+	height  : 100vh;
+	width   : auto;
+	margin  : 20px auto 0 auto;
+}
+/*-------- Profile -----------*/
+.profile_change,
+.Pas_Change,
+.lAnalitycs {
+	display   : block;
+	max-width : 80vmin;
+	min-width : 205px;
+	margin    : 15px auto 0 auto;
 
+	background-color : rgb(255, 255, 255);
+	padding          : 5px;
+	border-radius    : 5px 5px 0 0;
+}
+.Pas_Change {
+	margin-bottom: -20px;
+}
 
-            background-color: rgb(255, 255, 255);
-            padding         : 5px;
-            border-radius   : 5px 5px 0 0;
+.profile_forms {
+	margin           : 0 auto;
+	background-color : rgb(245, 241, 237);
+	max-width        : 80vmin;
+	min-width        : 205px;
+}
 
-        }
-    .Pas_Change
-        {
-            margin-bottom: -20px;
+.passChange input,
+.deleteAccount input,
+.profWrapper input,
+.profile_forms label {
+	max-width : 80vmin;
+	width     : 250px;
+	padding   : 0;
+	display   : block;
+	margin    : 0 auto;
+}
+.profile_forms label {
+	margin-bottom: -15px;
+}
+.profile_forms > :first-child {
+	padding-top: 15px;
+}
 
-        }
+/*--profile Buttons--*/
+.submit_profile {
+	margin: 0 0 15px 20px;
+}
 
-    .profile_forms
-        {
-            margin          : 0 auto;
-            background-color: rgb(245, 241, 237);
-            max-width       : 80vmin;
-            min-width       : 205px;
-        }
+/*~~~~~~~~~~~~~~~~~~~*/
 
-    .passChange input, .deleteAccount input, .profWrapper input, .profile_forms  label
-        {
-            max-width : 80vmin;
-            width     : 250px;
-            padding   : 0;
-            display   : block;
-            margin    : 0  auto;
-
-
-        }
-    .profile_forms  label
-        {
-            margin-bottom : -15px;
-        }
-    .profile_forms >:first-child
-    {
-        padding-top: 15px;
-    }
-
-    /*--profile Buttons--*/
-    .submit_profile
-        {
-            margin: 0 0 15px 20px;
-        }
-
-    /*~~~~~~~~~~~~~~~~~~~*/
-
-
-    .profWrapper input,.passChange input,.deleteAccount input
-        {
-
-            border       : 1px solid rgb(221, 221, 221);
-            border-radius: 3px;
-            padding      : 5px;
-            box-shadow   : inset 0 0 2px #000000;
-        }
+.profWrapper input,
+.passChange input,
+.deleteAccount input {
+	border        : 1px solid rgb(221, 221, 221);
+	border-radius : 3px;
+	padding       : 5px;
+	box-shadow    : inset 0 0 2px #000000;
+}
 
 /*_________________________________________*/
 /*--------------Pass Restoration------------- */
-    .wrapper
-    {
-        margin-top: 10px;
-        height    : 100vh;
-    }
-    .wrapper label.success
-    {
-        display   : block;
-        width     : 80%;
-        margin    : 0 auto;
-        text-align: center;
-        color     : rgb(10, 194, 22);
-    }
-    .wrapper form
-    {
+.wrapper {
+	margin-top : 10px;
+	height     : 100vh;
+}
+.wrapper label.success {
+	display    : block;
+	width      : 80%;
+	margin     : 0 auto;
+	text-align : center;
+	color      : rgb(10, 194, 22);
+}
+.wrapper form {
+	width            : 60%;
+	min-width        : 300px;
+	margin           : 0 auto 0 auto;
+	padding          : 5px;
+	border-radius    : 5px;
+	background-color : rgba(236, 240, 236, 0.856);
+}
+form.restoration > * {
+	margin  : 0 auto 5px auto;
+	width   : 95%;
+	display : block;
+}
+form.restoration > input {
+	padding       : 10px;
+	border-radius : 5px;
+	border        : none;
+}
+form.restoration button {
+	border-radius    : 2px;
+	border           : none;
+	outline-style    : none;
+	height           : 34px;
+	color            : rgb(255, 255, 255);
+	background-color : rgb(122, 198, 127);
+}
+form.restoration button:hover {
+	background-color: rgb(96, 173, 101);
+	/* box-shadow: 2px 5px 10px rgb(2, 1, 1); */
+}
+form.restoration button :active {
+	background-color    : rgb(122, 198, 127);
+	box-shadow          : 0px 0px 5px 0.5px black inset;
+}
 
-        width        : 60%;
-        min-width    : 300px ;
-        margin       : 0 auto 0 auto;
-        padding      : 5px;
-        border-radius: 5px;
-        background-color: rgba(236, 240, 236, 0.856);
-    }
-    form.restoration>*
-    {
-        margin : 0 auto 5px auto;
-        width  : 95%;
-        display: block;
-
-    }
-    form.restoration>input
-    {
-        padding      : 10px;
-        border-radius: 5px;
-        border       :none;
-
-    }
-    form.restoration button
-    {
-        border-radius    : 2px;
-        border           : none;
-        outline-style    : none;
-        height           : 34px;
-        color            : rgb(255,255,255);
-        background-color : rgb(122, 198, 127);
-    }
-    form.restoration button:hover
-    {
-        background-color : rgb(96, 173, 101);
-        /* box-shadow: 2px 5px 10px rgb(2, 1, 1); */
-    }
-    form.restoration button:active
-    {
-        background-color : rgb(122, 198, 127);
-        box-shadow       : 0px 0px 5px 0.5px black inset;
-    }
-
-    /* Password Enter */
-    form.pReset > *
-    {
-        padding : 0;
-        margin  : 0 auto 0 auto;
-        display : block;
-    }
-    form.pReset > label
-        {
-            padding: 5px;
-            text-align: center;
-            width: 80%;
-        }
-    /* form.pReset > input, form.pReset > button
+/* Password Enter */
+form.pReset > * {
+	padding : 0;
+	margin  : 0 auto 0 auto;
+	display : block;
+}
+form.pReset > label {
+	padding    : 5px;
+	text-align : center;
+	width      : 80%;
+}
+/* form.pReset > input, form.pReset > button
     {
     padding: 0;
     margin  : 0 auto 3px auto;
@@ -676,33 +595,29 @@ $imageSelection_W_Height : 75vh;
 
 /*_________________________________________*/
 /*--------------Verify Email------------- */
-    .verify
-        {
-            margin-top      : 20px;
-            color           : black;
-            padding         : 20px;
-            box-shadow      : 0px 1px 8px rgb(2, 1, 1);
-            background-color: $fColorBright;
+.verify {
+	margin-top       : 20px;
+	color            : black;
+	padding          : 20px;
+	box-shadow       : 0px 1px 8px rgb(2, 1, 1);
+	background-color : $fColorBright;
 
-            .row div .card .card-header
-            {
-                margin-bottom: 10px;
-            }
-        }
+	.row div .card .card-header {
+		margin-bottom: 10px;
+	}
+}
 //--Errors----
-    div.alert
-        {
-            max-width : 600px;
-            width     : 70vw;
-            padding   : 3px;
-            margin    : 1px auto 5px auto;
-        }
+div.alert {
+	max-width : 600px;
+	width     : 70vw;
+	padding   : 3px;
+	margin    : 1px auto 5px auto;
+}
 //--recapcha------
-    div.g-recaptcha
-        {
-            transform: scale(0.8);
-            transform-origin: 0 0;
-            margin : 0 auto;
-            width  : 250px;
-            display: block;
-        }
+div.g-recaptcha {
+	transform        : scale(0.8);
+	transform-origin : 0 0;
+	margin           : 0 auto;
+	width            : 250px;
+	display          : block;
+}

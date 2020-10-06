@@ -1,13 +1,9 @@
 import React                    from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 
-
-
-
 //--css
 // import 'bootstrap/dist/css/bootstrap.css';
 import './sass/app.scss';
-
 
 //--js
 import './js/app';
