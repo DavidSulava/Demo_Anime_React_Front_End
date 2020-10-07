@@ -24,7 +24,7 @@ export class Article extends Component
         getAll(e)
             {
                 e.preventDefault();
-                // this.props.history.push({ pathname: '/filtered',  state: { c_param: e.target.href.match(/(?=\?).*/gi)[0]  } });
+                this.props.history.push({ pathname: '/filtered',  state: { c_param: e.target.href.match(/(?<=\?).*/gi)[0]  } });
                 // this.props.history.push({ pathname: '/filtered',  state: { c_param: e.target.search.slice(1)  } });
             }
         trailer_display(ev)
