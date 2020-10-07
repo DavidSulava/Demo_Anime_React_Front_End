@@ -8,7 +8,7 @@ Back-end 👉 [тут]( https://github.com/DavidSulava/Demo_Anime_React_Back_End
 
 ## Stack
 ```
-React( Redux, redux-thunk, React Class Components, three.js )
+React( Redux, redux-thunk, react-router-dom,, React Class Components, three.js )
 
 ```
 
