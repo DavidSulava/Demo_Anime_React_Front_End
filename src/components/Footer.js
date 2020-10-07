@@ -68,7 +68,7 @@ export class FooterComp extends Component {
 
                 <a  className="closeMe foterCl ">×</a><br/>
 
-                <div class="form-group">
+                <div className="form-group">
                     <label>Email:</label><br/>
                     <input ref="email" type="email" name='email' className="sender form-control" placeholder="Enter your email"/>
 

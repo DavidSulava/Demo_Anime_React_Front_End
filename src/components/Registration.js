@@ -1,6 +1,7 @@
-import React, { Component }          from 'react'
-import { connect }                   from 'react-redux'
-import {  withRouter } from 'react-router-dom'
+import React, { Component } from 'react'
+import { connect }          from 'react-redux'
+import { withRouter }       from 'react-router-dom'
+import  Recaptcha           from 'react-recaptcha'
 
 import { getUser } from '../store/actions/getUser'
 
@@ -96,7 +97,7 @@ export class Registration extends Component {
 
                         <br/>
                         { (this.props.msg && this.props.msg.erCaptcha) && <div className="alert alert-danger">{ this.props.msg.erCaptcha } </div> }
-                        <div className="g-recaptcha" data-sitekey={ process.env.REACT_APP_RECAPCHA_KEY  } style ={{ margin:'auto auto', width: '250px', textAlign: 'center'}} ></div>
+                        <Recaptcha sitekey={ process.env.REACT_APP_RECAPCHA_KEY  } render="explicit" hl={window.navigator.userLanguage || window.navigator.language} />
                         <br/>
 
                         <button type="submit"  name="submitReg" className="submitRreg" >SUBMIT</button>
@@ -107,17 +108,15 @@ export class Registration extends Component {
             )
           }
       }
-    render()
-      {
-        return (
-          <div>
-
-            { this.localSection() }
-          </div>
+    render(){
+      return (
+        <div>
+          { this.localSection() }
+        </div>
 
 
-        )
-      }
+      )
+    }
 };
 
 

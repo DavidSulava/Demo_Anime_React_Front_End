@@ -62,6 +62,7 @@ $m_index_width  : 136px;
 body {
     background-color : $colorBackground;
     text-align       : center;
+    overflow-x: hidden;
 
     color     : black;
     font-size : $fSizeMain;
@@ -181,11 +182,12 @@ ul.nPanel
 
 }
 
+
 div#m_data_index
     {
         padding: 0;
         margin : 15px 0 0 0;
-        width: 100vw;
+
 
         .fButton_wrapper
             {
@@ -309,12 +311,17 @@ div#m_data_index
                 }
         }
         ul.m_i_v{
-            padding   : 0;
-            min-height: 100vh;
 
+            display               : grid;
+            grid-template-columns : repeat(auto-fit, minmax(150px, max-content));
+            justify-content       : space-around;
+            grid-gap              : 10px 2px;
+
+            padding         : 0 20px;
+            min-height      : 100vh;
 
             li{
-                display: inline-block;
+                // display: inline-block;
                 position: relative;
                 margin  : 5px 8px;
 

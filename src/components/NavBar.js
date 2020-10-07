@@ -22,7 +22,7 @@ export class NavBar extends Component{
     }
 
     componentDidMount() {
-        logo( process.env.NODE_ENV !== 'development' && process.env.PUBLIC_URL );
+        logo( process.env.NODE_ENV !== 'development' ? process.env.PUBLIC_URL : '' );
         this.props.checkUserSess();
     }
     submForm(ev) {

@@ -66,7 +66,7 @@ export class Body extends Component {
     }
     render() {
         return (
-            <div >
+            <div className="body_wrapper">
                 <Filter />
                 <p className="alert alert-success">This web app is only a demo. No illegal links presented !</p>
                 <ul className="m_i_v" style={{'listStyleType': 'none'}}>
