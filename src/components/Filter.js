@@ -131,7 +131,7 @@ export class Filter extends Component {
 
                 }
 
-            this.props.history.push({ pathname: '/filtered',  state: { c_param: get_str} });
+            this.props.history.replace({ pathname: '/filtered',  state: { c_param: get_str} });
         }
     render() {
 
