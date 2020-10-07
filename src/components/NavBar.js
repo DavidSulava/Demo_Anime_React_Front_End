@@ -5,6 +5,7 @@ import { Link, NavLink, withRouter } from 'react-router-dom'
 
 import { getUser }      from '../store/actions/getUser'
 import { checkUserSession } from '../store/actions/checkUserSession'
+import { logo } from '../js/logo'
 
 //--components
 import SearchBar   from './searchBar';
@@ -21,6 +22,7 @@ export class NavBar extends Component{
     }
 
     componentDidMount() {
+        logo( process.env.NODE_ENV !== 'development' && process.env.PUBLIC_URL );
         this.props.checkUserSess();
     }
     submForm(ev) {
@@ -87,7 +89,7 @@ export class NavBar extends Component{
                         <button className="singin" type="submit" name="singin" onClick={ this.submForm }>Login</button>
 
                         <button className="singup"  name="singup" >
-                            <a href="/registration">Sing-Up</a>
+                            <Link to="/registration">Sing-Up</Link>
                         </button>
                         <br/>
                         {/* <Link to="password/reset">Forgot password?</Link> */}

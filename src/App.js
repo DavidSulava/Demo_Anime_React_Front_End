@@ -1,5 +1,5 @@
 import React                    from 'react';
-import { BrowserRouter, Router, Route, browserHistory  } from 'react-router-dom';
+import { BrowserRouter, HashRouter, Route  } from 'react-router-dom';
 
 //--css
 // import 'bootstrap/dist/css/bootstrap.css';
@@ -21,7 +21,7 @@ import emailConfirm from './components/user/emailConfirm';
 
 function App() {
   return (
-      <Router history={browserHistory}>
+      <HashRouter>
         <div className="App">
           <NavBar />
           <div id="m_data_index">
@@ -39,7 +39,7 @@ function App() {
 
 
         </div>
-      </Router>
+      </HashRouter>
 
   );
 }

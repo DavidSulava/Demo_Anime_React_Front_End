@@ -1,6 +1,4 @@
 import { logo } from './logo';
-import { log } from 'three';
-
 
 
 // require('./bootstrap');
@@ -837,7 +835,7 @@ document.addEventListener('DOMContentLoaded', function ()
         // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
         //----LOGO
-            logo ();
+            // logo ();
 
 
 

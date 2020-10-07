@@ -1,20 +1,18 @@
-// var THREE = require('../../node_modules/three');
+
 import * as THREE from '../../node_modules/three';
 
 
-function logo ()
-{
+function logo ( imgPublicPath='' ) {
 
-    var fontsAr =
-                    [
-                        // "/threeJS/Knewave_Regular.json",
-                        "/threeJS/Lethal_Injector_Bold_Regular.json",
-                        // "/threeJS/SF_Sports_Night_Regular.json",
-                        // "/threeJS/Chinese_Asian_Style_Regular.json",
-                        // "/threeJS/Gypsy_Curse_Regular.json"
-                    ];
+    const fontsAr = [
+        // "/threeJS/Knewave_Regular.json",
+        `${imgPublicPath}/threeJS/Lethal_Injector_Bold_Regular.json`,
+        // "/threeJS/SF_Sports_Night_Regular.json",
+        // "/threeJS/Chinese_Asian_Style_Regular.json",
+        // "/threeJS/Gypsy_Curse_Regular.json"
+    ];
 
-    var imgPath = fontsAr[ Math.floor( Math.random()*fontsAr.length) ];//fontsAr[Math.floor(Math.random()*fontsAr.length)]
+    var imgPath = fontsAr[ Math.floor( Math.random() * fontsAr.length) ];//fontsAr[Math.floor(Math.random()*fontsAr.length)]
     var c_text  = 'TestLogo';
 
 
@@ -24,7 +22,6 @@ function logo ()
 
     var k                 = logoCanvas.parentElement.offsetWidth/logoCanvas.parentElement.offsetHeight;
         logoCanvas.height = logoCanvas.parentElement.offsetHeight;
-        // logoCanvas.width  = logoCanvas.parentElement.offsetWidth*k;
         logoCanvas.onload = threeD(0, logoCanvas, imgPath, c_text);
 
 
