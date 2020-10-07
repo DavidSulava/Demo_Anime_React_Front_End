@@ -1,18 +1,18 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "60ce6b97a7147d9c15a3f0c2945e8b21",
+    "revision": "a47b79fbeb27969c0b9b4fe34353b7a5",
     "url": "https://davidsulava.github.io/Demo_Anime_React_Front_End/index.html"
   },
   {
-    "revision": "24b986b1a41350c53eb2",
-    "url": "https://davidsulava.github.io/Demo_Anime_React_Front_End/static/css/main.cb3bdcd9.chunk.css"
+    "revision": "58cada9256d337192a12",
+    "url": "https://davidsulava.github.io/Demo_Anime_React_Front_End/static/css/main.75e429e5.chunk.css"
   },
   {
     "revision": "019ac533a6c1f2b2cf64",
     "url": "https://davidsulava.github.io/Demo_Anime_React_Front_End/static/js/2.67793137.chunk.js"
   },
   {
-    "revision": "24b986b1a41350c53eb2",
+    "revision": "58cada9256d337192a12",
     "url": "https://davidsulava.github.io/Demo_Anime_React_Front_End/static/js/main.9ce8963a.chunk.js"
   },
   {
