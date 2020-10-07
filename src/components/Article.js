@@ -75,7 +75,7 @@ export class Article extends Component
                         </div>
                     </div>
                 );
-                return !item.title && (item._id == this.props.match.params.id) ? (
+                return item.title && (item._id == this.props.match.params.id) ? (
 
                     <div className="content_container" >
                         {/* <span onClick={(e)=>this.user_favorite(e)} className={`favor ${this.state.v_favourite} fa-heart`} title="only for registered users"></span> */}
