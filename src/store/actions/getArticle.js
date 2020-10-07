@@ -9,13 +9,13 @@ export const getArticle = (id)=>
                         let corsAPI = `${process.env.REACT_APP_DATA_API}/find/${id}`;
 
                         const myHeaders = {
-                                                method: 'GET',
-                                                headers:
-                                                    {
-                                                        'X-Requested-With': 'XMLHttpRequest',
-                                                    },
-                                                credentials: 'include',
-                                          };
+                            method: 'GET',
+                            headers:
+                                {
+                                    'X-Requested-With': 'XMLHttpRequest',
+                                },
+                            credentials: 'include',
+                        };
 
                         const response  = await fetch( corsAPI, myHeaders );
                         let data        = await response.json();
