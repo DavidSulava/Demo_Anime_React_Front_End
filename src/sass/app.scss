@@ -69,8 +69,8 @@ body {
 
 }
 .container-fluid{
-    margin-right: 0;
-    margin-left: 0;
+    margin-right : 0;
+    margin-left  : 0;
 }
 nav
 {
@@ -106,7 +106,7 @@ nav
     .nPanel{
         text-align: left;
     }
-    
+
 
     label.box
         {
@@ -420,6 +420,16 @@ div#m_data_index
             }
     }
 
+.spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+}
+.spinner_article{
+    @extend .spinner;
+    height: 77vh !important;
+}
 
 //----[ GetMovie ]---------
     div#content_render_m
@@ -1026,7 +1036,7 @@ div#m_data_index
                     text-decoration : none;
                 }
         }
- 
+
     }
 
 @media screen and (orientation:landscape) and (min-device-width: 319px) and (max-device-width: 640px) {

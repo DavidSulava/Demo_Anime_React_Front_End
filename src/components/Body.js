@@ -38,9 +38,8 @@ export class Body extends Component {
 
     getState(){
 
-        // let loading  = ( <p>Loading....</p> );
         let loading = (
-                <div className="text-center">
+                <div className="text-center spinner">
                     <div className="spinner-border" role="status">
                         <span className="sr-only">Loading...</span>
                     </div>
