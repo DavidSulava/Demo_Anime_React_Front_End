@@ -48,9 +48,9 @@ export class NavBar extends Component{
                     alt   = "avatar " className="avatarlogged "
                     title = { `${ this.props.user.name }\n${ this.props.user.email }` } /> );
 
-        else if ( this.props.user && !this.props.user.img)
+        // else if ( this.props.user && !this.props.user.img)
 
-            return (<i className="fa fa-user avatarlogged"   style={{ fontSize: '4vmin', color: 'rgb(39, 217, 187)', cursor:'pointer' }}  alt="avatar " title={ `${ this.props.user.name }&#13;${ this.props.user.email }` }></i>);
+        //     return (<i className="fa fa-user avatarlogged"   style={{ fontSize: '4vmin', color: 'rgb(39, 217, 187)', cursor:'pointer' }}  alt="avatar " title={ `${ this.props.user.name }&#13;${ this.props.user.email }` }></i>);
 
     }
 

@@ -8,14 +8,11 @@ import { checkUserSession } from '../../store/actions/checkUserSession'
 
 
 
-
-
-function importAll(r)
-  {
-    const cache = [];
-    r.keys().map(( item ) => { cache.push( item.replace('./', '/') ) });
-    return cache;
-  }
+function importAll(r){
+  const cache = [];
+  r.keys().map(( item ) => { cache.push( item.replace('./', '/') ) });
+  return cache;
+}
 const images = importAll(require.context('../../../public/img/', false, /\.(png|jpg|jpeg|gif)?$/));
 
 function revSTR(str){return str.split('').reverse().join('')}
@@ -25,16 +22,19 @@ export class Profile extends Component {
     constructor(props)
       {
         super(props);
-        this.state = { ...props,
-                          form : {  'name'     : props.user.name,
-                                    'email'    : props.user.email,
-                                    'firstName': props.user.firstName,
-                                    'lastName' : props.user.lastName,
-                                    'phone'    : props.user.phone,
-                                    'password' : '',
-                                    'password_confirmation':''},
-                          imgEl: 'none',
-                     };
+        this.state = {
+          ...props,
+            form : {
+              'name'     : props.user.name,
+              'email'    : props.user.email,
+              'firstName': props.user.firstName,
+              'lastName' : props.user.lastName,
+              'phone'    : props.user.phone,
+              'password' : '',
+              'password_confirmation':''
+            },
+            imgEl: 'none',
+        };
 
         this.valueChanged = this.valueChanged.bind(this);
         this.updateUser   = this.updateUser.bind(this);
@@ -131,18 +131,18 @@ export class Profile extends Component {
                 let section = (
                   <div>
                     {/* ---------------[ Verify Email ]----------- */}
-                    { !this.props.user.isVerified &&
-                      <div className="avatarWrapperWrapper">
-                        <label className="error alert alert-danger">Email is not verified </label><br/>
-                        {
-                          this.props.msg.regSuccess &&
-                            <p className="alert alert-success" role="alert" >{ this.props.msg.regSuccess }</p>
+                    {
+                      !this.props.user.isVerified &&
+                        <div className="avatarWrapperWrapper">
+                          <label className="error alert alert-danger">Email is not verified </label><br/>
+                          {
+                            this.props.msg.regSuccess &&
+                              <p className="alert alert-success" role="alert" >{ this.props.msg.regSuccess }</p>
+                          }
 
-                        }
-
-                        <br/>
-                        <button onClick={ (ev)=> this.emailConfirm( ev )} type="submit"  className="submit_profile"> Verify </button>
-                      </div>
+                          <br/>
+                          <button onClick={ (ev)=> this.emailConfirm( ev )} type="submit"  className="submit_profile"> Verify </button>
+                        </div>
                     }
 
                     {/* ---------------[ Avatar change ]----------- */}
