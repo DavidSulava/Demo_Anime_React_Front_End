@@ -313,7 +313,7 @@ div#m_data_index
         ul.m_i_v{
 
             display               : grid;
-            grid-template-columns : repeat(auto-fit, minmax(150px, max-content));
+            grid-template-columns : repeat(auto-fill, minmax(150px, max-content));
             grid-template-rows    : repeat(auto-fit, minmax(200px, max-content));
             justify-content       : space-around;
             grid-gap              : 10px 2px;
@@ -429,10 +429,11 @@ div#m_data_index
     }
 
 .spinner {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 50vh;
+    display         : flex;
+    justify-content : center;
+    align-items     : center;
+    height          : 50vh;
+    width           : calc(100vw - (40px));
 }
 .spinner_article{
     @extend .spinner;

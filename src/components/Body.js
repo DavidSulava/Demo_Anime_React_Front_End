@@ -41,7 +41,7 @@ export class Body extends Component {
         let loading = (
                 <div className="text-center spinner">
                     <div className="spinner-border" role="status">
-                        <span className="sr-only">Loading...</span>
+                        {/* <span className="sr-only">Loading...</span> */}
                     </div>
                 </div>
         );
@@ -80,14 +80,12 @@ export class Body extends Component {
     }
 }
 
-const mapStateToProps = ( state, ownProps )=>
-    {
-        return { ...state.movieReducer }
-    }
-const mapDispatchToProps = ( dispatch )=>
-    {
-        return { addMovie : (params) => { dispatch( getMovie(params) ) },  dellMovie : () => { dispatch({ 'type': 'DELL_M_DATA' }); } }
-    }
+const mapStateToProps = ( state, ownProps )=>{
+    return { ...state.movieReducer }
+}
+const mapDispatchToProps = ( dispatch )=>{
+    return { addMovie : (params) => { dispatch( getMovie(params) ) },  dellMovie : () => { dispatch({ 'type': 'DELL_M_DATA' }); } }
+}
 
 export default connect( mapStateToProps, mapDispatchToProps )( withRouter(Body) )
 
