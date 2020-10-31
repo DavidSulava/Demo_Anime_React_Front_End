@@ -14,35 +14,28 @@ export class Registration extends Component {
 
         this.valueChanged = this.valueChanged.bind(this);
         this.submForm     = this.submForm.bind(this);
+    }
 
-      }
+    componentDidMount( ){
+      this.props.dellMessages();
+    };
 
-    componentDidMount( )
-      {
-        this.props.dellMessages();
-      };
+    valueChanged(ev){
 
-    valueChanged(ev)
-      {
+      var ch_key = ev.target.name;
+      var ch_val = ev.target.value
 
-        var ch_key = ev.target.name;
-        var ch_val = ev.target.value
+      this.setState( { form: { ...this.state.form, [ ch_key ]: ch_val } } );
+    };
 
-        this.setState( { form: { ...this.state.form, [ ch_key ]: ch_val } } );
+    submForm(ev){
+      ev.preventDefault()
+      var path =  '/users/register'
 
-      };
+      var formData = new FormData( ev.target );
 
-    submForm(ev)
-      {
-        ev.preventDefault()
-        var path =  '/users/register'
-
-        var formData = new FormData( ev.target );
-
-        this.props.getData( path, formData );
-
-        // this.props.getData( path, this.state.form );
-      }
+      this.props.getData( path, formData );
+    }
 
     localSection()
       {
@@ -129,5 +122,5 @@ const mapDispatchToProps = ( dispatch )=>
         return { getData : ( path, params) => {  dispatch( getUser( path, params ) ) }, dellMessages : ()=> {  dispatch( { 'type': 'DELL_ALL_MSG' } ) }  }
     };
 
-//export default withRouter( Registration );
+{/* export default withRouter( Registration ); */}
 export default connect( mapStateToProps, mapDispatchToProps )( withRouter( Registration ) )
