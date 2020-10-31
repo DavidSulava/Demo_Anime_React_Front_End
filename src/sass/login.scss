@@ -4,6 +4,14 @@ $fColorBright: rgb(255, 255, 255);
 $std_btn_color: rgb(122, 198, 127);
 $imageSelection_W_Height: 75vh;
 
+
+@mixin animate($name, $duration:'0.3s', $timing:'ease-in-out' ){
+    animation-name            : #{$name};
+    animation-duration        : #{$duration};
+    animation-timing-function : #{$timing};
+}
+
+
 /*-----------------------------------*/
 /*--------------[ Login ]-------------- */
 .loginContainer {
@@ -24,6 +32,7 @@ $imageSelection_W_Height: 75vh;
 		height           : 34px;
 		color            : $fColorBright;
 		background-color : $std_btn_color;
+		outline          : none;
 	}
 }
 
@@ -40,6 +49,8 @@ $imageSelection_W_Height: 75vh;
 	box-shadow       : 0px 2px 10px rgb(2, 1, 1);
 	color            : #000000;
 	font-size        : $fSizeMain + 1px;
+
+	@include animate('anima_opacity', '0.1s', 'linear');
 
 	> a {
 		clear      : left;
@@ -76,12 +87,20 @@ $imageSelection_W_Height: 75vh;
 
 .loginForm input,
 .loginForm label {
-	width    : 170px;
-	position : relative;
-	display  : block;
-	margin   : 0 auto;
-	padding  : 2px;
-	outline  : none;
+	width      : 170px;
+	position   : relative;
+	display    : block;
+	margin     : 0 auto;
+	padding    : 2px;
+	outline    : none;
+	text-align : left;
+	border-radius: 3px;
+}
+.loginForm input{
+	border           : solid;
+	background-color : rgb(253, 246, 246);
+	border-color     : rgb(23, 66, 23);
+	border-width     : 1px;
 }
 .loginForm .singin,
 .loginForm .singup {
@@ -91,6 +110,7 @@ $imageSelection_W_Height: 75vh;
 	margin    : 6px 8px;
 
 	border-radius    : 2px;
+	outline          : none;
 	border           : none;
 	height           : 25px;
 	color            : $fColorBright;
