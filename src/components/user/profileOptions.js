@@ -1,21 +1,21 @@
-import React, { Component }          from 'react'
-import { connect }                   from 'react-redux'
+import React, { Component }       from 'react'
+import { connect }                from 'react-redux'
 import {  withRouter, Redirect  } from 'react-router-dom'
 
 
-import { getUser }      from '../../store/actions/getUser'
+import { getUser }          from '../../store/actions/getUser'
 import { checkUserSession } from '../../store/actions/checkUserSession'
 
 
 
 function importAll(r){
   const cache = [];
-  r.keys().map(( item ) => { cache.push( item.replace('./', '/') ) });
+  r.keys().map(( item ) => { return cache.push( item.replace('./', '/') ) });
   return cache;
 }
 const images = importAll(require.context('../../../public/img/', false, /\.(png|jpg|jpeg|gif)?$/));
 
-function revSTR(str){return str.split('').reverse().join('')}
+let revSTR = (str)=>{ return str.split('').reverse().join('') }
 
 export class Profile extends Component {
 

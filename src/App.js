@@ -1,8 +1,7 @@
-import React                    from 'react';
-import { BrowserRouter, HashRouter, Route  } from 'react-router-dom';
+import React                  from 'react';
+import { HashRouter, Route  } from 'react-router-dom';
 
 //--css
-// import 'bootstrap/dist/css/bootstrap.css';
 import './sass/app.scss';
 
 //--js

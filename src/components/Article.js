@@ -23,9 +23,11 @@ export class Article extends Component
 
         getAll(e)
             {
-                e.preventDefault();
-                this.props.history.replace({ pathname: '/filtered',  state: { c_param: e.target.href.match(/(?<=\?).*/gi)[0]  } });
-                // this.props.history.push({ pathname: '/filtered',  state: { c_param: e.target.search.slice(1)  } });
+                e.preventDefault()
+
+                // ----[ for the Edge compatibility ( not supports positive lookBehind) ]----
+                let getParameters = e.target.href.match(/(?=\?).*/gi)[0].split('?')[1];
+                this.props.history.replace({ pathname: '/filtered',  state: { c_param:  getParameters } });
             }
         trailer_display(ev)
             {

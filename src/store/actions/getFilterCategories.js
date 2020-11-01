@@ -18,7 +18,7 @@ export const getFilterCategories = () => {
                 };
 
                 const response = await fetch(corsAPI, myHeaders);
-                let data = await response.json();
+                let data       = await response.json();
 
                 if (data && data.length) {
                     let el_filter = (data) => { return data.filter(el => {return el !== '' && el !== '0' && el}) }
