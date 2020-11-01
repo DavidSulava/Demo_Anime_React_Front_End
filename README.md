@@ -8,7 +8,8 @@ __Дэмку можно посмотреть тут__: 👉 https://davidsulava.
 
 ## Stack
 ```
-React( Redux, redux-thunk, react-router-dom, React Class Components, three.js )
+React( Redux, redux-thunk, react-router-dom, React Class Components )
+three.js
 
 ```
 
