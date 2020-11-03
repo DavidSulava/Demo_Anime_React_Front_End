@@ -5,7 +5,6 @@ import  Recaptcha           from 'react-recaptcha'
 
 import { getUser } from '../store/actions/getUser'
 
-let recaptchaInstance = null
 
 export class Registration extends Component {
 
@@ -28,6 +27,17 @@ export class Registration extends Component {
     componentDidMount( ){
       this.props.dellMessages();
     };
+    componentDidUpdate(prevProps) {
+
+      //--- Check Server Messages ----
+      if( this.props.msg ){
+        let currentMsg = Object.entries( this.props.msg ).sort().toString();
+        let prevMsg    = Object.entries( prevProps.msg  ).sort().toString();
+
+        if (currentMsg !== prevMsg)
+          this.setState( (state, props)=> ({ msg:{  ...props.msg } }) );
+      }
+    };
 
     valueChanged = (ev)=>{
 
@@ -39,16 +49,38 @@ export class Registration extends Component {
 
     submForm = (ev)=>{
       ev.preventDefault()
-      var path =  '/users/register'
+      var path = '/users/register'
 
       var formData = new FormData( ev.target );
 
-      recaptchaInstance.reset();
+      if( !this.validateInput( this.state.form ) ) return;
+
+      window.grecaptcha.reset();
 
       this.props.getData( path, formData );
-    }
+    };
 
-    localSection = ()=> {
+    validateInput = ( form )=>{
+      let msg = {};
+
+      if( !form.name )
+        msg.errorUsername = "Username field is empty" 
+
+      if( !form.email )
+         msg.emailErr = "Email field is empty"
+
+      if( !form.password )
+        msg.errorPassword = "Password field is empty"
+
+      if( form.password !== form.password_confirmation  )
+        msg.errorPass_confirm = "Passwords do not match"
+
+      this.setState( (state, props)=> ({ msg:{  ...props.msg, ...msg } }) );
+
+      return (form.name && form.email && form.password && ( form.password === form.password_confirmation )  )? true: false
+    };
+
+    regForm = ()=> {
 
       if( this.props.msg && this.props.msg.loginSuccess )
         {
@@ -74,45 +106,44 @@ export class Registration extends Component {
         {
           return (
 
-              <form onSubmit={ this.submForm }  method = "POST" className="regForm" action='users/register'>
-                  <div className="Registration">
-                      { ( this.props.msg && this.props.msg.errorCred ) && <div className="alert alert-danger">{ this.props.msg.errorCred } </div> }
-                      <input type="hidden" name='sender'   value='' /> <br/>
+            <form onSubmit={ this.submForm }  method = "POST" className="regForm" action='users/register'>
+              <div className="Registration">
+                { (  this.props.msg &&  this.props.msg.errorCred ) && <div className="alert alert-danger">{  this.props.msg.errorCred } </div> }
+                <input type="hidden" name='sender'   value='' /> <br/>
 
-                      <input type="text"  onChange={this.valueChanged} name='name'      className="username"  placeholder="Username"  value= { this.state.form.username }  /><br/>
-                      { ( this.props.msg && this.props.msg.errorUsername) && <div className="alert alert-danger">{ this.props.msg.errorUsername } </div> }
+                <input type="text"  onChange={this.valueChanged} name='name'      className="username"  placeholder="Username"  value= { this.state.form.username }  /><br/>
+                { ( this.state.msg && this.state.msg.errorUsername) && <div className="alert alert-danger">{ this.state.msg.errorUsername } </div> }
 
-                      <input type="text"  onChange={this.valueChanged} name='email'     className="email"     placeholder="E-mail"     value= { this.state.form.email } / ><br/>
-                      { ( this.props.msg && this.props.msg.emailErr) && <div className="alert alert-danger">{ this.props.msg.emailErr } </div> }
+                <input type="text"  onChange={this.valueChanged} name='email'     className="email"     placeholder="E-mail"     value= { this.state.form.email } / ><br/>
+                { (  this.state.msg &&  this.state.msg.emailErr) && <div className="alert alert-danger">{  this.state.msg.emailErr } </div> }
 
-                      <input type="text"  onChange={this.valueChanged} name='firstName' className="firstName" placeholder="First Name" value= { this.state.form.firstName } /><br/>
+                <input type="text"  onChange={this.valueChanged} name='firstName' className="firstName" placeholder="First Name" value= { this.state.form.firstName } /><br/>
 
-                      <input type="text"  onChange={this.valueChanged} name='lastName'  className="lastName"  placeholder="Last Name"  value= { this.state.form.lastName } /><br/>
+                <input type="text"  onChange={this.valueChanged} name='lastName'  className="lastName"  placeholder="Last Name"  value= { this.state.form.lastName } /><br/>
 
-                      <input type="text"  onChange={this.valueChanged} name='phone'     className="phone"     placeholder="Phone Number" value= { this.state.form.phone } /><br/><br/>
+                <input type="text"  onChange={this.valueChanged} name='phone'     className="phone"     placeholder="Phone Number" value= { this.state.form.phone } /><br/><br/>
 
-                      <input type="password" onChange={this.valueChanged} name='password' placeholder="Password"  className="password" value= { this.state.form.password}></input>
-                      { ( this.props.msg && this.props.msg.errorPassword)  && <div className="alert alert-danger">{ this.props.msg.errorPassword } </div> }
+                <input type="password" onChange={this.valueChanged} name='password' placeholder="Password"  className="password" value= { this.state.form.password}></input>
+                { (  this.state.msg &&  this.state.msg.errorPassword)  && <div className="alert alert-danger">{  this.state.msg.errorPassword } </div> }
 
-                      <input type="password" onChange={this.valueChanged} name='password_confirmation'  placeholder="Confirm Password" className="pasConfirm" value= { this.state.form.password_confirmation} />
-                      { ( this.props.msg && this.props.msg.errorPass_confirm ) && <div className="alert alert-danger">{ this.props.msg.errorPass_confirm } </div> }
-                      <br/>
-                      { (  this.props.msg && this.props.msg.regSuccess && !this.props.errorCred) && <div className="alert alert-success" role="alert">{ this.props.regSuccess } </div> }
+                <input type="password" onChange={this.valueChanged} name='password_confirmation'  placeholder="Confirm Password" className="pasConfirm" value= { this.state.form.password_confirmation} />
+                { ( this.state.msg && this.state.msg.errorPass_confirm ) && <div className="alert alert-danger">{ this.state.msg.errorPass_confirm } </div> }
+                <br/>
+                { (  this.props.msg && this.props.msg.regSuccess && !this.props.errorCred) && <div className="alert alert-success" role="alert">{ this.props.regSuccess } </div> }
 
-                      <br/>
-                      { (this.props.msg && this.props.msg.erCaptcha) && <div className="alert alert-danger">{ this.props.msg.erCaptcha } </div> }
-                      <Recaptcha
-                        sitekey = { process.env.REACT_APP_RECAPCHA_KEY  }
-                        render  = "explicit"
-                        hl      = { window.navigator.userLanguage || window.navigator.language }
-                        ref     = { e => recaptchaInstance = e }
-                      />
+                <br/>
+                { (this.props.msg && this.props.msg.erCaptcha) && <div className="alert alert-danger">{ this.props.msg.erCaptcha } </div> }
+                <Recaptcha
+                  sitekey = { process.env.REACT_APP_RECAPCHA_KEY  }
+                  render  = "explicit"
+                  hl      = { window.navigator.userLanguage || window.navigator.language }
+                />
 
-                      <br/>
-                      <button type="submit"  name="submitReg" className="submitRreg" >SUBMIT</button>
-                  </div>
+                <br/>
+                <button type="submit"  name="submitReg" className="submitRreg" >SUBMIT</button>
+              </div>
 
-              </form>
+            </form>
 
           )
         }
@@ -120,23 +151,20 @@ export class Registration extends Component {
     render(){
       return (
         <div>
-          { this.localSection() }
+          { this.regForm() }
         </div>
-
-
       )
     }
 };
 
 
-const mapStateToProps = ( state )=>
-    {
-      return { ...state.userReducer }
-    };
-const mapDispatchToProps = ( dispatch )=>
-    {
-        return { getData : ( path, params) => {  dispatch( getUser( path, params ) ) }, dellMessages : ()=> {  dispatch( { 'type': 'DELL_ALL_MSG' } ) }  }
-    };
+const mapStateToProps = ( state )=>{
+  return { ...state.userReducer }
+};
+const mapDispatchToProps = ( dispatch )=>{
+  return {
+    getData      : ( path, params) => {  dispatch( getUser( path, params ) ) },
+    dellMessages : ()=> {  dispatch( { 'type': 'DELL_ALL_MSG' } ) }  }
+};
 
-{/* export default withRouter( Registration ); */}
 export default connect( mapStateToProps, mapDispatchToProps )( withRouter( Registration ) )

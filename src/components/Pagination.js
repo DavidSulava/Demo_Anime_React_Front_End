@@ -9,10 +9,10 @@ import { getMovie }         from '../store/actions/getMovieAction'
 export class Pagination extends Component
 {
     activeStyle={
-                    fontWeight: "bold",
-                    color     : "white",
-                    backgroundColor: 'rgb(0, 138, 230)'
-                };
+        fontWeight      : "bold",
+        color           : "white",
+        backgroundColor : 'rgb(0, 138, 230)'
+    };
 
     componentDidMount()
         {
@@ -59,8 +59,6 @@ export class Pagination extends Component
             let curPage    = params.page ? parseInt( params.page )  : 1  ;
             let prevPage   = ( curPage >1 ) ? `${str_Params}&page=${curPage - 1}` : `${str_Params}&page=${ 1 }` ;
             let nextPage   = ( totalPages > 1 && curPage < totalPages )? `${str_Params}&page=${ curPage + 1}` : `${str_Params}&page=${ curPage }` ;
-
-
 
             let subComponent =  movie.length > 0 && pages? (
 
