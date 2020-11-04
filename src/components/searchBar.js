@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect }          from 'react-redux'
-import { Link, withRouter }    from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 
 import { getSearch }        from '../store/actions/getSearch'
 
@@ -55,11 +55,11 @@ export class SearchBar extends Component {
 
         }
     }
-    getState(){
+    elementResults(){
 
         let SubComponent = this.props.search && this.props.search.data &&  this.props.search.data[0]._id ? (
 
-            <div  className="search-suggest row  col-11 col-sm-11 col-md-11 col-lg-4 col-xl-3" style={{display: 'block'}}>
+            <div  className="search-suggest row  col-11 col-sm-11 col-md-11 col-lg-3 col-xl-3 " style={{display: 'block'}}>
                     <ul style={{ listStyleType: 'none' }}>
 
                         {
@@ -80,7 +80,8 @@ export class SearchBar extends Component {
                                 )
                             })
                         }
-                        <li className="ss-bottom" style={{'padding': '0px', 'borderBottom': 'none', 'borderRadius': '0px 0px 5px 5px'}}>
+
+                        <li className="ss-bottom" >
                             <Link to={`?title=${this.searchTitle }`}  onClick={ (e)=> this.getAll(e) }  id="finde_all" >View all</Link>
                         </li>
 
@@ -108,7 +109,7 @@ export class SearchBar extends Component {
 
                     </div>
 
-                    { this.getState() }
+                    { this.elementResults() }
 
                     <div  className="wrapper_MbSearch col-12" style={{display: 'none'}}>
                         <div  className="inputCont mobileBar" >

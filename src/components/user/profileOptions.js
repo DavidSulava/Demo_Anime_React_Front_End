@@ -141,7 +141,7 @@ export class Profile extends Component {
                           }
 
                           <br/>
-                          <button onClick={ (ev)=> this.emailConfirm( ev )} type="submit"  className="submit_profile"> Verify </button>
+                          <button onClick={ (ev)=> this.emailConfirm( ev )} type="submit"  className="submit_profile btn btn-success btn-sm"> Verify </button>
                         </div>
                     }
 
@@ -151,7 +151,7 @@ export class Profile extends Component {
                       <br/>
                       <h4 style={{ marginLeft: '20px'}} >Select avatar</h4>
                       <br/>
-                      <button onClick={ (ev)=> this.showImgEl( ev )} type="submit"  className="submit_profile"> Select </button>
+                      <button onClick={ (ev)=> this.showImgEl( ev )} type="submit"  className="submit_profile btn btn-success btn-sm"> Select </button>
                     </div>
 
                       <div onClick={ ( ev )=> this.showImgEl( ev, false )} className="avatarWrapper" style={{ display: 'none'}}>
@@ -237,7 +237,7 @@ export class Profile extends Component {
                                 <br/> */}
 
                             <br/><br/>
-                            <button type="submit" name="submit_profile_change" className="submit_profile">Change</button>
+                            <button type="submit" name="submit_profile_change btn btn-success btn-sm" className="submit_profile">Change</button>
                         </form>
                     </div>
 
@@ -268,7 +268,7 @@ export class Profile extends Component {
                                   <label className='success alert alert-success'>{ this.state.msg.passUpdated  }</label>
                           }
                           <br/>  <br/>
-                          <button type="submit" name="submitPassChange" className="submit_profile">Change</button>
+                          <button type="submit" name="submitPassChange" className="submit_profile btn btn-success btn-sm">Change</button>
                       </form>
                     </div>
 
@@ -298,7 +298,7 @@ export class Profile extends Component {
                         }
 
                         <br/>
-                        <button type="submit" name="submitDelete" className="submit_profile">Delete</button>
+                        <button type="submit" name="submitDelete" className="submit_profile btn btn-danger btn-sm">Delete</button>
                       </form>
                     </div>
                   </div>

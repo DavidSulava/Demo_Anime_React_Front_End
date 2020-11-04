@@ -79,8 +79,8 @@ body {
 }
 
 nav {
-    background-color: $navBcolor;
-    font-size: 20px;
+    background-color : $navBcolor;
+    font-size        : 20px;
 
     @include stopSelection;
 
@@ -102,10 +102,10 @@ nav {
         text-align: left;
 
         canvas.logo {
-            height: $logoHeight;
-            margin: ($navHeight - $logoHeight)/2 0 auto 0;
-            padding: 0;
-            max-width: 200px;
+            height    : $logoHeight;
+            margin    : ($navHeight - $logoHeight)/2 0 auto 0;
+            padding   : 0;
+            max-width : 200px;
         }
     }
 
@@ -115,20 +115,20 @@ nav {
 
 
     label.box {
-        font-size: calc(2vw + 2vh);
-        cursor: pointer;
-        background-color: black;
-        padding: 0;
-        margin: 0;
-        height: $navHeight - 1.1px;
-        overflow: auto;
+        font-size        : calc(2vw + 2vh);
+        cursor           : pointer;
+        background-color : black;
+        padding          : 0;
+        margin           : 0;
+        height           : $navHeight - 1.1px;
+        overflow         : hidden;
+        height           : $navHeight + 2px;
 
         i {
-            display: inline-block;
-            color: $fColorMain;
-            vertical-align: middle;
-            line-height: $navHeight - 1.1px;
-
+            display        : inline-block;
+            color          : $fColorMain;
+            vertical-align : middle;
+            line-height    : $navHeight - 1.1px;
         }
 
     }
@@ -189,7 +189,7 @@ div#m_data_index {
     padding : 0;
     margin  : 15px 0 0 0;
 
- 
+
     .fButton_wrapper {
         display    : block;
         text-align : right;
@@ -209,7 +209,7 @@ div#m_data_index {
             @include stopSelection;
         }
 
-        #mMenu_f             :checked~.fButton {
+        #mMenu_f :checked~.fButton {
             background-color : rgb(231, 79, 74);
             color            : rgb(228, 225, 225);
 
@@ -760,6 +760,13 @@ div.frame_container {
 
 
     }
+
+}
+@media only screen and (min-width: 1250px) {
+    .search-suggest{
+        max-width: 355px;
+    }
+
 }
 
 /*_______________________________________*/
@@ -773,7 +780,6 @@ div.frame_container {
 
     .inputCont {
         border-radius   : 5px;
-        // margin-right : 8px !important;
         margin          : 10px 8px 10px 0 !important;
         position        : relative;
         height          : 34px;
@@ -817,7 +823,7 @@ div.frame_container {
     padding    : 0;
     position   : absolute;
     z-index    : 3;
-    margin-top : 5px;
+    margin-top : 8px;
 
     @include animate('anima_opacity');
 
@@ -832,8 +838,7 @@ div.frame_container {
             display       : block;
             border-bottom : 1px solid rgb(199, 199, 199);
             padding       : 2px 5px 2px 2px;
-            width         : 100%;
-            /* min-width  : 250px;  */
+            width         : auto;
 
             &                    :hover {
                 background-color : rgb(234, 234, 234);
@@ -875,19 +880,21 @@ div.frame_container {
             padding       : 15px 0 2px 2px;
         }
 
+        // ---Button
         li:last-child {
-            background-color: rgb(99, 191, 108);
-
-            &:hover {
-                background-color : rgb(72, 177, 84);
-                cursor           : pointer;
-            }
+            @include standardButton;
+            margin-top: 2px;
+            border-radius: 0px 0px 5px 5px;
 
             a {
-                width           : 100%;
-                height          : 100%;
-                text-decoration : none;
-                text-align      : center;
+                width            : 100%;
+                height           : 100%;
+                text-decoration  : none;
+                text-align       : center;
+                margin           : 0;
+                background-color : inherit;
+                cursor           : pointer;
+                color            : $fColorMain;
             }
         }
     }
@@ -897,6 +904,7 @@ div.frame_container {
 .mobileBar {
     display: none;
 }
+
 
 @media screen and (max-width: 991px) {
 
@@ -951,12 +959,11 @@ div.frame_container {
 
 
     .search-suggest {
-        margin-top   : $navHeight - 3px;
+        margin-top   : $navHeight + 5px;
         left         : 0;
         right        : 0;
         margin-left  : auto;
         margin-right : auto;
-
 
         ul li {
             min-width: auto;

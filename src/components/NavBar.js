@@ -42,15 +42,25 @@ export class NavBar extends Component{
 
             return ( <div className="alert alert-danger" style={{ width:'auto', margin:'0 7px'}}>{ this.props.msg.errorCred } </div> );
 
-        else if (  this.props.user && this.props.user.img )
+        else if (  this.props.user ){
 
-            return (<img src  = { process.env.PUBLIC_URL + '/img/' + this.props.user.img }
+            if( !this.props.user.img )
+                return (
+                    <i
+                        className="fa fa-user avatarlogged"
+                        style={{ fontSize: '4vmin', color: 'rgb(39, 217, 187)', cursor:'pointer' }}
+                        alt="avatar "
+                        title={ `${ this.props.user.name }&#13;${ this.props.user.email }` }
+                    ></i>);
+
+            return (
+                <img
+                    src   = { process.env.PUBLIC_URL + '/img/' + this.props.user.img }
                     alt   = "avatar " className="avatarlogged "
-                    title = { `${ this.props.user.name }\n${ this.props.user.email }` } /> );
-
-        // else if ( this.props.user && !this.props.user.img)
-
-        //     return (<i className="fa fa-user avatarlogged"   style={{ fontSize: '4vmin', color: 'rgb(39, 217, 187)', cursor:'pointer' }}  alt="avatar " title={ `${ this.props.user.name }&#13;${ this.props.user.email }` }></i>);
+                    title = { `${ this.props.user.name }\n${ this.props.user.email }` }
+                />
+            );
+        }
 
     }
 
@@ -127,11 +137,11 @@ export class NavBar extends Component{
                 </label>
 
                 {/* CANVAS */}
-                <div className='canvasWrapper col-7 col-sm-8 col-md-8 col-lg-2 '>
+                <div className='canvasWrapper col-7 col-sm-8 col-md-8 col-lg-2'>
                     <canvas className="logo" ></canvas>
                 </div>
 
-                <ul className="nPanel col-12 col-sm-12 col-md-12 col-lg-6 col-xl-7 ">
+                <ul className="nPanel col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 ml-auto">
                     <li><NavLink  to="/home"    >HOME</NavLink></li>
                     <li><NavLink  to="/latest"  >LATEST</NavLink></li>
                     <li><NavLink  to="/movies"  >MOVIES</NavLink></li>
@@ -143,7 +153,7 @@ export class NavBar extends Component{
                 </div>
 
                 {/* Login */}
-                <div className="loginContainer col-2 col-sm-2 col-md-1 col-lg-1 col-xl-1">
+                <div className="loginContainer col-2 col-sm-2 col-md-1 col-lg-1 ">
                     { this.formSection() }
                 </div>
 

@@ -15,9 +15,8 @@ $imageSelection_W_Height: 75vh;
 /*-----------------------------------*/
 /*--------------[ Login ]-------------- */
 .loginContainer {
-	/* float: left; */
-	padding: 0;
-	text-align: center;
+	padding    : 0;
+	text-align : center;
 
 	a {
 		text-decoration: none;
@@ -139,13 +138,9 @@ $imageSelection_W_Height: 75vh;
 /*--------[ LOGGED ]---------*/
 
 .logged {
-	/*float     : left;*/
-	/*position  : absolute;*/
-	/*z-index   : 3;*/
-	/*top       : 5px;
-            right     : 10px; */
-	text-align: right;
-	margin-left: 10px;
+
+	text-align  : right;
+	margin-left : 10px;
 }
 
 .avatarlogged {
@@ -175,7 +170,7 @@ $imageSelection_W_Height: 75vh;
 	}
 	a,
 	.logout {
-		font-size: 0.7em;
+		font-size : 0.7em;
 	}
 }
 
@@ -195,6 +190,7 @@ $imageSelection_W_Height: 75vh;
 	background-color : rgb(122, 198, 127);
 	border           : none;
 	border-radius    : 5px;
+	padding   : 3px;
 }
 .logout:hover {
 	background-color: rgb(244, 112, 112);
@@ -632,6 +628,9 @@ div.alert {
 	width     : 70vw;
 	padding   : 3px;
 	margin    : 1px auto 5px auto;
+}
+label.alert{
+	margin : 5px auto 0px auto;
 }
 //--recapcha------
 div.g-recaptcha {
