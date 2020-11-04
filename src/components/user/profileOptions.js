@@ -129,8 +129,9 @@ export class Profile extends Component {
         if( !this.props.user )
          // this.props.history.push('/home')
          return <Redirect to='/home'  />
-  
-        let section = (
+
+
+        return (
           <div>
             {/* ---------------[ Verify Email ]----------- */}
             {
@@ -305,8 +306,6 @@ export class Profile extends Component {
             </div>
           </div>
         )
-
-        return section
 
       };
 
