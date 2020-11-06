@@ -1,30 +1,32 @@
 export const getMovie = (getParams = '') => {
-    return (dispatch, getState) => {
+    return async (dispatch, getState) => {
         //async stuff
-       (async () => {
-            let corsAPI = (getParams === '') ? `${process.env.REACT_APP_DATA_API}/media` : `${process.env.REACT_APP_DATA_API}/media?${getParams}`;
+
+        let corsAPI = (getParams === '') ? `${process.env.REACT_APP_DATA_API}/media` : `${process.env.REACT_APP_DATA_API}/media?${getParams}`;
+
+        const myHeaders = {
+            method : 'GET',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+            },
+            credentials: 'include',
+        };
 
 
-            const myHeaders = {
-                method : 'GET',
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest',
-                },
-                credentials: 'include',
-            };
-
-            const response  = await fetch( corsAPI, myHeaders )
+        try {
+            const response  = await fetch( corsAPI, myHeaders );
             let data        = await response.json();
 
-            if ( data ){
+            if ( data.data ){
                 dispatch({ 'type': 'ADD_M_DATA', 'movie': data });
             }
             else{
                 dispatch({ 'type': 'ADD_M_DATA', 'movie':[] });
             };
 
-        })().catch(err=>console.log('----', err));
-
+        } catch (error) {
+            console.log('----', error);
+        }
 
     }
 }

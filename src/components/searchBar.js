@@ -10,11 +10,11 @@ export class SearchBar extends Component {
 
     searchTitle = '';
 
-    makeReq(e) {
+    makeReq = (e)=> {
         this.searchTitle = e.target.value;
         this.props.getData(`title=${this.searchTitle}`)
     }
-    getAll(e) {
+    getAll = (e)=> {
 
         e.preventDefault();
 
@@ -28,7 +28,7 @@ export class SearchBar extends Component {
 
 
     }
-    mobBtn() {
+    mobBtn = ()=> {
         let searchBar = document.querySelector('.wrapper_MbSearch');
 
         if (searchBar && searchBar.style.display === 'none')
@@ -41,12 +41,12 @@ export class SearchBar extends Component {
 
         }
     }
-    showResults() {
+    showResults = ()=> {
         let results = document.querySelector('.search-suggest ul');
         if (results)
             results.style = 'display:block;'
     }
-    hideResults() {
+    hideResults = ()=> {
         document.onclick = function (event) {
             let results = document.querySelector('.search-suggest ul');
 
@@ -55,7 +55,7 @@ export class SearchBar extends Component {
 
         }
     }
-    elementResults(){
+    elementResults = ()=>{
 
         let SubComponent = this.props.search && this.props.search.data &&  this.props.search.data[0]._id ? (
 

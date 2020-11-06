@@ -10,23 +10,40 @@ import Pagination       from '../components/Pagination';
 export class Body extends Component {
     constructor(props){
         super(props)
-        this.state = {...props}
+        this.state = {...props};
+        this.getParams = this.setUrlParams();
     }
 
-    async componentDidMount( ){
-        this.props.addMovie( this.props.c_param );
-    }
+    componentDidMount = ( )=>{
+
+        setTimeout( ()=>{
+
+            this.props.addMovie( this.getParams );
+        }, 700)
+    };
+    setUrlParams = ()=>{
+
+        let getParams       = this.props.location.search ? this.props.location.search.split('?')[1]: '';
+        let finalParameters = getParams? `${this.props.c_param}&` + getParams : this.props.c_param;
+
+         //--set get parameters for url
+         if( !this.props.location.search && this.props.c_param ){
+            window.location.href = window.location.href + '?' + finalParameters ;
+        };
+
+        return finalParameters
+    };
     componentDidUpdate (prevProps){
+
         if(  !new RegExp(this.props.c_param).test(prevProps.c_param) )
-            this.props.addMovie( this.props.c_param );
-    }
+            this.props.addMovie( this.setUrlParams() );
+    };
     componentWillUnmount(){
         this.props.dellMovie( );
-    }
+    };
 
-
-    check_length(el) { return el.episodes > 1 };
-    get_translation(el){
+    check_length    = (el)=> { return el.episodes > 1 };
+    get_translation = (el)=>{
         var reverse_str     = el.split('').reverse().join('');
         var reversed_params = 'Sub|Dub'.split('').reverse().join('');
         var reg             = new RegExp(`(?!\\))${reversed_params}(?=\\()`, 'i');
@@ -34,9 +51,9 @@ export class Body extends Component {
 
         return status ? status[0].split('').reverse().join('').toUpperCase() : 'SUB'
     };
-    get_img(el) { return el.imgU2 ? el.imgU2  : el.img ? el.img : 'img/NoImageFound.png' };
+    get_img = (el)=> { return el.imgU2 ? el.imgU2  : el.img ? el.img : 'img/NoImageFound.png' };
 
-    getState(){
+    getState = ()=>{
 
         let loading = (
                 <div className="text-center spinner">
@@ -63,7 +80,7 @@ export class Body extends Component {
         ) : loading ;
 
         return subComponent ;
-    }
+    };
     render() {
         return (
             <div className="body_wrapper">
@@ -77,14 +94,17 @@ export class Body extends Component {
                 <Pagination />
             </div>
         )
-    }
+    };
 }
 
 const mapStateToProps = ( state, ownProps )=>{
     return { ...state.movieReducer }
 }
 const mapDispatchToProps = ( dispatch )=>{
-    return { addMovie : (params) => { dispatch( getMovie(params) ) },  dellMovie : () => { dispatch({ 'type': 'DELL_M_DATA' }); } }
+    return {
+        addMovie  : (params) => { dispatch( getMovie(params) ) },
+        dellMovie : () => { dispatch({ 'type': 'DELL_M_DATA' }); }
+    }
 }
 
 export default connect( mapStateToProps, mapDispatchToProps )( withRouter(Body) )

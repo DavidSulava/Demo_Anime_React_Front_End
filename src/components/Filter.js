@@ -8,131 +8,126 @@ import { getMovie }            from '../store/actions/getMovieAction'
 
 export class Filter extends Component {
 
-    constructor(props)
-        {
-            super(props)
-            this.props = props;
+    constructor(props){
+        super(props)
+        this.props = props;
 
-            this.v_filter_section = true;
-            this.v_filter_btn     = 'none';
-            this.v_ul_Show        = { fOrder : 'none', fType: 'none', fGenre : 'none', fCountry : 'none', fYear : 'none', fLang : 'none'  };
-            this.styleObject      = { 'backgroundColor':'rgb(37, 181, 121)'};
+        this.v_filter_section = true;
+        this.v_filter_btn     = 'none';
+        this.v_ul_Show        = { fOrder : 'none', fType: 'none', fGenre : 'none', fCountry : 'none', fYear : 'none', fLang : 'none'  };
+        this.styleObject      = { 'backgroundColor':'rgb(37, 181, 121)'};
 
-            this.state = {
-                            // ...this.props,
-                            v_filter_section: this.v_filter_section,
-                            v_filter_btn    : this.v_filter_btn,
-                            v_ul_Show       : this.v_ul_Show,
-                            styleObject     : this.styleObject
-                        };
-
+        this.state = {
+            // ...this.props,
+            v_filter_section: this.v_filter_section,
+            v_filter_btn    : this.v_filter_btn,
+            v_ul_Show       : this.v_ul_Show,
+            styleObject     : this.styleObject
         };
 
-
-     componentDidMount()
-        {
-            this.props.getFilter();
-        };
+    };
 
 
-    check_li = (ev)=>
-        {
-             //--hide a li elements after click----
-             ev.target.parentNode.previousElementSibling.innerText = ev.target.innerText;
+    componentDidMount(){
+        this.props.getFilter();
+    };
 
-             let f_kay = ev.target.classList[1];
-             this.setState({ ...this.state, v_ul_Show: { ...this.state.v_ul_Show, [f_kay]: 'none' } });
 
-             //--change a BG-Color of a li elements
-             ev.target.style.backgroundColor = this.state.styleObject['backgroundColor'];
+    check_li = (ev)=>{
 
-             var parent_el = ev.target.parentNode.children;
+        //--hide a li elements after click----
+        ev.target.parentNode.previousElementSibling.innerText = ev.target.innerText;
 
-             for (const iterator of parent_el)
-                 {
-                    if ( ev.target.innerText !== iterator.innerText )
-                        iterator.style.backgroundColor = '';
+        let f_kay = ev.target.classList[1];
+        this.setState({ ...this.state, v_ul_Show: { ...this.state.v_ul_Show, [f_kay]: 'none' } });
 
-                 }
+        //--change a BG-Color of a li elements
+        ev.target.style.backgroundColor = this.state.styleObject['backgroundColor'];
+
+        var parent_el = ev.target.parentNode.children;
+
+        for (let iterLi of parent_el){
+            if ( ev.target.innerText !== iterLi.innerText )
+                iterLi.style.backgroundColor = '';
+
         }
-    checkdisplay = ( p_el )=>
-        {
+    };
+    checkdisplay = ( p_el )=>{
 
-            let new_v_ul_Show = {};
+        let new_v_ul_Show = {};
 
-            let el_show  = this.state.v_ul_Show[p_el] === 'none' ?  'block': 'none';
+        let el_show  = this.state.v_ul_Show[p_el] === 'none' ?  'block': 'none';
 
-            for ( var kay in this.state.v_ul_Show)
-                {
-                    new_v_ul_Show[kay] = ( kay !== p_el ) ? 'none' : el_show;
-                }
+        for ( let kay in this.state.v_ul_Show){
 
-            this.setState({ ...this.state , v_ul_Show: new_v_ul_Show  });
-
-        };
-    showHideBTN = ()=>
-        {
-            let el_show    = this.state.v_filter_btn === 'none' ?  'block': 'none';
-            let v_ul_Show  = { fOrder : 'none', fType: 'none', fGenre : 'none', fCountry : 'none', fYear : 'none', fLang : 'none'  };//hide all subElements
-
-            this.setState({ ...this.state, v_filter_btn: el_show, v_ul_Show  });
-        };
-    get_li(category)
-        {
-            let extract_str = category.slice(1).toLowerCase();
-            var preDefault  =   (
-                                    <div className= {category} >
-                                        Type:
-                                        <button onClick={ ()=> this.checkdisplay(  category ) } >All</button>
-                                        <ul  style= {{"display": this.state.v_ul_Show[category] }}>
-                                            <li className={`li ${category}`} onClick={(e)=>this.check_li(e) } style= { this.state.styleObject } >All</li>
-                                        </ul>
-                                    </div>
-                                );
-
-            var subComponent = this.props.filter && this.props.filter[extract_str]   ?
-                    (
-                        <div className={category}>
-                            {category.slice(1)}:
-                                <button onClick={ ()=> this.checkdisplay( category )}>All</button>
-                                <ul   style= {{"display": this.state.v_ul_Show[category] }}>
-
-                                    <li className={`li ${category}`} onClick={(e)=>this.check_li(e) }  style= { this.state.styleObject } >All</li>
-
-                                    {this.props.filter[extract_str].map( ( el, index ) =>
-                                        { return ( <li className={`li ${category}`} onClick={ (e)=>this.check_li(e) } key={ index } >{el}</li> ) }  )
-                                    }
-                                </ul>
-                        </div>
-                    )
-                    : preDefault ;
-            return subComponent ;
+            new_v_ul_Show[kay] = ( kay !== p_el ) ? 'none' : el_show;
         }
-    async get_filteredData(e)
-        {
 
-            let buttons = e.target.parentNode.children;
-            let get_str = '';
+        this.setState({ ...this.state , v_ul_Show: new_v_ul_Show  });
+    };
+    showHideBTN = ()=>{
 
-            for (const iterator of buttons)
-                {
-                    if(iterator.localName === 'div')
-                    {
-                        var [kay, value] = iterator.outerText.split(':');
-                        value.trim();
+        let el_show    = this.state.v_filter_btn === 'none' ?  'block': 'none';
+        let v_ul_Show  = { fOrder : 'none', fType: 'none', fGenre : 'none', fCountry : 'none', fYear : 'none', fLang : 'none'  };//hide all subElements
 
-                        value = value.includes('Movies name') ? 'title'      : value ;
-                        value = value.includes('Raiting')     ? 'rating'     : value ;
-                        value = value.includes('Release Year')? 'year'       : value ;
-                        value = value.includes('New Update')  ? 'updatedAt'  : value ;
+        this.setState({ ...this.state, v_filter_btn: el_show, v_ul_Show  });
+    };
+    get_li = (category)=>{
 
-                        get_str +=`${kay}=${value}&`;
-                    }
+        let extract_str = category.slice(1).toLowerCase();
+        var preDefault  =   (
+            <div className= {category} >
+                Type:
+                <button onClick={ ()=> this.checkdisplay(  category ) } >All</button>
+                <ul  style= {{"display": this.state.v_ul_Show[category] }}>
+                    <li className={`li ${category}`} onClick={(e)=>this.check_li(e) } style= { this.state.styleObject } >All</li>
+                </ul>
+            </div>
+        );
 
-                }
+        var subComponent = this.props.filter && this.props.filter[extract_str]   ? (
 
-            this.props.history.replace({ pathname: '/filtered',  state: { c_param: get_str} });
+            <div className={category}>
+                {category.slice(1)}:
+                    <button onClick={ ()=> this.checkdisplay( category )}>All</button>
+                    <ul   style= {{"display": this.state.v_ul_Show[category] }}>
+
+                        <li className={`li ${category}`} onClick={(e)=>this.check_li(e) }  style= { this.state.styleObject } >All</li>
+
+                        {this.props.filter[extract_str].map( ( el, index ) =>
+                            { return ( <li className={`li ${category}`} onClick={ (e)=>this.check_li(e) } key={ index } >{el}</li> ) }  )
+                        }
+                    </ul>
+            </div>
+        ) : preDefault ;
+
+        return subComponent ;
+    };
+    get_filteredData = async (e)=>{
+
+        let buttons = e.target.parentNode.children;
+        let get_str = '';
+
+        for (let filteredBtn of buttons){
+
+            if(filteredBtn.localName === 'div'){
+
+                var [kay, value] = filteredBtn.outerText.split(':');
+                value.trim();
+
+                value = value.includes('Movies name') ? 'title'      : value ;
+                value = value.includes('Raiting')     ? 'rating'     : value ;
+                value = value.includes('Release Year')? 'year'       : value ;
+                value = value.includes('New Update')  ? 'updatedAt'  : value ;
+
+                get_str +=`${kay}=${value}&`;
+            }
+
         }
+
+        this.props.history.replace({ pathname: '/filtered',  state: { c_param: get_str} });
+    };
+
     render() {
 
         return (
@@ -194,13 +189,11 @@ export class Filter extends Component {
 };
 
 
-const mapStateToProps = ( state, ownProps )=>
-    {
-        return { ...state.movieReducer }
-    }
-const mapDispatchToProps = ( dispatch )=>
-    {
-        return { getFilter : () => { dispatch( getFilterCategories() ) }, addMovie : (params) => { dispatch( getMovie(params) ) } }
-    }
+const mapStateToProps = ( state, ownProps )=>{
+    return { ...state.movieReducer }
+}
+const mapDispatchToProps = ( dispatch )=>{
+    return { getFilter : () => { dispatch( getFilterCategories() ) }, addMovie : (params) => { dispatch( getMovie(params) ) } }
+}
 
 export default connect( mapStateToProps, mapDispatchToProps )( withRouter(Filter))

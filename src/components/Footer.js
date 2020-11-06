@@ -6,56 +6,50 @@ import { getUser }      from '../store/actions/getUser'
 
 export class FooterComp extends Component {
 
-    constructor(props)
-      {
+    constructor(props){
+
         super(props);
         this.state = { ...props };
+    };
 
-      };
+    static getDerivedStateFromProps(props, state){
 
-    static getDerivedStateFromProps(props, state)
-        {
-            //  if message has changed, then change it
-            if( props.msg && JSON.stringify(props.msg) !== JSON.stringify(state.msg) )
-                {
-                    return { ...state, msg:  props.msg  }
-                }
-            return null
+        //  if message has changed, then change it
+        if( props.msg && JSON.stringify(props.msg) !== JSON.stringify(state.msg) )
+            return { ...state, msg:  props.msg  }
+
+        return null
+    }
+
+    sendMessage = (ev)=>{
+
+        ev.preventDefault();
+
+        var inputEm   = document.querySelector('.emessageWrap .sender');
+        var emailErr  = document.querySelector('.emessageWrap .mailErr small');
+        var messageEm = document.querySelector('.emessageWrap textarea');
+        var messErr   = document.querySelector('.emessageWrap .textErr small');
+
+        if (!inputEm.checkValidity()){
+            emailErr.innerText = inputEm.validationMessage;
+
+        } else if (inputEm.value === ''){
+            emailErr.innerText = 'Email fild cannot be empty!';
+
+        }else if (messageEm.value === ''){
+            emailErr.innerText = '';
+            messErr.innerText = 'Massege fild cannot be empty!';
+
+        }else{
+            emailErr.innerText = '';
+            messErr.innerText = '';
+
+            var formData = new FormData( ev.target );
+
+            this.props.sendEmail( '/users/contact/email', formData)
         }
 
-    sendMessage = (ev)=>
-        {
-            ev.preventDefault();
-
-            var inputEm   = document.querySelector('.emessageWrap .sender');
-            var emailErr  = document.querySelector('.emessageWrap .mailErr small');
-            var messageEm = document.querySelector('.emessageWrap textarea');
-            var messErr   = document.querySelector('.emessageWrap .textErr small');
-
-            if (!inputEm.checkValidity())
-                {
-                    emailErr.innerText = inputEm.validationMessage;
-                }
-            else if (inputEm.value === '')
-                {
-                    emailErr.innerText = 'Email fild cannot be empty!';
-                }
-            else if (messageEm.value === '')
-                {
-                    emailErr.innerText = '';
-                    messErr.innerText = 'Massege fild cannot be empty!';
-                }
-            else
-                {
-                    emailErr.innerText = '';
-                    messErr.innerText = '';
-
-                    var formData = new FormData( ev.target );
-
-                    this.props.sendEmail( '/users/contact/email', formData)
-                }
-
-        }
+    }
 
     contactForm (){
         return  (
@@ -134,13 +128,11 @@ export class FooterComp extends Component {
     }
 }
 
-const mapStateToProps = ( state )=>
-    {
-        return { ...state.userReducer  }
-    }
-const mapDispatchToProps = ( dispatch )=>
-    {
-        return { sendEmail    : ( path, params) => {  dispatch( getUser( path, params ) ) } }
-    }
+const mapStateToProps = ( state )=>{
+    return { ...state.userReducer  }
+}
+const mapDispatchToProps = ( dispatch )=>{
+    return { sendEmail    : ( path, params) => {  dispatch( getUser( path, params ) ) } }
+}
 
 export default connect( mapStateToProps, mapDispatchToProps )(FooterComp)

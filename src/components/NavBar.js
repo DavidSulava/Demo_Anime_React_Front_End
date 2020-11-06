@@ -16,16 +16,15 @@ export class NavBar extends Component{
     constructor(props){
         super(props);
         this.state = { ...props };
-
-        this.submForm  = this.submForm.bind(this);
-        this.logOut    = this.logOut.bind(this);
     }
 
-    componentDidMount() {
-        logo( process.env.NODE_ENV !== 'development' ? process.env.PUBLIC_URL : '' );
+
+    componentDidMount = ()=> {
+
         this.props.checkUserSess();
+        logo( process.env.NODE_ENV !== 'development' ? process.env.PUBLIC_URL : '' );
     }
-    submForm(ev) {
+    submForm = (ev)=> {
         ev.preventDefault();
 
         let formEl = ev.currentTarget.parentNode
@@ -35,14 +34,14 @@ export class NavBar extends Component{
 
         this.props.login(path, formData);
     }
-    imgSection(){
+    imgSection = ()=>{
 
 
         if( this.props.msg && this.props.msg.errorCred && !this.props.user )
 
             return ( <div className="alert alert-danger" style={{ width:'auto', margin:'0 7px'}}>{ this.props.msg.errorCred } </div> );
 
-        else if (  this.props.user ){
+        else if (  this.props.user && this.props.user.email  ){
 
             if( !this.props.user.img )
                 return (
@@ -62,16 +61,17 @@ export class NavBar extends Component{
             );
         }
 
+
     }
 
-    logOut(ev) {
+    logOut = (ev)=> {
         ev.preventDefault();
 
         this.props.checkUserSess('/users/logOut');
 
     }
 
-    formSection(){
+    formSection = ()=>{
         if ( !this.props.user || !this.props.user.email) {
             return (
                 <div>
@@ -166,7 +166,9 @@ const mapStateToProps = ( state )=>{
     return {  ...state.userReducer  }
 }
 const mapDispatchToProps = ( dispatch )=>{
-    return { login : ( path, params) => {  dispatch( getUser( path, params ) ) }, checkUserSess: ( path ) => {  dispatch( checkUserSession( path ) ) }  }
+    return {
+        login         : ( path, params) => {  dispatch( getUser( path, params ) ) },
+        checkUserSess : ( path ) => {  dispatch( checkUserSession( path ) ) }  }
 }
 
 // export default withRouter( NavBar );
