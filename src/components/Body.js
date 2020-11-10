@@ -18,8 +18,17 @@ export class Body extends Component {
 
         setTimeout( ()=>{
 
-            this.props.addMovie( this.getParams );
+            this.props.addMovie( this.setUrlParams );
         }, 700)
+    };
+
+    componentDidUpdate (prevProps){
+
+        if(  !new RegExp(this.props.c_param).test(prevProps.c_param) )
+            this.props.addMovie( this.setUrlParams() );
+    };
+    componentWillUnmount(){
+        this.props.dellMovie( );
     };
     setUrlParams = ()=>{
 
@@ -33,15 +42,6 @@ export class Body extends Component {
 
         return finalParameters
     };
-    componentDidUpdate (prevProps){
-
-        if(  !new RegExp(this.props.c_param).test(prevProps.c_param) )
-            this.props.addMovie( this.setUrlParams() );
-    };
-    componentWillUnmount(){
-        this.props.dellMovie( );
-    };
-
     check_length    = (el)=> { return el.episodes > 1 };
     get_translation = (el)=>{
         var reverse_str     = el.split('').reverse().join('');
