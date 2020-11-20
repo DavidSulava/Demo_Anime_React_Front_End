@@ -1,11 +1,8 @@
 import React                  from 'react';
-import { HashRouter, Route  } from 'react-router-dom';
+import { HashRouter, Route, BrowserRouter  } from 'react-router-dom';
 
 //--css
 import './sass/app.scss';
-
-//--js
-import './js/app';
 
 
 //--components
@@ -28,7 +25,7 @@ function App() {
             <Route exact path="/latest"         render={ (props) => <Body {...props} c_param='Order=updatedAt'/>} />
             <Route exact path="/movies"         render={ (props) => <Body {...props} c_param='Type=movie'/>} />
             <Route exact path="/tv"             render={ (props) => <Body {...props} c_param='Type=tv'/>} />
-            <Route exact path="/filtered"       render={ (props) => <Body {...props} c_param={ props.location.state && props.location.state.c_param? props.location.state.c_param : '' }/>} />
+            <Route exact path="/filtered"       render={ (props) => <Body {...props} />} />
           </div>
           <Route exact path = '/article/:id'  component = { Article } />
           <Route exact path = '/registration' component = { Registration } />

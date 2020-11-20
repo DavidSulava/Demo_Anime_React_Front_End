@@ -1,6 +1,11 @@
 
+import get_set_LocalStorageData  from '../_helpers/localStorageFunction';
 
-function appMainReducer( state = { movie: [], filter:[] , article:[]}, action ){
+
+const initState = { movie: [], filter:[] , article:[], search:[], getParam:null }
+
+
+function appMainReducer( state = get_set_LocalStorageData(initState, 'movie_data_*18'), action ){
     switch (action.type){
         case 'ADD_M_DATA':{
             return { ...state, 'movie': action.movie }
@@ -16,6 +21,9 @@ function appMainReducer( state = { movie: [], filter:[] , article:[]}, action ){
         }
         case 'ADD_M_ARTICLE':{
             return { ...state, 'article': action.article }
+        }
+        case 'SET_M_GET_PARAM':{
+            return { ...state, 'getParam': action.getParam }
         }
 
         default:

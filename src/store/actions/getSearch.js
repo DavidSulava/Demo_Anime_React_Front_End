@@ -26,9 +26,10 @@ export const getSearch = (getParams = '') => {
             const response = await fetch(corsAPI, myHeaders);
             let data = await response.json();
 
-            if (data && data.length) {
-                dispatch({ 'type': 'ADD_SEARCH', 'search': {data} });
-            }
+            if (data && data.length )
+                dispatch({ 'type': 'ADD_SEARCH', 'search': data });
+            else if(data && !data.length )
+                dispatch({ 'type': 'ADD_SEARCH', 'search': [] });
 
 
         })().catch(err => console.log(err));

@@ -21,11 +21,12 @@ export class Article extends Component{
 
     getAll(e){
 
-        e.preventDefault()
-
         // ----[ for the Edge compatibility ( not supports positive lookBehind) ]----
         let getParameters = e.target.href.match(/(?=\?).*/gi)[0].split('?')[1];
-        this.props.history.replace({ pathname: '/filtered',  state: { c_param:  getParameters } });
+
+        this.props.setGetParams(getParameters);
+        this.props.history.replace({ pathname: '/filtered' });
+
     }
     trailer_display(ev){
 
@@ -193,7 +194,10 @@ const mapStateToProps = ( state )=>
 
 const mapDispatchToProps = ( dispatch, props )=>
     {
-        return { addArticle : () => { dispatch( getArticle( props.match.params.id ) ) }  }
+        return {
+            addArticle   : ()              => { dispatch( getArticle( props.match.params.id ) ) },
+            setGetParams : ( params=null ) => {  dispatch({ 'type': 'SET_M_GET_PARAM', 'getParam': params }) }
+        }
     }
 
 export default connect( mapStateToProps, mapDispatchToProps )( withRouter(Article) )

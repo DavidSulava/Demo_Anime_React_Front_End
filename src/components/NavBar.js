@@ -142,10 +142,11 @@ export class NavBar extends Component{
                 </div>
 
                 <ul className="nPanel col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 ml-auto">
-                    <li><NavLink  to="/home"    >HOME</NavLink></li>
-                    <li><NavLink  to="/latest"  >LATEST</NavLink></li>
-                    <li><NavLink  to="/movies"  >MOVIES</NavLink></li>
-                    <li><NavLink  to="/tv"      >TV</NavLink></li>
+
+                    <li><NavLink  to="/home"   onClick={() => this.props.clearGetParams() } >HOME</NavLink></li>
+                    <li><NavLink  to="/latest" onClick={() => this.props.clearGetParams() } >LATEST</NavLink></li>
+                    <li><NavLink  to="/movies" onClick={() => this.props.clearGetParams() } >MOVIES</NavLink></li>
+                    <li><NavLink  to="/tv"     onClick={() => this.props.clearGetParams() } >TV</NavLink></li>
                 </ul>
 
                 <div id='search_wrapper'>
@@ -168,10 +169,12 @@ const mapStateToProps = ( state )=>{
 const mapDispatchToProps = ( dispatch )=>{
     return {
         login         : ( path, params) => {  dispatch( getUser( path, params ) ) },
-        checkUserSess : ( path ) => {  dispatch( checkUserSession( path ) ) }  }
+        checkUserSess : ( path ) => {  dispatch( checkUserSession( path ) ) },
+        clearGetParams: ( ) => {  dispatch({ 'type': 'SET_M_GET_PARAM', 'getParam': null }) }
+    }
+
 }
 
-// export default withRouter( NavBar );
 export default connect( mapStateToProps, mapDispatchToProps )( withRouter( NavBar ) )
 
 

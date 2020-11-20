@@ -5,7 +5,7 @@ import React    from 'react';
 import ReactDOM from 'react-dom';
 
 import './index.css';
-import App      from './App';
+import App  from './App';
 
 
 import { Provider }  from 'react-redux'
@@ -19,8 +19,15 @@ import userReducer   from './store/reducers/userReducer';
 const rootReducer = combineReducers( { movieReducer, userReducer } )
 const store       = createStore( rootReducer,  compose( applyMiddleware(thunk) ) );
 
-ReactDOM.render(<Provider store={store}>
-                    <App />
-                </Provider>, document.getElementById('root'));
+//---Cash data----
+store.subscribe(() => {
+    localStorage.setItem('movie_data_*18', JSON.stringify(store.getState().movieReducer));
+})
+
+ReactDOM.render(
+    <Provider store={store}>
+        <App />
+    </Provider>, document.getElementById('root')
+);
 
 

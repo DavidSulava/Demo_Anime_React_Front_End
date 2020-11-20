@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { connect }          from 'react-redux';
-import {  withRouter } from 'react-router-dom'
+import React, { Component }    from 'react';
+import { connect }             from 'react-redux';
+import {  withRouter }         from 'react-router-dom'
 import { getFilterCategories } from '../store/actions/getFilterCategories';
-import { getMovie }            from '../store/actions/getMovieAction'
+import { getMovie }            from '../store/actions/getMovieAction';
 
 
 
@@ -125,7 +125,8 @@ export class Filter extends Component {
 
         }
 
-        this.props.history.replace({ pathname: '/filtered',  state: { c_param: get_str} });
+
+        this.props.addMovie(get_str);
     };
 
     render() {
@@ -193,7 +194,10 @@ const mapStateToProps = ( state, ownProps )=>{
     return { ...state.movieReducer }
 }
 const mapDispatchToProps = ( dispatch )=>{
-    return { getFilter : () => { dispatch( getFilterCategories() ) }, addMovie : (params) => { dispatch( getMovie(params) ) } }
+    return {
+        getFilter   : ()       => { dispatch( getFilterCategories() ) },
+        addMovie    : (params) => { dispatch( getMovie(params) ) },
+    }
 }
 
 export default connect( mapStateToProps, mapDispatchToProps )( withRouter(Filter))
