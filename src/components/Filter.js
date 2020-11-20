@@ -10,19 +10,12 @@ export class Filter extends Component {
 
     constructor(props){
         super(props)
-        this.props = props;
-
-        this.v_filter_section = true;
-        this.v_filter_btn     = 'none';
-        this.v_ul_Show        = { fOrder : 'none', fType: 'none', fGenre : 'none', fCountry : 'none', fYear : 'none', fLang : 'none'  };
-        this.styleObject      = { 'backgroundColor':'rgb(37, 181, 121)'};
 
         this.state = {
-            // ...this.props,
-            v_filter_section: this.v_filter_section,
-            v_filter_btn    : this.v_filter_btn,
-            v_ul_Show       : this.v_ul_Show,
-            styleObject     : this.styleObject
+            v_filter_section: true,
+            v_filter_btn    : 'none',
+            v_ul_Show       : { fOrder : 'none', fType: 'none', fGenre : 'none', fCountry : 'none', fYear : 'none', fLang : 'none'  },
+            styleObject     : { 'backgroundColor':'rgb(37, 181, 121)'}
         };
 
     };
@@ -127,6 +120,7 @@ export class Filter extends Component {
 
 
         this.props.addMovie(get_str);
+        this.setState({ ...this.state, v_filter_btn: 'none'  });
     };
 
     render() {

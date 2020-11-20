@@ -1,34 +1,35 @@
-import React, { Component } from 'react'
+import React, { Component, useState, useEffect, useRef, } from 'react'
 import { connect }          from 'react-redux'
 
 import { getUser }      from '../store/actions/getUser'
 
+//--subComponents
+import EmailForm   from './subComponents/sendEmailForm';
 
-export class FooterComp extends Component {
+const FooterComp = (props)=>{
 
-    constructor(props){
+    let [state, setState] = useState({
+        ...props,
+        showForm: false,
+    })
 
-        super(props);
-        this.state = { ...props };
-    };
+    const refs = useRef();
 
-    static getDerivedStateFromProps(props, state){
+    useEffect( ()=> {
 
-        //  if message has changed, then change it
-        if( props.msg && JSON.stringify(props.msg) !== JSON.stringify(state.msg) )
-            return { ...state, msg:  props.msg  }
+        if(props.msg)
+            setState( { ...state, msg:props.msg } )
+    },[props.msg] )
 
-        return null
-    }
-
-    sendMessage = (ev)=>{
+    const sendMessage = (ev)=>{
 
         ev.preventDefault();
 
-        var inputEm   = document.querySelector('.emessageWrap .sender');
-        var emailErr  = document.querySelector('.emessageWrap .mailErr small');
-        var messageEm = document.querySelector('.emessageWrap textarea');
-        var messErr   = document.querySelector('.emessageWrap .textErr small');
+        var inputEm   = refs.current.email;
+        var emailErr  = refs.current.email_error;
+        var messageEm = refs.current.comment;
+        var messErr   = refs.current.comment_error;
+
 
         if (!inputEm.checkValidity()){
             emailErr.innerText = inputEm.validationMessage;
@@ -46,87 +47,55 @@ export class FooterComp extends Component {
 
             var formData = new FormData( ev.target );
 
-            this.props.sendEmail( '/users/contact/email', formData)
+            props.sendEmail( '/users/contact/email', formData)
         }
 
-    }
+    };
 
-    contactForm (){
-        return  (
-            <form onSubmit={ (ev)=> this.sendMessage(ev) } method="POST" action='/users/contact/email'  className=" col-11  col-md-6 ">
+    const showForm =(ev)=>{
+        setState({
+            ...state,
+            showForm: !state.showForm
+        })
+    };
+
+
+    return (
+        <footer>
+            <div  className="footer_wrapper">
 
                 {
-                    (this.state.msg && this.state.msg.contact) &&
-                        <label className="alert alert-success" role="alert" >{ this.state.msg.contact }</label>
+                    state.showForm &&
+                        <div className="emessageWrap container-fluid" >
+                            {/* { contactForm()} */}
+                            <EmailForm 
+                                {...state} 
+                                ref         = {refs}
+                                sendMessage = {sendMessage}
+                                showForm    = {showForm}
+                            />
+                        </div>
+
                 }
 
-                <a  className="closeMe foterCl ">×</a><br/>
 
-                <div className="form-group">
-                    <label>Email:</label><br/>
-                    <input ref="email" type="email" name='email' className="sender form-control" placeholder="Enter your email"/>
-
-                    <span className="mailErr text-danger"><small ref="email_error"></small></span><br/>
+                <div className="disc">
+                    <p  className="contact">
+                        Contact as : <span onClick={()=>{showForm()}} title="Click to send a message">✉</span>
+                    </p>
+                    <p className="f_2">
+                        <span>Disclaimer: This site does not store any files on its server. All contents are provided by non-affiliated third parties.</span>
+                    </p>
                 </div>
 
 
-                <div className="form-group">
-                    <label htmlFor="comment">Message:</label>
-                    <textarea ref="comment" name='msg' className="form-control" rows="5" id="comment" type="text" placeholder="Enter your message"></textarea>
-                    <span className="textErr text-danger"><small ref="comment_error"></small></span>
-                </div>
+            </div>
 
-                <label className="dummy"></label>
+        </footer>
+    )
 
-                <div className="input-group">
-                    <div className="g-recaptcha" > {/*  to do capcha_siteKay */}
-                    </div>
-                </div>
-
-                {/* MSG from Server */}
-                <span  className="mailErr   text-danger">
-                    <small ref="send_email_error"></small>
-                </span><br/>
-
-                <span  className="mailOk  text-success">
-                    <small ref="send_email_OK">   </small><br/>
-                </span><br/>
-
-                {/* Send Button */}
-                <input   type='submit'  value="SEND" className="btn btn-success form-control"/><br/>
-
-
-            </form>
-        )
-    }
-
-    render() {
-        return (
-            <footer>
-                <div  className="footer_wrapper">
-
-                    <div className="emessageWrap container-fluid"  style = {{ display:"none" }}>
-
-
-                       {this.contactForm()}
-
-
-                    </div>
-
-                    <div className="disc">
-                        <p  className="contact">Contact as : <span title="Click to send a message">✉</span></p>
-                        <p className="f_2">
-                            <span>Disclaimer: This site does not store any files on its server. All contents are provided by non-affiliated third parties.</span>
-                        </p>
-                    </div>
-
-
-                </div>
-
-            </footer>
-        )
-    }
 }
+
 
 const mapStateToProps = ( state )=>{
     return { ...state.userReducer  }

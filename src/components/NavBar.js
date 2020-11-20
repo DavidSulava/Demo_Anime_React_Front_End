@@ -15,7 +15,10 @@ export class NavBar extends Component{
 
     constructor(props){
         super(props);
-        this.state = { ...props };
+        this.state = {
+            ...props,
+            showFormElem:false
+        };
     }
 
 
@@ -23,6 +26,10 @@ export class NavBar extends Component{
 
         this.props.checkUserSess();
         logo( process.env.NODE_ENV !== 'development' ? process.env.PUBLIC_URL : '' );
+    }
+
+    showForm = (ev)=>{
+        this.setState({...this.state, showFormElem:!this.state.showFormElem })
     }
     submForm = (ev)=> {
         ev.preventDefault();
@@ -36,27 +43,33 @@ export class NavBar extends Component{
     }
     imgSection = ()=>{
 
-
+        // -- Error Credentials MSG
         if( this.props.msg && this.props.msg.errorCred && !this.props.user )
-
-            return ( <div className="alert alert-danger" style={{ width:'auto', margin:'0 7px'}}>{ this.props.msg.errorCred } </div> );
-
+            return (
+                <div className="alert alert-danger" style={{ width:'auto', margin:'0 7px'}}>
+                    { this.props.msg.errorCred }
+                </div>
+            );
+        // -- User Avatar
         else if (  this.props.user && this.props.user.email  ){
 
             if( !this.props.user.img )
                 return (
                     <i
-                        className="fa fa-user avatarlogged"
-                        style={{ fontSize: '4vmin', color: 'rgb(39, 217, 187)', cursor:'pointer' }}
-                        alt="avatar "
-                        title={ `${ this.props.user.name }&#13;${ this.props.user.email }` }
+                        className = "fa fa-user avatarlogged"
+                        style     = {{ fontSize: '4vmin', color: 'rgb(39, 217, 187)', cursor:'pointer' }}
+                        alt       = "avatar "
+                        title     = { `${ this.props.user.name }&#13;${ this.props.user.email }` }
+                        style     = {{ cursor: 'pointer'}}
                     ></i>);
 
             return (
                 <img
-                    src   = { process.env.PUBLIC_URL + '/img/' + this.props.user.img }
-                    alt   = "avatar " className="avatarlogged "
-                    title = { `${ this.props.user.name }\n${ this.props.user.email }` }
+                    src     = { process.env.PUBLIC_URL + '/img/' + this.props.user.img }
+                    alt     = "avatar " className="avatarlogged "
+                    title   = { `${ this.props.user.name }\n${ this.props.user.email }` }
+                    onClick = { (e)=>this.showForm(e) }
+                    style   = {{ cursor: 'pointer'}}
                 />
             );
         }
@@ -76,35 +89,39 @@ export class NavBar extends Component{
             return (
                 <div>
                     <div className="loginButtons  ">
-                        <button className="enter ">LOGIN</button>
+                        <button onClick={ (e)=>this.showForm(e) } className="enter ">LOGIN</button>
                     </div>
 
-                    <form  className="loginForm" method="POST" >
-                        <a className="closeMe">&times;</a>
-                        <div className="imgContainer">
-                            { this.imgSection() }
-                        </div>
+                    {
+                        this.state.showFormElem &&
+                            <form  className="loginForm" method="POST" >
+                                <a  onClick={ (e)=>this.showForm(e) } className="closeMe">&times;</a>
+                                <div className="imgContainer">
+                                    { this.imgSection() }
+                                </div>
 
-                        <label htmlFor="uname">Email</label>
-                        <input id="uname" type="text" placeholder="Email" name="email" />
+                                <label htmlFor="uname">Email</label>
+                                <input id="uname" type="text" placeholder="Email" name="email" />
 
 
-                        <br/>
+                                <br/>
 
-                        <label htmlFor="pass">Password</label>
-                        <input id="pass" type="password" placeholder="Enter Password" name="password" ></input>
+                                <label htmlFor="pass">Password</label>
+                                <input id="pass" type="password" placeholder="Enter Password" name="password" ></input>
 
-                        <br/>
+                                <br/>
 
-                        <button className="singin" type="submit" name="singin" onClick={ this.submForm }>Login</button>
+                                <button className="singin" type="submit" name="singin" onClick={ this.submForm }>Login</button>
 
-                        <button className="singup"  name="singup" >
-                            <Link to="/registration">Sing-Up</Link>
-                        </button>
-                        <br/>
-                        {/* <Link to="password/reset">Forgot password?</Link> */}
+                                <button className="singup"  name="singup" >
+                                    <Link to="/registration">Sing-Up</Link>
+                                </button>
+                                <br/>
+                                {/* <Link to="password/reset">Forgot password?</Link> */}
 
-                    </form>
+                            </form>
+                    }
+
                 </div>
             )
         }
@@ -112,14 +129,19 @@ export class NavBar extends Component{
             return (
                 <div>
                     { this.imgSection() }
-                    <form className="logged " action='/users/logout' method="POST" style = {{ display: 'none'}}  >
 
-                        <div className="fold" style = {{ display: 'block'}}>
-                            <h4>{ this.props.user.name }</h4><p>{this.props.user.email}</p>
-                            <Link to="/user/profile" >Profile</Link>
-                            <button className="logout" onClick={ this.logOut } type="submit" name="logout">Log-Out</button>
-                        </div>
-                    </form>
+                    {
+                        this.state.showFormElem &&
+                            <form className="logged " action='/users/logout' method="POST" >
+
+                                <div className="fold" style = {{ display: 'block'}}>
+                                    <h4>{ this.props.user.name }</h4><p>{this.props.user.email}</p>
+                                    <Link to="/user/profile" >Profile</Link>
+                                    <button className="logout" onClick={ this.logOut } type="submit" name="logout">Log-Out</button>
+                                </div>
+                            </form>
+                    }
+
                 </div>
 
             )
