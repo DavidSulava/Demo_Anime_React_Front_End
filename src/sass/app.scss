@@ -61,7 +61,6 @@ $m_index_width   : 136px;
 }
 
 
-
 body {
     background-color : $colorBackground;
     text-align       : center;
@@ -70,6 +69,8 @@ body {
     color     : black;
     font-size : $fSizeMain;
     margin    : 0;
+
+
 
 }
 
@@ -809,13 +810,14 @@ div.frame_container {
 
 .search-input {
     border-radius : 5px;
-    border-style  : none;
+    // border-style  : none;
     padding-right : calc(25px + 1.2vmin);
 
 }
 
 .search-input:focus {
-    border: 0.5px solid rgb(115, 178, 252);
+    border: 0.8px solid rgb(85, 159, 245);
+    // outline: none !important;
 }
 
 
