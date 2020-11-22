@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef  } from 'react';
 import { connect }          from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 
-import { getMovie }            from '../store/actions/getMovieAction'
+import { getMovie }         from '../store/actions/getMovieAction'
 import { getSearch }        from '../store/actions/getSearch'
 
 
@@ -82,11 +82,21 @@ const SearchBar = (props)=>{
     }
 
     let getAll = (e)=> {
-
         e.preventDefault();
 
-        if ( resultsSearch.length ){
+        let redirectPaths = new RegExp('(?!\/)article|registration|profile|authentication');
+        let checkPathName = redirectPaths.test(props.location.pathname )
+
+        if ( resultsSearch.length && !checkPathName ){
             props.addMovie(`title=${searchTitle}`);
+            hideResults(e)
+        }
+        else if (resultsSearch.length && checkPathName){
+            props.history.push({
+                pathname : '/filtered',
+                c_param  : `title=${searchTitle}`
+            });
+            hideResults(e);
         }
     }
 

@@ -11,6 +11,18 @@ $imageSelection_W_Height: 75vh;
     animation-timing-function : #{$timing};
 }
 
+@mixin closeMe(){
+	.closeMe {
+		font-weight     : bold;
+		display         : block;
+		float           : right;
+		cursor          : pointer;
+		margin-right    : 6px;
+		color           : rgb(247, 58, 58);
+		text-decoration : none;
+	}
+}
+
 
 /*-----------------------------------*/
 /*--------------[ Login ]-------------- */
@@ -50,6 +62,7 @@ $imageSelection_W_Height: 75vh;
 	font-size        : $fSizeMain + 1px;
 
 	@include animate('anima_opacity', '0.1s', 'linear');
+	@include closeMe();
 
 	> a {
 		clear      : left;
@@ -58,15 +71,6 @@ $imageSelection_W_Height: 75vh;
 		padding    : 0;
 		margin     : 0 0 5px 0;
 		font-size  : $fSizeMain;
-	}
-	a.closeMe {
-		font-weight     : bold;
-		display         : block;
-		float           : right;
-		cursor          : pointer;
-		margin-right    : 6px;
-		color           : rgb(247, 58, 58);
-		text-decoration : none;
 	}
 }
 
@@ -160,8 +164,9 @@ $imageSelection_W_Height: 75vh;
 	margin-top       : 10px;
 	padding          : 5px;
 	border-radius    : 3%;
-	display          : none;
 	box-shadow       : 0px 4px 50px 0px rgba(0, 0, 0, 0.75);
+
+	@include closeMe();
 
 	a {
 		position     : relative;
@@ -172,6 +177,7 @@ $imageSelection_W_Height: 75vh;
 	.logout {
 		font-size : 0.7em;
 	}
+
 }
 
 .logged h4 {

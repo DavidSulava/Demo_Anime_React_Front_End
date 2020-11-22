@@ -68,8 +68,8 @@ const FooterComp = (props)=>{
                     state.showForm &&
                         <div className="emessageWrap container-fluid" >
                             {/* { contactForm()} */}
-                            <EmailForm 
-                                {...state} 
+                            <EmailForm
+                                {...state}
                                 ref         = {refs}
                                 sendMessage = {sendMessage}
                                 showForm    = {showForm}

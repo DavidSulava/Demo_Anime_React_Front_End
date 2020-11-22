@@ -3,8 +3,9 @@ import { connect }                   from 'react-redux'
 import { Link, NavLink, withRouter } from 'react-router-dom'
 
 
-import { getUser }      from '../store/actions/getUser'
+import { getUser          } from '../store/actions/getUser'
 import { checkUserSession } from '../store/actions/checkUserSession'
+
 import { logo } from '../js/logo'
 
 //--components
@@ -23,13 +24,27 @@ export class NavBar extends Component{
 
 
     componentDidMount = ()=> {
-
+        document.addEventListener('click', this.showForm)
         this.props.checkUserSess();
         logo( process.env.NODE_ENV !== 'development' ? process.env.PUBLIC_URL : '' );
     }
 
+
     showForm = (ev)=>{
-        this.setState({...this.state, showFormElem:!this.state.showFormElem })
+
+        let formElRef   = this.refs.userForm? this.refs.userForm : '';
+        let formTrigger = this.refs.formTrigger;
+        let closeMe     = this.refs.closeMe;
+
+
+        if( ( formElRef && !formElRef.outerHTML.includes(ev.target.outerHTML) ) || ( closeMe && closeMe.outerHTML.includes( ev.target.outerHTML ) ) )
+            this.setState({...this.state, showFormElem:false });
+
+        else if( formElRef && formElRef.outerHTML.includes(ev.target.outerHTML) )
+            this.setState({...this.state, showFormElem:true });
+
+        else if( ev.target.outerHTML && formTrigger.outerHTML.includes(ev.target.outerHTML))
+            this.setState({...this.state, showFormElem:!this.state.showFormElem });
     }
     submForm = (ev)=> {
         ev.preventDefault();
@@ -68,7 +83,6 @@ export class NavBar extends Component{
                     src     = { process.env.PUBLIC_URL + '/img/' + this.props.user.img }
                     alt     = "avatar " className="avatarlogged "
                     title   = { `${ this.props.user.name }\n${ this.props.user.email }` }
-                    onClick = { (e)=>this.showForm(e) }
                     style   = {{ cursor: 'pointer'}}
                 />
             );
@@ -84,25 +98,25 @@ export class NavBar extends Component{
 
     }
 
-    formSection = ()=>{
+    loginFormElement = ()=>{
+
         if ( !this.props.user || !this.props.user.email) {
             return (
                 <div>
                     <div className="loginButtons  ">
-                        <button onClick={ (e)=>this.showForm(e) } className="enter ">LOGIN</button>
+                        <button ref="formTrigger" className="enter ">LOGIN</button>
                     </div>
 
                     {
                         this.state.showFormElem &&
-                            <form  className="loginForm" method="POST" >
-                                <a  onClick={ (e)=>this.showForm(e) } className="closeMe">&times;</a>
+                            <form ref="userForm" className="loginForm" method="POST" >
+                                <a ref="closeMe" className="closeMe">&times;</a>
                                 <div className="imgContainer">
                                     { this.imgSection() }
                                 </div>
 
                                 <label htmlFor="uname">Email</label>
                                 <input id="uname" type="text" placeholder="Email" name="email" />
-
 
                                 <br/>
 
@@ -128,13 +142,16 @@ export class NavBar extends Component{
         else if ( this.props.user && this.props.user.email  ){
             return (
                 <div>
-                    { this.imgSection() }
+                    <div ref="formTrigger">
+                        { this.imgSection() }
+                    </div>
+
 
                     {
                         this.state.showFormElem &&
-                            <form className="logged " action='/users/logout' method="POST" >
-
-                                <div className="fold" style = {{ display: 'block'}}>
+                            <form ref="userForm" className="logged " action='/users/logout' method="POST" >
+                                <div className="fold" >
+                                    <a  ref="closeMe" className="closeMe">&times;</a><br/>
                                     <h4>{ this.props.user.name }</h4><p>{this.props.user.email}</p>
                                     <Link to="/user/profile" >Profile</Link>
                                     <button className="logout" onClick={ this.logOut } type="submit" name="logout">Log-Out</button>
@@ -177,7 +194,7 @@ export class NavBar extends Component{
 
                 {/* Login */}
                 <div className="loginContainer col-2 col-sm-2 col-md-1 col-lg-1 ">
-                    { this.formSection() }
+                    { this.loginFormElement() }
                 </div>
 
             </nav>
