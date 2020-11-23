@@ -810,14 +810,13 @@ div.frame_container {
 
 .search-input {
     border-radius : 5px;
-    // border-style  : none;
+    box-sizing: border-box;
     padding-right : calc(25px + 1.2vmin);
 
 }
 
 .search-input:focus {
     border: 0.8px solid rgb(85, 159, 245);
-    // outline: none !important;
 }
 
 
