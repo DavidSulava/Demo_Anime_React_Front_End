@@ -1,11 +1,11 @@
 {
   "files": {
-    "main.css": "/Demo_Anime_React_Front_End/static/css/main.2729fcb9.chunk.css",
+    "main.css": "/Demo_Anime_React_Front_End/static/css/main.c9d50f7e.chunk.css",
     "main.js": "/Demo_Anime_React_Front_End/static/js/main.fb412608.chunk.js",
     "runtime-main.js": "/Demo_Anime_React_Front_End/static/js/runtime-main.21907931.js",
     "static/js/2.eb3848ab.chunk.js": "/Demo_Anime_React_Front_End/static/js/2.eb3848ab.chunk.js",
     "index.html": "/Demo_Anime_React_Front_End/index.html",
-    "precache-manifest.6c796c8cb54bbfcf5d88ef94ecbdeb19.js": "/Demo_Anime_React_Front_End/precache-manifest.6c796c8cb54bbfcf5d88ef94ecbdeb19.js",
+    "precache-manifest.bd96be29c13882ad79b814b2a241a524.js": "/Demo_Anime_React_Front_End/precache-manifest.bd96be29c13882ad79b814b2a241a524.js",
     "service-worker.js": "/Demo_Anime_React_Front_End/service-worker.js",
     "static/media/100506.jpg": "/Demo_Anime_React_Front_End/static/media/100506.732b3996.jpg",
     "static/media/108839.gif": "/Demo_Anime_React_Front_End/static/media/108839.5ba567c6.gif",
@@ -37,7 +37,7 @@
   "entrypoints": [
     "static/js/runtime-main.21907931.js",
     "static/js/2.eb3848ab.chunk.js",
-    "static/css/main.2729fcb9.chunk.css",
+    "static/css/main.c9d50f7e.chunk.css",
     "static/js/main.fb412608.chunk.js"
   ]
 }
