@@ -1,0 +1,89 @@
+
+
+@mixin animateFrame($name, $duration:'0.7s', $timing: 'ease-in-out'){
+
+    $positionOrigin: 'left top';
+
+	animation-name     : #{$name};
+	animation-duration : #{$duration};
+	animation-fill-mode: forwards;
+	animation-direction: #{$timing};
+	// animation-delay: -0.3s;
+	// animation-iteration-count: 1;
+
+	@if $name == "slideLeft"{
+		@keyframes #{$name} {
+			from { transform: translate(100vw, 0vh); }
+			to   { transform: translate(0vw, 0vh); }
+		}
+    }
+
+    @if $name == "opacity"{
+        @keyframes #{$name}{
+            from  { opacity: 0;}
+            to    { opacity: 1;}
+        }
+    }
+
+    @if $name == "rotateTopLeftCorner"{
+        @keyframes #{$name}{
+            from  {
+                transform-origin: #{$positionOrigin};
+                transform: rotate(90deg);
+                opacity: 0;
+            }
+            to    {
+                transform-origin: #{$positionOrigin};
+                transform: rotate(0);
+                opacity: 1;
+            }
+        }
+	}
+
+
+}
+
+@mixin closeMe(){
+	.closeMe {
+		font-weight     : bold;
+		display         : block;
+		float           : right;
+		cursor          : pointer;
+		margin-right    : 6px;
+		color           : rgb(247, 58, 58);
+		text-decoration : none;
+	}
+
+}
+
+
+@mixin standardButton {
+    background-color : rgb(87, 206, 87);
+    color            : rgb(238, 235, 235);
+    border           : none;
+
+    &:hover {
+        background-color : rgb(104, 224, 104);
+        color            : rgb(255, 255, 255);
+    }
+
+    &:active {
+        background-color : rgb(79, 187, 79);
+        color            : rgb(238, 235, 235);
+    }
+}
+
+@mixin clearFix {
+    &:after {
+        content: '';
+        display: block;
+        clear: both;
+    }
+}
+
+
+@mixin stopSelection {
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    user-select: none;
+}

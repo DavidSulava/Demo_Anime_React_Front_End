@@ -42,10 +42,10 @@ const SearchBar = (props)=>{
     let docClickListener = (lastSearchValue)=>(event)=>{
 
 
-        if( addedEl && addedEl.current && addedEl.current.innerHTML.includes(event.target.innerHTML) && lastSearchValue)
+        if( addedEl && addedEl.current && addedEl.current.innerHTML.includes(event.target.outerHTML) && lastSearchValue)
             setResultElement(true)
 
-        else if ( ( addedEl && addedEl.current && !addedEl.current.innerHTML.includes(event.target.innerHTML) ) || !lastSearchValue )
+        else if ( ( addedEl && addedEl.current && !addedEl.current.innerHTML.includes(event.target.outerHTML) ) || !lastSearchValue )
             setResultElement(false)
 
         else

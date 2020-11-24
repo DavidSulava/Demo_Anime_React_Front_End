@@ -1,7 +1,6 @@
-import React, { Component }          from 'react'
-import { connect }                   from 'react-redux'
-import { Link, NavLink, withRouter } from 'react-router-dom'
-
+import React, { useState, useEffect, useRef } from 'react'
+import { connect                            } from 'react-redux'
+import { Link, NavLink, withRouter          } from 'react-router-dom'
 
 import { getUser          } from '../store/actions/getUser'
 import { checkUserSession } from '../store/actions/checkUserSession'
@@ -11,42 +10,53 @@ import { logo } from '../js/logo'
 //--components
 import SearchBar   from './searchBar';
 
+const NavBar = (props)=>{
 
-export class NavBar extends Component{
+    const [formVisibility  , setFormVisibility ] = useState(false);
 
-    constructor(props){
-        super(props);
-        this.state = {
-            ...props,
-            showFormElem:false
-        };
-    }
+    const userFormRef    = useRef(null);
+    const formTriggerRef = useRef(null);
+    const closeMeRef     = useRef(null);
 
+    useEffect(()=>{
 
-    componentDidMount = ()=> {
-        document.addEventListener('click', this.showForm)
-        this.props.checkUserSess();
+        props.checkUserSess();
+        document.addEventListener('click', showForm());
         logo( process.env.NODE_ENV !== 'development' ? process.env.PUBLIC_URL : '' );
-    }
+
+    }, [] );
+    useEffect(()=>{
+
+        showForm(false)();
+
+    }, [props.user] );
 
 
-    showForm = (ev)=>{
+    const showForm = (closeManual=true)=>(ev=null)=>{
 
-        let formElRef   = this.refs.userForm? this.refs.userForm : '';
-        let formTrigger = this.refs.formTrigger;
-        let closeMe     = this.refs.closeMe;
+        let formEl      = userFormRef.current    ? userFormRef.current    : '';
+        let formTrigger = formTriggerRef.current ? formTriggerRef.current : '';
+        let closeMe     = closeMeRef.current     ? closeMeRef.current     : '';
 
+        if(!ev){
+            setFormVisibility(closeManual);
+            return;
+        }
 
-        if( ( formElRef && !formElRef.outerHTML.includes(ev.target.outerHTML) ) || ( closeMe && closeMe.outerHTML.includes( ev.target.outerHTML ) ) )
-            this.setState({...this.state, showFormElem:false });
+        if( ( formEl && !formEl.outerHTML.includes(ev.target.outerHTML) ) ||
+            ( closeMe && closeMe.outerHTML.includes( ev.target.outerHTML ) ) ||
+            !closeManual )
 
-        else if( formElRef && formElRef.outerHTML.includes(ev.target.outerHTML) )
-            this.setState({...this.state, showFormElem:true });
+            setFormVisibility(false);
+
+        else if( formEl && formEl.outerHTML.includes(ev.target.outerHTML) )
+            setFormVisibility(true);
 
         else if( ev.target.outerHTML && formTrigger.outerHTML.includes(ev.target.outerHTML))
-            this.setState({...this.state, showFormElem:!this.state.showFormElem });
-    }
-    submForm = (ev)=> {
+            setFormVisibility(!formVisibility);
+    };
+
+    const submForm = (ev)=> {
         ev.preventDefault();
 
         let formEl = ev.currentTarget.parentNode
@@ -54,107 +64,109 @@ export class NavBar extends Component{
 
         var formData = new FormData(formEl);
 
-        this.props.login(path, formData);
-    }
-    imgSection = ()=>{
+        props.login(path, formData);
+    };
+
+    const logOut = (ev)=> {
+        ev.preventDefault();
+
+        props.checkUserSess('/users/logOut');
+
+    };
+
+    //  --- [ elements ] ---
+    const imgSection = ()=>{
 
         // -- Error Credentials MSG
-        if( this.props.msg && this.props.msg.errorCred && !this.props.user )
+        if( props.msg && props.msg.errorCred && !props.user )
             return (
                 <div className="alert alert-danger" style={{ width:'auto', margin:'0 7px'}}>
-                    { this.props.msg.errorCred }
+                    { props.msg.errorCred }
                 </div>
             );
         // -- User Avatar
-        else if (  this.props.user && this.props.user.email  ){
+        else if (  props.user && props.user.email  ){
 
-            if( !this.props.user.img )
+            if( !props.user.img )
                 return (
                     <i
                         className = "fa fa-user avatarlogged"
                         style     = {{ fontSize: '4vmin', color: 'rgb(39, 217, 187)', cursor:'pointer' }}
                         alt       = "avatar "
-                        title     = { `${ this.props.user.name }&#13;${ this.props.user.email }` }
+                        title     = { `${ props.user.name }&#13;${ props.user.email }` }
                         style     = {{ cursor: 'pointer'}}
                     ></i>);
 
             return (
                 <img
-                    src     = { process.env.PUBLIC_URL + '/img/' + this.props.user.img }
+                    src     = { process.env.PUBLIC_URL + '/img/' + props.user.img }
                     alt     = "avatar " className="avatarlogged "
-                    title   = { `${ this.props.user.name }\n${ this.props.user.email }` }
+                    title   = { `${ props.user.name }\n${ props.user.email }` }
                     style   = {{ cursor: 'pointer'}}
                 />
             );
         }
 
 
-    }
+    };
 
-    logOut = (ev)=> {
-        ev.preventDefault();
+    const loginFormElement = ()=>{
 
-        this.props.checkUserSess('/users/logOut');
-
-    }
-
-    loginFormElement = ()=>{
-
-        if ( !this.props.user || !this.props.user.email) {
+        if ( !props.user || !props.user.email) {
             return (
                 <div>
                     <div className="loginButtons  ">
-                        <button ref="formTrigger" className="enter ">LOGIN</button>
+                        <button ref={formTriggerRef} className="enter ">LOGIN</button>
                     </div>
 
                     {
-                        this.state.showFormElem &&
-                            <form ref="userForm" className="loginForm" method="POST" >
-                                <a ref="closeMe" className="closeMe">&times;</a>
+                        formVisibility &&
+                        <div className='overlay'>
+                            <form ref={userFormRef} className="loginForm" method="POST" >
+                                <a ref={closeMeRef} className="closeMe">&times;</a>
                                 <div className="imgContainer">
-                                    { this.imgSection() }
+                                    { imgSection() }
                                 </div>
-
-                                <label htmlFor="uname">Email</label>
-                                <input id="uname" type="text" placeholder="Email" name="email" />
-
                                 <br/>
 
-                                <label htmlFor="pass">Password</label>
-                                <input id="pass" type="password" placeholder="Enter Password" name="password" ></input>
+                                <input id="uname" type="text" placeholder="...Email" name="email" />
+                                <br/><br/>
 
-                                <br/>
+                                <input id="pass" type="password" placeholder="...Enter Password" name="password" ></input>
+                                <br/><br/>
 
-                                <button className="singin" type="submit" name="singin" onClick={ this.submForm }>Login</button>
+                                <button className="singin" type="submit" name="singin" onClick={ submForm }>Login</button>
 
                                 <button className="singup"  name="singup" >
-                                    <Link to="/registration">Sing-Up</Link>
+                                    <Link onClick={()=>showForm(false)()} to="/registration">Sing-Up</Link>
                                 </button>
                                 <br/>
                                 {/* <Link to="password/reset">Forgot password?</Link> */}
 
                             </form>
+                        </div>
+
                     }
 
                 </div>
             )
         }
-        else if ( this.props.user && this.props.user.email  ){
+        else if ( props.user && props.user.email  ){
             return (
                 <div>
-                    <div ref="formTrigger">
-                        { this.imgSection() }
+                    <div ref={formTriggerRef}>
+                        { imgSection() }
                     </div>
 
 
                     {
-                        this.state.showFormElem &&
-                            <form ref="userForm" className="logged " action='/users/logout' method="POST" >
+                        formVisibility &&
+                            <form ref={userFormRef} className="logged " action='/users/logout' method="POST" >
                                 <div className="fold" >
-                                    <a  ref="closeMe" className="closeMe">&times;</a><br/>
-                                    <h4>{ this.props.user.name }</h4><p>{this.props.user.email}</p>
-                                    <Link to="/user/profile" >Profile</Link>
-                                    <button className="logout" onClick={ this.logOut } type="submit" name="logout">Log-Out</button>
+                                    <a  ref={closeMeRef} className="closeMe">&times;</a><br/>
+                                    <h4>{ props.user.name }</h4><p>{props.user.email}</p>
+                                    <Link onClick={()=>showForm(false)()} to="/user/profile" >Profile</Link>
+                                    <button className="logout" onClick={ logOut } type="submit" name="logout">Log-Out</button>
                                 </div>
                             </form>
                     }
@@ -163,44 +175,43 @@ export class NavBar extends Component{
 
             )
         }
-    }
+    };
+    return(
+        <nav id="nav" className= 'container-fluid row' style={{padding:'0'}} >
 
-    render() {
-        return (
+            <input type="checkbox" className="toggle" id="mMenu" style = {{ display:"none" }} />
+            <label htmlFor="mMenu"  className="box col-1 col-sm-1 col-md-1">
+                <i className="fa fa-align-justify "></i>
+            </label>
 
-            <nav id="nav" className= 'container-fluid row' style={{padding:'0'}} >
+            {/* CANVAS */}
+            <div className='canvasWrapper col-7 col-sm-8 col-md-8 col-lg-2'>
+                <canvas className="logo" ></canvas>
+            </div>
 
-                <input type="checkbox" className="toggle" id="mMenu" style = {{ display:"none" }} />
-                <label htmlFor="mMenu"  className="box col-1 col-sm-1 col-md-1">
-                    <i className="fa fa-align-justify "></i>
-                </label>
+            <ul className="nPanel col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 ml-auto">
 
-                {/* CANVAS */}
-                <div className='canvasWrapper col-7 col-sm-8 col-md-8 col-lg-2'>
-                    <canvas className="logo" ></canvas>
-                </div>
+                <li><NavLink  to="/home"   onClick={() => props.clearGetParams() } >HOME</NavLink></li>
+                <li><NavLink  to="/latest" onClick={() => props.clearGetParams() } >LATEST</NavLink></li>
+                <li><NavLink  to="/movies" onClick={() => props.clearGetParams() } >MOVIES</NavLink></li>
+                <li><NavLink  to="/tv"     onClick={() => props.clearGetParams() } >TV</NavLink></li>
+            </ul>
 
-                <ul className="nPanel col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 ml-auto">
+            <div id='search_wrapper'>
+                <SearchBar/>
+            </div>
 
-                    <li><NavLink  to="/home"   onClick={() => this.props.clearGetParams() } >HOME</NavLink></li>
-                    <li><NavLink  to="/latest" onClick={() => this.props.clearGetParams() } >LATEST</NavLink></li>
-                    <li><NavLink  to="/movies" onClick={() => this.props.clearGetParams() } >MOVIES</NavLink></li>
-                    <li><NavLink  to="/tv"     onClick={() => this.props.clearGetParams() } >TV</NavLink></li>
-                </ul>
+            {/* Login */}
+            <div className="loginContainer col-2 col-sm-2 col-md-1 col-lg-1 ">
+                { loginFormElement() }
+            </div>
 
-                <div id='search_wrapper'>
-                    <SearchBar/>
-                </div>
+        </nav>
+    )
 
-                {/* Login */}
-                <div className="loginContainer col-2 col-sm-2 col-md-1 col-lg-1 ">
-                    { this.loginFormElement() }
-                </div>
 
-            </nav>
-        )
-    }
 }
+
 
 const mapStateToProps = ( state )=>{
     return {  ...state.userReducer  }
@@ -208,8 +219,8 @@ const mapStateToProps = ( state )=>{
 const mapDispatchToProps = ( dispatch )=>{
     return {
         login         : ( path, params) => {  dispatch( getUser( path, params ) ) },
-        checkUserSess : ( path ) => {  dispatch( checkUserSession( path ) ) },
-        clearGetParams: ( ) => {  dispatch({ 'type': 'SET_M_GET_PARAM', 'getParam': null }) }
+        checkUserSess : ( path )        => {  dispatch( checkUserSession( path ) ) },
+        clearGetParams: ( )             => {  dispatch({ 'type': 'SET_M_GET_PARAM', 'getParam': null }) }
     }
 
 }

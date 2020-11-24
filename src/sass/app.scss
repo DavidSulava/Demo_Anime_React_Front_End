@@ -2,6 +2,7 @@
 @import url('https://use.fontawesome.com/releases/v5.0.6/css/all.css');
 
 @import "login";
+@import "./mixins";
 
 
 // --- Variables
@@ -16,42 +17,7 @@ $logoHeight      : $navHeight - 10px;
 $m_index_height  : 200px;
 $m_index_width   : 136px;
 
-// ----Mixins
-@mixin clearFix {
-    &:after {
-        content: '';
-        display: block;
-        clear: both;
-    }
-}
 
-@mixin stopSelection {
-    -webkit-touch-callout: none;
-    /* iOS Safari */
-    user-select: none;
-}
-
-@mixin standardButton {
-    background-color : rgb(87, 206, 87);
-    color            : rgb(238, 235, 235);
-    border           : none;
-
-    &:hover {
-        background-color : rgb(104, 224, 104);
-        color            : rgb(255, 255, 255);
-    }
-
-    &:active {
-        background-color : rgb(79, 187, 79);
-        color            : rgb(238, 235, 235);
-    }
-}
-
-@mixin animate($name, $duration:'0.3s', $timing:'ease-in-out' ){
-    animation-name            : #{$name};
-    animation-duration        : #{$duration};
-    animation-timing-function : #{$timing};
-}
 @mixin keyframes($name){
 
     @keyframes #{$name}{
@@ -235,7 +201,7 @@ div#m_data_index {
         border-radius    : 3px;
         user-select      : none;
 
-        @include animate('anima_opacity', '0.2s');
+        @include animateFrame('opacity', 0.4s);
 
         &>*{
             display    : block;
@@ -826,14 +792,15 @@ div.frame_container {
     z-index    : 3;
     margin-top : 8px;
 
-    @include animate('anima_opacity');
-
     ul {
         background-color : rgb(247, 247, 247);
         padding          : 0;
         border-radius    : 5px;
         box-shadow       : 0px 4px 50px 0px rgba(0, 0, 0, 0.75);
         color            : black;
+
+        @include animateFrame('rotateTopLeftCorner', '0.6s', 'ease-out');
+
 
         li {
             display       : block;
@@ -898,6 +865,8 @@ div.frame_container {
                 color            : $fColorMain;
             }
         }
+
+
     }
 }
 
@@ -1050,10 +1019,6 @@ footer {
         }
     }
 }
-
-
-//--AnimationFrames---
-@include keyframes('anima_opacity');
 
 //--Dynamic CSS Classes
 .delMe,
