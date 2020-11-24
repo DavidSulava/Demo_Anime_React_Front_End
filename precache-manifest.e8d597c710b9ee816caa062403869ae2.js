@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "e22432ba178e6c9964810fa7283da118",
+    "revision": "f989104cec39cfb76397d3c40e704564",
     "url": "/Demo_Anime_React_Front_End/index.html"
   },
   {
-    "revision": "b656700ee26178417ced",
+    "revision": "4e0db298dc4472343a11",
     "url": "/Demo_Anime_React_Front_End/static/css/main.72d9dbf7.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Demo_Anime_React_Front_End/static/js/2.be59855a.chunk.js"
   },
   {
-    "revision": "b656700ee26178417ced",
-    "url": "/Demo_Anime_React_Front_End/static/js/main.7c46867f.chunk.js"
+    "revision": "4e0db298dc4472343a11",
+    "url": "/Demo_Anime_React_Front_End/static/js/main.c1b823c5.chunk.js"
   },
   {
     "revision": "9e2fcc7a9fe6077fa468",
