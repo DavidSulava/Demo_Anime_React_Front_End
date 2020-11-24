@@ -54,7 +54,7 @@ const SearchBar = (props)=>{
 
     }
 
-    let hideResults = (eventSearch)=> {
+    let hideResults = (eventSearch=null)=> {
 
         let lastSearchValue = eventSearch && eventSearch.target.value;
 
@@ -116,7 +116,7 @@ const SearchBar = (props)=>{
                                         <Link to={`/article/${el._id}`}  style={{ 'backgroundSize': 'cover', 'display': 'block', 'width': '50px', 'height': '70px', 'backgroundImage': `url(${ el.img })`, 'cursor': 'pointer' }}></Link>
 
                                         <div >
-                                            <Link to={`/article/${el._id}`} style={{'cursor': 'pointer'}}> { el.title } </Link>
+                                            <Link on onClick={ ()=>hideResults() } to={`/article/${el._id}`} style={{'cursor': 'pointer'}}> { el.title } </Link>
                                             <p  > { el.media_type } </p>
                                             <p  > { el.start_year } </p>
                                         </div>
