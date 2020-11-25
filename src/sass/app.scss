@@ -802,7 +802,6 @@ div.frame_container {
         box-shadow       : 0px 4px 50px 0px rgba(0, 0, 0, 0.75);
         color            : black;
 
-        // @include animateFrame('rotateTopLeftCorner', '0.6s', 'ease-out');
         @include animateFrame('trembleBottom', '0.8s',  'ease-in');
 
 
