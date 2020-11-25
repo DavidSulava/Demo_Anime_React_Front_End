@@ -38,6 +38,44 @@
                 opacity: 1;
             }
         }
+    }
+
+    @if $name == "trembleBottom"{
+
+        transform-origin : top;
+
+        @keyframes #{$name}{
+            0% {
+
+                transform        : rotateX(-20deg);
+                opacity          : 0;
+            }
+            25%{
+                transform        : rotateX( 15deg);
+                opacity          : 1;
+            }
+            35%    {
+
+                transform        : rotateX( -7deg);
+                opacity          : 1;
+            }
+            45%    {
+
+                transform        : rotateX( 4deg);
+                opacity          : 1;
+            }
+            55%    {
+
+                transform        : rotateX( -4deg);
+                opacity          : 1;
+            }
+
+            100%    {
+
+                transform        : rotateX(0deg);
+                opacity          : 1;
+            }
+        }
 	}
 
 

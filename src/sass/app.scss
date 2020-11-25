@@ -792,6 +792,9 @@ div.frame_container {
     z-index    : 3;
     margin-top : 8px;
 
+    transform-style : preserve-3d;
+    perspective     : 1000px;
+
     ul {
         background-color : rgb(247, 247, 247);
         padding          : 0;
@@ -799,7 +802,8 @@ div.frame_container {
         box-shadow       : 0px 4px 50px 0px rgba(0, 0, 0, 0.75);
         color            : black;
 
-        @include animateFrame('rotateTopLeftCorner', '0.6s', 'ease-out');
+        // @include animateFrame('rotateTopLeftCorner', '0.6s', 'ease-out');
+        @include animateFrame('trembleBottom', '0.8s',  'ease-in');
 
 
         li {
