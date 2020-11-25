@@ -12,10 +12,21 @@ const SearchBar = (props)=>{
     const [resultElement, setResultElement] = useState(false)
     const [resultsSearch, setResultsSearch] = useState([]);
 
-    const addedEl = useRef(null);
+    const addedEl          = useRef(null);
+    const inputSearch      = useRef(null);
 
-    // --UseEffect Section
-    useEffect(()=>{ props.clearSearch() }, [] );
+
+    // --UseEffect 
+    useEffect(()=>{
+        //---[component mount]---
+        props.clearSearch();
+        document.addEventListener('click', hideResults());
+
+        //---[component unmount]---
+        return () => {
+            document.removeEventListener('click', hideResults )
+        }
+    }, [] );
 
     useEffect(()=>{ setResultsSearch(props.search) }, [props.search]);
 
@@ -26,10 +37,8 @@ const SearchBar = (props)=>{
             setResultElement(false);
     },[resultsSearch])
 
-    // --Component Functions Section
+    // --Component Functions 
     let makeSearch = (e)=> {
-
-        setSearchTitle(e.target.value)
 
         if( e.target.value.length >= 3 )
             props.getData(`title=${e.target.value}`);
@@ -39,28 +48,26 @@ const SearchBar = (props)=>{
 
     }
 
-    let docClickListener = (lastSearchValue)=>(event)=>{
+
+    let hideResults = (hide=false)=>(event=null)=> {
+
+        if(hide){
+            setResultElement(false);
+            return;
+        };
+
+        let addElClicked       = addedEl          && addedEl.current          ? addedEl.current.innerHTML.includes(event.target.outerHTML)     : false;
+        let searchInputClicked = inputSearch      && inputSearch.current      ? inputSearch.current.outerHTML.includes(event.target.outerHTML) : false;
 
 
-        if( addedEl && addedEl.current && addedEl.current.innerHTML.includes(event.target.outerHTML) && lastSearchValue)
-            setResultElement(true)
+        if( addElClicked || searchInputClicked ){
 
-        else if ( ( addedEl && addedEl.current && !addedEl.current.innerHTML.includes(event.target.outerHTML) ) || !lastSearchValue )
-            setResultElement(false)
+            setResultElement(true);
+            return;
+        }
+        else if ( !addElClicked  )
 
-        else
-            setResultElement(!resultElement)
-
-
-    }
-
-    let hideResults = (eventSearch=null)=> {
-
-        let lastSearchValue = eventSearch && eventSearch.target.value;
-
-        document.removeEventListener('click', docClickListener);
-        document.onclick = docClickListener(lastSearchValue);
-
+            setResultElement(false);
     }
 
     let mobBtn = ()=> {
@@ -85,18 +92,18 @@ const SearchBar = (props)=>{
         e.preventDefault();
 
         let redirectPaths = new RegExp('(?!\/)article|registration|profile|authentication');
-        let checkPathName = redirectPaths.test(props.location.pathname )
+        let checkPathName = redirectPaths.test(props.location.pathname );
 
         if ( resultsSearch.length && !checkPathName ){
             props.addMovie(`title=${searchTitle}`);
-            hideResults(e)
+            hideResults(true)();
         }
         else if (resultsSearch.length && checkPathName){
             props.history.push({
                 pathname : '/filtered',
                 c_param  : `title=${searchTitle}`
             });
-            hideResults(e);
+            hideResults(true)();
         }
     }
 
@@ -113,10 +120,18 @@ const SearchBar = (props)=>{
                                 return(
                                     <li key={index}>
 
-                                        <Link to={`/article/${el._id}`}  style={{ 'backgroundSize': 'cover', 'display': 'block', 'width': '50px', 'height': '70px', 'backgroundImage': `url(${ el.img })`, 'cursor': 'pointer' }}></Link>
+                                        <Link to={`/article/${el._id}`}  style={{ 'backgroundSize': 'cover', 'display': 'block', 'width': '50px', 'height': '70px', 'backgroundImage': `url(${ el.img })`, 'cursor': 'pointer' }}
+                                            onClick={ hideResults(true)}
+                                        ></Link>
 
                                         <div >
-                                            <Link on onClick={ ()=>hideResults() } to={`/article/${el._id}`} style={{'cursor': 'pointer'}}> { el.title } </Link>
+
+                                            <Link to={`/article/${el._id}`} style={{'cursor': 'pointer'}}
+                                                onClick={ hideResults(true)}
+                                            >
+                                                { el.title }
+                                            </Link>
+
                                             <p  > { el.media_type } </p>
                                             <p  > { el.start_year } </p>
                                         </div>
@@ -127,7 +142,7 @@ const SearchBar = (props)=>{
                         }
 
                         <li className="ss-bottom" >
-                            <Link to={`?title=${searchTitle }`}  onClick={ (e)=> getAll(e) }  id="finde_all" >View all</Link>
+                            <Link to='/filtered'  onClick={ (e)=> getAll(e) }  id="finde_all" >View all</Link>
                         </li>
 
                     </ul>
@@ -147,8 +162,17 @@ const SearchBar = (props)=>{
                 </div>
 
                 <div className="inputCont">
-                    <input onFocus={ (e)=>hideResults(e) } onBlur={ (e)=>hideResults(e) } onChange ={ makeSearch }  name="keyword" type="text" className="form-control search-input" placeholder="Type to search..."/>
-                    <Link  onClick={ (e)=>getAll(e) }  className="search-submit  col-md-1" to={`?title=${searchTitle}`} title="Search"><i className="fa fa-search"></i></Link>
+
+                    <input  name ="keyword" type="text" className="form-control search-input" placeholder="Type to search..."
+                            ref      ={inputSearch}
+                            onChange ={ (e)=>{setSearchTitle(e.target.value); makeSearch(e); } }
+                    />
+
+                    <Link  className="search-submit  col-md-1" to='/filtered' title="Search"
+                           onClick={ (e)=>getAll(e) }
+                    >
+                        <i className="fa fa-search"></i>
+                    </Link>
                 </div>
 
             </div>
@@ -156,8 +180,10 @@ const SearchBar = (props)=>{
 
             <div  className="wrapper_MbSearch col-12" style={{display: 'none'}}>
                 <div  className="inputCont mobileBar" >
-                        <input  onFocus={(e)=>hideResults(e)} onBlur={(e)=>hideResults(e)} onChange={ makeSearch }  name="keyword" type="text" className="form-control search-input" placeholder="Type to search..."/>
-                        <Link  onClick={ (e)=>getAll(e) }  className="search-submit " to={`?title=${searchTitle}`} title="Search"><i className="fa fa-search"></i></Link>
+                        <input name="keyword" type="text" className="form-control search-input" placeholder="Type to search..."
+                               onChange ={ (e)=>{ setSearchTitle(e.target.value); makeSearch(e); } }
+                        />
+                        <Link  onClick={ (e)=>getAll(e) }  className="search-submit " to='/filtered' title="Search"><i className="fa fa-search"></i></Link>
                 </div>
             </div>
 

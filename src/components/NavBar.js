@@ -24,6 +24,10 @@ const NavBar = (props)=>{
         document.addEventListener('click', showForm());
         logo( process.env.NODE_ENV !== 'development' ? process.env.PUBLIC_URL : '' );
 
+        return () => {
+            document.removeEventListener('click', showForm )
+        }
+
     }, [] );
     useEffect(()=>{
 
