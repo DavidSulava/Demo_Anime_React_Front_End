@@ -16,7 +16,7 @@ const SearchBar = (props)=>{
     const inputSearch      = useRef(null);
 
 
-    // --UseEffect 
+    // --UseEffect
     useEffect(()=>{
         //---[component mount]---
         props.clearSearch();
@@ -37,7 +37,7 @@ const SearchBar = (props)=>{
             setResultElement(false);
     },[resultsSearch])
 
-    // --Component Functions 
+    // --Component Functions
     let makeSearch = (e)=> {
 
         if( e.target.value.length >= 3 )
