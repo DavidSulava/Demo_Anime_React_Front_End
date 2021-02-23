@@ -2,11 +2,12 @@
 ## Описание
 Приложение для просмотра аниме.
 
-Back-end 👉 [тут]( https://github.com/DavidSulava/Demo_Anime_React_Back_End )
+- Back-end ( Data server ) 👉 [тут]( https://github.com/DavidSulava/Demo_Anime_React_Back_End )
+- Back-end ( Login server ) 👉 [тут]( https://github.com/DavidSulava/LoginServer )
 
-__Дэмку можно посмотреть тут__: 👉 https://davidsulava.github.io/Demo_Anime_React_Front_End/ <br>( необходимо немного подождеть пока back-end выйдет из "idling state" ).
+- Демка 👉 [тут]( https://davidsulava.github.io/Demo_Anime_React_Front_End/) ( необходимо немного подождеть пока back-end выйдет из "idling state" ).
 
-## Stack
+#### Используемые технологии:
 ```
 React( Redux, redux-thunk, react-router-dom, React Class Components )
 three.js
