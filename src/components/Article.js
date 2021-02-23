@@ -49,20 +49,19 @@ export class Article extends Component{
         }
     }
 
-    user_favorite = async function( ch_status=false )
-        {
-            // console.log(this.props);
-            // let local_href   = this.rootUrl;
-            // let m_id         = /(?<=\?id=)\d+/.exec(local_href)[0];
-            // ch_status        = ch_status ? `&ch_status=true` : '';
+    // user_favorite = async function( ch_status=false ){
+    //     console.log(this.props);
+    //     let local_href   = this.rootUrl;
+    //     let m_id         = /(?<=\?id=)\d+/.exec(local_href)[0];
+    //     ch_status        = ch_status ? `&ch_status=true` : '';
 
-            // let url_prepared = local_href.replace(/public\/.*/, `public/ajax/to_favorite?id=${m_id}${ch_status}`)
+    //     let url_prepared = local_href.replace(/public\/.*/, `public/ajax/to_favorite?id=${m_id}${ch_status}`)
 
-            // let getF =  await getFetch(url_prepared, "GET", );
+    //     let getF =  await getFetch(url_prepared, "GET", );
 
-            // !getF ? this.v_favourite='far' :  this.v_favourite='fas';
+    //     !getF ? this.v_favourite='far' :  this.v_favourite='fas';
 
-        }
+    // }
     compArticle(){
 
         let item  = this.props.article;
@@ -174,31 +173,28 @@ export class Article extends Component{
 
     }
 
-    render()
-        {
-            return (
-                <div id="content_render_m">
-                <div className="wrapper_content">
-                    { this.compArticle() }
+    render(){
+        return (
+            <div id="content_render_m">
+            <div className="wrapper_content">
+                { this.compArticle() }
 
-                </div>
-                </div>
-            )
-        }
+            </div>
+            </div>
+        )
+    }
 }
 
-const mapStateToProps = ( state )=>
-    {
-        return { ...state.movieReducer }
-    }
+const mapStateToProps = ( state )=>{
+    return { ...state.movieReducer }
+}
 
-const mapDispatchToProps = ( dispatch, props )=>
-    {
-        return {
-            addArticle   : ()              => { dispatch( getArticle( props.match.params.id ) ) },
-            setGetParams : ( params=null ) => {  dispatch({ 'type': 'SET_M_GET_PARAM', 'getParam': params }) }
-        }
+const mapDispatchToProps = ( dispatch, props )=>{
+    return {
+        addArticle   : ()              => { dispatch( getArticle( props.match.params.id ) ) },
+        setGetParams : ( params=null ) => {  dispatch({ 'type': 'SET_M_GET_PARAM', 'getParam': params }) }
     }
+}
 
 export default connect( mapStateToProps, mapDispatchToProps )( withRouter(Article) )
 
