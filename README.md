@@ -9,7 +9,12 @@
 
 #### Используемые технологии:
 ```
-React( Redux, redux-thunk, react-router-dom, React Class Components, React Functional Components )
+React:
+    Redux,
+    redux-thunk,
+    react-router-dom,
+    React Class Components && Functional Components,
+
 three.js
 
 ```
