@@ -144,8 +144,9 @@ $imageSelection_W_Height: 75vh;
 .avatarlogged {
 	width         : 34px;
 	height        : 34px;
-	margin        : ($navHeight - 34px)/2 auto 5px auto;
+	// margin        : ($navHeight - 44px)/2 auto 1px auto;
 	border-radius : 50%;
+	color         : rgb(241, 241, 243);
 }
 
 .fold {

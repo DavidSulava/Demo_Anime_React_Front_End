@@ -22,6 +22,7 @@ const store       = createStore( rootReducer,  compose( applyMiddleware(thunk) )
 //---Cash data----
 store.subscribe(() => {
     localStorage.setItem('movie_data_*18', JSON.stringify(store.getState().movieReducer));
+    localStorage.setItem('movie_user_*18', JSON.stringify(store.getState().userReducer));
 })
 
 ReactDOM.render(

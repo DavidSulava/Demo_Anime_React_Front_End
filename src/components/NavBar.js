@@ -3,7 +3,8 @@ import { connect                            } from 'react-redux'
 import { Link, NavLink, withRouter          } from 'react-router-dom'
 
 import { getUser          } from '../store/actions/getUser'
-import { checkUserSession } from '../store/actions/checkUserSession'
+import { logOut }           from '../store/actions/logOut'
+import { getTokensSilently }from '../store/actions/getNewTokens'
 
 import { logo } from '../js/logo'
 
@@ -18,9 +19,10 @@ const NavBar = (props)=>{
     const formTriggerRef = useRef(null);
     const closeMeRef     = useRef(null);
 
+    let timeOutFunction = null;
+
     useEffect(()=>{
 
-        props.checkUserSess();
         document.addEventListener('click', showForm());
         logo( process.env.NODE_ENV !== 'development' ? process.env.PUBLIC_URL : '' );
 
@@ -34,6 +36,17 @@ const NavBar = (props)=>{
         showForm(false)();
 
     }, [props.user] );
+
+    // Silently Refresh Tokens
+    useEffect(()=>{
+
+        let time    = props.accessTokenExpiresAt - new Date().getTime();
+
+        if( timeOutFunction ) clearTimeout(timeOutFunction);
+        if( time && props.accessTokenExpiresAt )
+            timeOutFunction = setTimeout( function (){ props.acquireTokenSilently() } , time );
+
+    }, [props.accessTokenExpiresAt] );
 
 
     const showForm = (closeManual=true)=>(ev=null)=>{
@@ -64,28 +77,27 @@ const NavBar = (props)=>{
         ev.preventDefault();
 
         let formEl = ev.currentTarget.parentNode
-        var path   = "/users/login";
+        var path   = "/user/login";
 
         var formData = new FormData(formEl);
 
         props.login(path, formData);
     };
 
-    const logOut = (ev)=> {
+    const loginOut = (ev)=> {
         ev.preventDefault();
 
-        props.checkUserSess('/users/logOut');
-
+        props.logOut('/user/logOut');
     };
 
     //  --- [ elements ] ---
     const imgSection = ()=>{
 
         // -- Error Credentials MSG
-        if( props.msg && props.msg.errorCred && !props.user )
+        if( props.msg && props.msg.error && !props.user )
             return (
                 <div className="alert alert-danger" style={{ width:'auto', margin:'0 7px'}}>
-                    { props.msg.errorCred }
+                    { props.msg.error }
                 </div>
             );
         // -- User Avatar
@@ -94,7 +106,7 @@ const NavBar = (props)=>{
             if( !props.user.img )
                 return (
                     <i
-                        className = "fa fa-user avatarlogged"
+                        className = "fa fa-user avatarlogged default"
                         style     = {{ fontSize: '4vmin', color: 'rgb(39, 217, 187)', cursor:'pointer' }}
                         alt       = "avatar "
                         title     = { `${ props.user.name }&#13;${ props.user.email }` }
@@ -170,7 +182,7 @@ const NavBar = (props)=>{
                                     <a  ref={closeMeRef} className="closeMe">&times;</a><br/>
                                     <h4>{ props.user.name }</h4><p>{props.user.email}</p>
                                     <Link onClick={()=>showForm(false)()} to="/user/profile" >Profile</Link>
-                                    <button className="logout" onClick={ logOut } type="submit" name="logout">Log-Out</button>
+                                    <button className="logout" onClick={ loginOut } type="submit" name="logout">Log-Out</button>
                                 </div>
                             </form>
                     }
@@ -213,7 +225,6 @@ const NavBar = (props)=>{
         </nav>
     )
 
-
 }
 
 
@@ -222,9 +233,10 @@ const mapStateToProps = ( state )=>{
 }
 const mapDispatchToProps = ( dispatch )=>{
     return {
-        login         : ( path, params) => {  dispatch( getUser( path, params ) ) },
-        checkUserSess : ( path )        => {  dispatch( checkUserSession( path ) ) },
-        clearGetParams: ( )             => {  dispatch({ 'type': 'SET_M_GET_PARAM', 'getParam': null }) }
+        login                : ( path, params) => {  dispatch( getUser( path, params ) ) },
+        acquireTokenSilently : ( )             => {  dispatch( getTokensSilently () ) },
+        logOut               : ( path )        => {  dispatch( logOut( path ) ) },
+        clearGetParams       : ( )             => {  dispatch({ 'type': 'SET_M_GET_PARAM', 'getParam': null }) }
     }
 
 }

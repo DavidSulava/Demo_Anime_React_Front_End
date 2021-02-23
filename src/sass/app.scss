@@ -156,7 +156,6 @@ div#m_data_index {
     padding : 0;
     margin  : 15px 0 0 0;
 
-
     .fButton_wrapper {
         display    : block;
         text-align : right;
@@ -385,6 +384,7 @@ div#m_data_index {
     align-items     : center;
     height          : 50vh;
     width           : calc(100vw - (40px));
+    margin: 0;
 }
 
 .spinner_article {
@@ -736,6 +736,12 @@ div.frame_container {
 
 }
 
+
+/*_____________________________________________________*/
+/*---------------Email confirmation check--------------*/
+.email_confirmation_wrapper{
+    height: calc(100vh - #{$navHeight});
+}
 /*_______________________________________*/
 /*---------------Search bar--------------*/
 
