@@ -1,39 +1,31 @@
+import HttpClient, { Method } from '../../services/http.clien';
+import { ADD_SEARCH } from '../constants';
+import Api from '../../services/api';
+
+
 export const getSearch = (getParams = '') => {
-    return (dispatch, getState) => {
-        //async stuff
-        (async () => {
-            // --- [ reverse regex for edge browser ~~edge supports only  Lookahead ?~~ ] ---
-            var pr_str  = getParams.split("").reverse().join("");
-            var param   = 'title'.split("").reverse().join("");
-            var pattern = new RegExp(`.*(?=\=${param}\?)`, "i");
+  return async (dispatch, getState) => {
+    try {
+      // --- [ reverse regex for edge browser ~~edge supports only  Lookahead ?~~ ] ---
+      const pr_str = getParams.split("").reverse().join("");
+      const param = 'title'.split("").reverse().join("");
+      const pattern = new RegExp(`.*(?=\=${param}\?)`, "i");
 
-            let searchLen = pattern.exec(pr_str);
+      const searchLen = pattern.exec(pr_str);
 
-            if ( !searchLen[0] && searchLen[0].length <= 2)
-                dispatch({ 'type': 'ADD_SEARCH', 'search': {} });
+      if (!searchLen[0] && searchLen[0].length <= 2)
+        dispatch({'type': ADD_SEARCH, 'search': {}});
 
+      const data = await Api.getSearch(getParams);
 
-            let corsAPI = getParams === '' ? `${process.env.REACT_APP_DATA_API}/findAll?` : `${process.env.REACT_APP_DATA_API}/findAll?${getParams}`;
+      if (data && data.length)
+        dispatch({'type': ADD_SEARCH, 'search': data});
+      else if (data && !data.length)
+        dispatch({'type': ADD_SEARCH, 'search': []});
 
-            const myHeaders = {
-                method : 'GET',
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest',
-                },
-                credentials: 'include',
-            };
-
-            const response = await fetch(corsAPI, myHeaders);
-            let data = await response.json();
-
-            if (data && data.length )
-                dispatch({ 'type': 'ADD_SEARCH', 'search': data });
-            else if(data && !data.length )
-                dispatch({ 'type': 'ADD_SEARCH', 'search': [] });
-
-
-        })().catch(err => console.log(err));
-
-
+    } catch (e) {
+      console.log(e)
     }
+
+  }
 }
