@@ -1,33 +1,29 @@
+import { DELL_USER, USER_EXIST } from '../constants';
+import Api from '../../services/api';
+
+
 export const logOut = (path = '/user/logOut') => {
-    return async (dispatch, getState) => {
-        //async stuff
+  return async (dispatch, getState) => {
+    try {
+      const authToken = `Bearer ${getState().userReducer.accessToken}`
+      const body = getState().userReducer.user
 
-        let corsAPI = `${process.env.REACT_APP_LOGIN_SERVER_API}${path}`;
+      const response = await Api.logOut(path, authToken, body);
 
-        const myHeaders = {
-            method : 'POST',
-            headers: {
-                'Content-Type' : 'application/json',
-                'Authorization': `Bearer ${getState().userReducer.accessToken}`
-            },
-            credentials : 'include',
-            body        : JSON.stringify( getState().userReducer.user )
-        };
+      if (response.status === 200) {
 
-        const response = await fetch(corsAPI, myHeaders);
+        const data = await response.json();
 
-        if (response.status === 200  ) {
+        if (data && data.user) {
+          dispatch({'type': USER_EXIST, 'user': data.user})
+        } else
+          dispatch({'type': DELL_USER});
 
-            var data = await response.json();
-
-            if (data && data.user) {
-                dispatch({'type': 'USER_EXIST', 'user': data.user})
-            } else
-                dispatch({ 'type': 'DELL_USER' });
-
-        } else {
-            dispatch({ 'type': 'DELL_USER' });
-        }
-
+      } else {
+        dispatch({'type': DELL_USER});
+      }
+    } catch (e) {
+      console.log(e)
     }
+  }
 }

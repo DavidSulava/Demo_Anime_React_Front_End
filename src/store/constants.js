@@ -1,0 +1,17 @@
+export const ADD_M_ARTICLE = 'ADD_M_ARTICLE'
+export const ADD_M_FILTER = 'ADD_M_FILTER'
+export const SET_M_GET_PARAM = 'SET_M_GET_PARAM'
+export const ADD_M_DATA = 'ADD_M_DATA'
+export const ADD_SEARCH = 'ADD_SEARCH'
+export const DELL_M_DATA = 'DELL_M_DATA'
+
+
+export const SET_ACCESS_TOKEN = 'SET_ACCESS_TOKEN'
+export const SET_ACCESS_EXPIRES_AT = 'SET_ACCESS_EXPIRES_AT'
+export const DELL_USER = 'DELL_USER'
+export const USER_NO = 'USER_NO'
+export const REG_SUCCESS = 'REG_SUCCESS'
+export const SUCCESS_MSG = 'SUCCESS_MSG'
+export const REG_ERROR = 'REG_ERROR'
+export const USER_EXIST = 'USER_EXIST'
+export const DELL_ALL_MSG = 'DELL_ALL_MSG'
