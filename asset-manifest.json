@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Demo_Anime_React_Front_End/static/css/main.a98553c0.css",
-    "main.js": "/Demo_Anime_React_Front_End/static/js/main.4b0858d5.js",
+    "main.css": "/Demo_Anime_React_Front_End/static/css/main.9a87af34.css",
+    "main.js": "/Demo_Anime_React_Front_End/static/js/main.aa037ad0.js",
     "static/media/14784.gif": "/Demo_Anime_React_Front_End/static/media/14784.a0ad50fb190f37e31c0c.gif",
     "static/media/7709.gif": "/Demo_Anime_React_Front_End/static/media/7709.824745867fba941f3fa4.gif",
     "static/media/108839.gif": "/Demo_Anime_React_Front_End/static/media/108839.452edae076d6c2011409.gif",
@@ -31,7 +31,7 @@
     "index.html": "/Demo_Anime_React_Front_End/index.html"
   },
   "entrypoints": [
-    "static/css/main.a98553c0.css",
-    "static/js/main.4b0858d5.js"
+    "static/css/main.9a87af34.css",
+    "static/js/main.aa037ad0.js"
   ]
 }
