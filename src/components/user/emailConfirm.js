@@ -4,7 +4,6 @@ import { useHistory, withRouter } from 'react-router-dom'
 import { updateUserData } from '../../store/actions/updateUserData'
 import { DELL_ALL_MSG } from '../../store/constants';
 
-
 export const EmailConfirm = (props) => {
   const history = useHistory()
 
@@ -19,9 +18,7 @@ export const EmailConfirm = (props) => {
     }
   }, [])
 
-
   const localSection = () => {
-
     const wrapperStyle = {height: '100vh', margin: '20px auto'};
     const alertStyle = {padding: '20px'};
 

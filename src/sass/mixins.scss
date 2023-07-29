@@ -1,5 +1,4 @@
 @mixin animateFrame($name, $duration:'0.7s', $timing: 'ease-in-out') {
-
   $positionOrigin: 'left top';
 
   animation-name: #{$name};
@@ -124,7 +123,6 @@
     clear: both;
   }
 }
-
 
 @mixin stopSelection {
   -webkit-touch-callout: none;

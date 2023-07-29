@@ -102,22 +102,29 @@ const SearchBar = (props) => {
 
   const elementResults = () => {
     return resultsSearch && resultsSearch.length ? (
-      <div className="search-suggest row  col-11 col-sm-11 col-md-11 col-lg-3 col-xl-3 " style={{display: 'block'}}>
-        <ul ref={addedEl} style={{listStyleType: 'none'}}>
-
+      <div
+          className="search-suggest row  col-11 col-sm-11 col-md-11 col-lg-3 col-xl-3 "
+          style={{display: 'block'}}
+      >
+        <ul
+            ref={addedEl}
+            style={{listStyleType: 'none'}}
+        >
           {
             resultsSearch.map((el, index) => {
               return (
                 <li key={index}>
-                  <Link to={`/article/${el._id}`} style={{
-                    'backgroundSize': 'cover',
-                    'display': 'block',
-                    'width': '50px',
-                    'height': '70px',
-                    'backgroundImage': `url(${el.img})`,
-                    'cursor': 'pointer'
-                  }}
-                        onClick={hideResults(true)}
+                  <Link
+                      to={`/article/${el._id}`}
+                      style={{
+                        'backgroundSize': 'cover',
+                        'display': 'block',
+                        'width': '50px',
+                        'height': '70px',
+                        'backgroundImage': `url(${el.img})`,
+                        'cursor': 'pointer'
+                      }}
+                      onClick={hideResults(true)}
                   ></Link>
 
                   <div>
@@ -138,7 +145,13 @@ const SearchBar = (props) => {
           }
 
           <li className="ss-bottom">
-            <Link to='/filtered' onClick={(e) => getAll(e)} id="finde_all">View all</Link>
+            <Link
+                to='/filtered'
+                onClick={getAll}
+                id="finde_all"
+            >
+              View all
+            </Link>
           </li>
 
         </ul>
@@ -149,13 +162,22 @@ const SearchBar = (props) => {
   return (
     <div>
       <div className="search-content">
-        <div onClick={() => mobBtn()} className="mobile-search active">
-          <label htmlFor="fa-search" className="fa fa-search "></label>
+        <div
+            className="mobile-search active"
+            onClick={mobBtn}
+        >
+          <label
+              htmlFor="fa-search"
+              className="fa fa-search "
+          ></label>
         </div>
 
         <div className="inputCont">
           <input
-            name="keyword" type="text" className="form-control search-input" placeholder="Type to search..."
+            name="keyword"
+            type="text"
+            className="form-control search-input"
+            placeholder="Type to search..."
             ref={inputSearch}
             onChange={(e) => {
               setSearchTitle(e.target.value);
@@ -164,8 +186,10 @@ const SearchBar = (props) => {
           />
 
           <Link
-            className="search-submit  col-md-1" to='/filtered' title="Search"
-            onClick={(e) => getAll(e)}
+            className="search-submit  col-md-1"
+            to='/filtered'
+            title="Search"
+            onClick={getAll}
           >
             <i className="fa fa-search"></i>
           </Link>
@@ -173,17 +197,25 @@ const SearchBar = (props) => {
 
       </div>
 
-
-      <div className="wrapper_MbSearch col-12" style={{display: 'none'}}>
+      <div
+          className="wrapper_MbSearch col-12"
+          style={{display: 'none'}}
+      >
         <div className="inputCont mobileBar">
           <input
-            name="keyword" type="text" className="form-control search-input" placeholder="Type to search..."
+            name="keyword" type="text"
+            className="form-control search-input"
+            placeholder="Type to search..."
             onChange={(e) => {
               setSearchTitle(e.target.value);
               makeSearch(e);
             }}
           />
-          <Link onClick={(e) => getAll(e)} className="search-submit " to='/filtered' title="Search">
+          <Link
+              onClick={getAll}
+              className="search-submit"
+              to='/filtered'
+              title="Search">
             <i className="fa fa-search"></i>
           </Link>
         </div>
